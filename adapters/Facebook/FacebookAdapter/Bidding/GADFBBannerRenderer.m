@@ -19,6 +19,7 @@
 #import "GADFBUtils.h"
 #import "GADMAdapterFacebookConstants.h"
 #import "GADMediationAdapterFacebook.h"
+#import "ASAdTracker.h"
 
 @interface GADFBBannerRenderer () <GADMediationBannerAd, FBAdViewDelegate>
 
@@ -122,6 +123,11 @@
     adView.frame = frame;
     _finalBannerSize = CGSizeZero;
   }
+	
+	// astar
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"facebook" ofType:@"banner" data:nil];
+	
   _adEventDelegate = _adLoadCompletionHandler(self, nil);
 }
 

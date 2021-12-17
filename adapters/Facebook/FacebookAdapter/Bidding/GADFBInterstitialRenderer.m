@@ -21,6 +21,7 @@
 #import "GADFBUtils.h"
 #import "GADMAdapterFacebookConstants.h"
 #import "GADMediationAdapterFacebook.h"
+#import "ASAdTracker.h"
 
 @interface GADFBInterstitialRenderer () <GADMediationInterstitialAd, FBInterstitialAdDelegate>
 @end
@@ -96,6 +97,12 @@
 #pragma mark FBInterstitialAdDelegate
 
 - (void)interstitialAdDidLoad:(FBInterstitialAd *)interstitialAd {
+	
+	// astar
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"facebook" ofType:@"banner" data:nil];
+	
+	
   _adEventDelegate = _adLoadCompletionHandler(self, nil);
 }
 

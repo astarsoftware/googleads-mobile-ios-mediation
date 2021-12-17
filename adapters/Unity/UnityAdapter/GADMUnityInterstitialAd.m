@@ -17,6 +17,7 @@
 #import "GADMAdapterUnityConstants.h"
 #import "GADMAdapterUnityUtils.h"
 #import "GADUnityError.h"
+#import "ASAdTracker.h"
 
 @implementation GADMUnityInterstitialAd {
   NSString *_placementID;
@@ -132,6 +133,17 @@ static NSMapTable<NSString *, GADMUnityInterstitialAd *> *_placementInUse;
 
 - (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
   _loadComplete = YES;
+	
+	
+	// astar
+	NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
+	if (placementId != nil) {
+		networkInfo[@"placementId"] = placementId;
+	}
+	
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"unity" ofType:@"fullscreen" data:networkInfo];
+	
 
   id<GADMAdNetworkConnector> strongConnector = _connector;
   id<GADMAdNetworkAdapter> strongAdapter = _adapter;

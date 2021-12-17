@@ -18,6 +18,7 @@
 #import "GADMAdapterUnityUtils.h"
 #import "GADMediationAdapterUnity.h"
 #import "GADUnityError.h"
+#import "ASAdTracker.h"
 
 @interface GADMAdapterUnityBannerAd () <UADSBannerViewDelegate>
 @end
@@ -96,6 +97,18 @@
 
 - (void)bannerViewDidLoad:(UADSBannerView *)bannerView {
   NSLog(@"Unity Ads finished loading banner for placement ID '%@'.", _placementID);
+	
+	
+	// astar
+	NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
+	if (bannerView.placementId != nil) {
+		networkInfo[@"placementId"] = bannerView.placementId;
+	}
+	
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"unity" ofType:@"banner" data:networkInfo];
+	
+	
   id<GADMAdNetworkConnector> strongConnector = _connector;
   id<GADMAdNetworkAdapter> strongAdapter = _adapter;
   if (strongConnector && strongAdapter) {

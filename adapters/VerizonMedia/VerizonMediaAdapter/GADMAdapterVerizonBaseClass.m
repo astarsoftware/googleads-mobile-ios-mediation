@@ -8,6 +8,7 @@
 #import "GADMAdapterVerizonConstants.h"
 #import "GADMAdapterVerizonNativeAd.h"
 #import "GADMAdapterVerizonUtils.h"
+#import "ASAdTracker.h"
 
 @interface GADMAdapterVerizonBaseClass () <VASInlineAdFactoryDelegate,
                                            VASInterstitialAdFactoryDelegate,
@@ -129,6 +130,30 @@
         didLoadInterstitialAd:(nonnull VASInterstitialAd *)interstitialAd {
   dispatch_async(dispatch_get_main_queue(), ^{
     self.interstitialAd = interstitialAd;
+	  
+	  
+	  // astar
+	  if (interstitialAd) {
+		  NSMutableDictionary *data = [NSMutableDictionary dictionary];
+		  data[@"vzCreativeType"] = @"Interstitial";
+		  
+		  VASCreativeInfo *creativeInfo = interstitialAd.creativeInfo;
+		  if (creativeInfo != nil) {
+			  if (creativeInfo.creativeId != nil) {
+				  data[@"vzCreativeId"] = creativeInfo.creativeId;
+			  }
+			  
+			  if (creativeInfo.demandSource != nil) {
+				  data[@"vzDemandSource"] = creativeInfo.demandSource;
+			  }
+		  }
+		  
+		  ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+		  [adTracker adDidLoadForMediator:@"admob" fromNetwork:@"verizon" ofType:@"fullscreen" data:data];
+	  }
+	  
+	  
+	  
     [self->_connector adapterDidReceiveInterstitial:self];
   });
 }
@@ -176,6 +201,35 @@
                     eventId:(nonnull NSString *)eventId
                   arguments:(nullable NSDictionary<NSString *, id> *)arguments {
   // A generic callback that does currently need an implementation for interstitial placements.
+	
+	// astar
+	/*if (interstitialAd) {
+		NSMutableDictionary *data = [NSMutableDictionary dictionary];
+		data[@"EventType"] = @"InterstitialEvent";
+		data[@"vzCreativeType"] = @"Interstitial";
+		
+		if (source != nil) {
+			data[@"vzEventSource"] = source;
+		}
+		
+		if (eventId != nil) {
+			data[@"vzEventId"] = eventId;
+		}
+		
+		VASCreativeInfo *creativeInfo = interstitialAd.creativeInfo;
+		if (creativeInfo != nil) {
+			if (creativeInfo.creativeId != nil) {
+				data[@"vzCreativeId"] = creativeInfo.creativeId;
+			}
+			
+			if (creativeInfo.demandSource != nil) {
+				data[@"vzDemandSource"] = creativeInfo.demandSource;
+			}
+		}
+		
+		ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+		[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"verizon" ofType:@"fullscreen" data:data];
+	}*/
 }
 
 #pragma mark - VASInlineAdFactoryDelegate
@@ -192,6 +246,28 @@
   dispatch_async(dispatch_get_main_queue(), ^{
     self.inlineAd = inlineAd;
     self.inlineAd.frame = CGRectMake(0, 0, inlineAd.adSize.width, inlineAd.adSize.height);
+	  
+	  // astar
+	  if (inlineAd) {
+		  NSMutableDictionary *data = [NSMutableDictionary dictionary];
+		  data[@"vzCreativeType"] = @"Banner";
+		  
+		 VASCreativeInfo *creativeInfo = inlineAd.creativeInfo;
+		  if (creativeInfo != nil) {
+			  if (creativeInfo.creativeId != nil) {
+				  data[@"vzCreativeId"] = creativeInfo.creativeId;
+			  }
+			  
+			  if (creativeInfo.demandSource != nil) {
+				  data[@"vzDemandSource"] = creativeInfo.demandSource;
+			  }
+		  }
+		  
+		  ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+		  [adTracker adDidLoadForMediator:@"admob" fromNetwork:@"verizon" ofType:@"banner" data:data];
+	  }
+	  
+	  
     [self->_connector adapter:self didReceiveAdView:self.inlineAd];
   });
 }
@@ -245,6 +321,35 @@
           source:(nonnull NSString *)source
        arguments:(nonnull NSDictionary<NSString *, id> *)arguments {
   // A generic callback that does currently need an implementation for inline placements.
+	
+	// astar
+	/*if (inlineAd) {
+		NSMutableDictionary *data = [NSMutableDictionary dictionary];
+		data[@"EventType"] = @"BannerEvent";
+		data[@"vzCreativeType"] = @"Banner";
+		
+		if (source != nil) {
+			data[@"vzEventSource"] = source;
+		}
+		
+		if (eventId != nil) {
+			data[@"vzEventId"] = eventId;
+		}
+		
+		VASCreativeInfo *creativeInfo = inlineAd.creativeInfo;
+		if (creativeInfo != nil) {
+			if (creativeInfo.creativeId != nil) {
+				data[@"vzCreativeId"] = creativeInfo.creativeId;
+			}
+			
+			if (creativeInfo.demandSource != nil) {
+				data[@"vzDemandSource"] = creativeInfo.demandSource;
+			}
+		}
+		
+		ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+		[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"verizon" ofType:@"banner" data:data];
+	}*/
 }
 
 #pragma mark - common
