@@ -83,7 +83,8 @@
 
   // Initializing Unity Ads with |gameID|.
   _initCompletionHandler = completionHandler;
-  [UnityAds initialize:gameID testMode:NO enablePerPlacementLoad:YES initializationDelegate:self];
+  //[UnityAds initialize:gameID testMode:NO enablePerPlacementLoad:YES initializationDelegate:self]; // compiler error
+	[UnityAds initialize:gameID testMode:NO initializationDelegate:self];
 }
 
 #pragma mark Interstitial Methods
