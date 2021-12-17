@@ -1,4 +1,4 @@
-framework module InMobiAdapter {
+framework module InMobiAdmobAdapter {
   umbrella header "InMobiAdapter.h"
 
   export *
