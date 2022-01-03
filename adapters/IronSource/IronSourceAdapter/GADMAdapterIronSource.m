@@ -17,6 +17,7 @@
 #import "GADMAdapterIronSourceInterstitialDelegate.h"
 #import "GADMAdapterIronSourceUtils.h"
 #import "ISMediationManager.h"
+#import "ASAdTracker.h"
 
 @interface GADMAdapterIronSource () <GADMAdapterIronSourceInterstitialDelegate> {
   // Connector from Google Mobile Ads SDK to receive interstitial ad configurations.
@@ -129,6 +130,17 @@
   [GADMAdapterIronSourceUtils
       onLog:[NSString stringWithFormat:@"IronSource interstitial ad did load for instance %@",
                                        instanceId]];
+	
+	
+	// astar
+	NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
+	if (instanceId != nil) {
+		networkInfo[@"instanceID"] = instanceId;
+	}
+	
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"ironsource" ofType:@"fullscreen" data:networkInfo];
+	
 
   // We will notify only changes regarding to the registered instance.
   if (![self.instanceID isEqualToString:instanceId]) {

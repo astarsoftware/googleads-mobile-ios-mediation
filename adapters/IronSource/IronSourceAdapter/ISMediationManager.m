@@ -17,6 +17,7 @@
 #import "GADMAdapterIronSourceConstants.h"
 #import "GADMAdapterIronSourceUtils.h"
 #import "GADMediationAdapterIronSource.h"
+#import "ASAdTracker.h"
 
 @interface ISMediationManager ()
 
@@ -260,6 +261,19 @@
 - (void)interstitialDidLoad:(NSString *)instanceID {
   id<GADMAdapterIronSourceInterstitialDelegate> delegate =
       [self getInterstitialDelegateForInstanceID:instanceID];
+	
+	
+	// astar
+	NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
+	if (instanceID != nil) {
+		networkInfo[@"instanceID"] = instanceID;
+	}
+	networkInfo[@"ISType"] = @"DemandOnly";
+	
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"ironsource" ofType:@"fullscreen" data:networkInfo];
+	
+	
   if (delegate) {
     [delegate interstitialDidLoad:instanceID];
   } else {
