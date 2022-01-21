@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC.
+// Copyright 2021 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,6 +14,11 @@
 
 #import <Foundation/Foundation.h>
 
-/// Returns an NSError with NSLocalizedDescriptionKey and NSLocalizedFailureReasonErrorKey values
-/// set to |description|.
-NSError *GADUnityErrorWithDescription(NSString *description);
+/// Pangle mediation network adapter version.
+static NSString *const GADMAdapterPangleVersion = @"x.y.z.p";
+
+/// Pangle mediation network adapter Pangle App ID parameter key.
+static NSString *const GADMAdapterPangleAppID = @"appid";
+
+/// Pangle mediation network adapter Ad Placement ID parameter key.
+static NSString *const GADMAdapterPanglePlacementID = @"placementid";
