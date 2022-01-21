@@ -15,6 +15,7 @@
 #import "GADMUnityInterstitialNetworkAdapterProxy.h"
 #import "GADMAdapterUnityConstants.h"
 #import "NSErrorUnity.h"
+#import "ASAdTracker.h"
 
 @implementation GADMUnityInterstitialNetworkAdapterProxy
 
@@ -35,6 +36,17 @@
     return;
   }
   [self.connector adapterDidReceiveInterstitial:self.adapter];
+	
+	
+	// astar
+	NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
+	if (placementId != nil) {
+		networkInfo[@"placementId"] = placementId;
+	}
+	
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"unity" ofType:@"fullscreen" data:networkInfo];
+	
 }
 #pragma mark UnityAdsShowDelegate
 

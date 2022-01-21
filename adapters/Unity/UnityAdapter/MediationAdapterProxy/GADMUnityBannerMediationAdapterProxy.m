@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #import "GADMUnityBannerMediationAdapterProxy.h"
+#import "ASAdTracker.h"
 
 @interface GADMUnityBannerMediationAdapterProxy ()
 @property(nonatomic, copy) GADMediationBannerLoadCompletionHandler loadCompletionHandler;
@@ -35,6 +36,18 @@
 
 - (void)bannerViewDidLoad:(UADSBannerView *)bannerView {
   self.eventDelegate = self.loadCompletionHandler(self.ad, nil);
+	
+	
+	// astar
+	NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
+	if (bannerView.placementId != nil) {
+		networkInfo[@"placementId"] = bannerView.placementId;
+	}
+	
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"unity" ofType:@"banner" data:networkInfo];
+	
+	
 }
 
 - (void)bannerViewDidError:(UADSBannerView *)bannerView error:(UADSBannerError *)error {

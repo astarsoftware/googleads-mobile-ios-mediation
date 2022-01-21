@@ -14,6 +14,7 @@
 
 #import "GADMUnityInterstitialMediationAdapterProxy.h"
 #import "NSErrorUnity.h"
+#import "ASAdTracker.h"
 
 @interface GADMUnityInterstitialMediationAdapterProxy ()
 @property(nonatomic, weak) id<GADMediationInterstitialAd> ad;
@@ -43,6 +44,17 @@
 
 - (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
   self.eventDelegate = self.loadCompletionHandler(self.ad, nil);
+	
+	
+	// astar
+	NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
+	if (placementId != nil) {
+		networkInfo[@"placementId"] = placementId;
+	}
+	
+	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"unity" ofType:@"fullscreen" data:networkInfo];
+	
 }
 
 @end
