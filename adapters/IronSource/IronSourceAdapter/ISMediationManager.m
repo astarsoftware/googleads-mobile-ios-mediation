@@ -49,8 +49,8 @@
                               valueOptions:NSPointerFunctionsWeakMemory];
     [IronSource
         setMediationType:[NSString
-                             stringWithFormat:@"%@%@SDK%@", kGADMAdapterIronSourceMediationName,
-                                              kGADMAdapterIronSourceInternalVersion,
+                             stringWithFormat:@"%@%@SDK%@", GADMAdapterIronSourceMediationName,
+                                              GADMAdapterIronSourceInternalVersion,
                                               [GADMAdapterIronSourceUtils getAdMobSDKVersion]]];
   }
   return self;
@@ -84,7 +84,7 @@
   }
 
   if ([self canLoadRewardedVideoInstance:instanceID]) {
-    [self setRewardedDelegate:adapterDelegate toInstanceState:kInstanceStateLocked];
+    [self setRewardedDelegate:adapterDelegate toInstanceState:GADMAdapterIronSourceInstanceStateLocked];
     [self addRewardedDelegate:adapterDelegate forInstanceID:instanceID];
     [GADMAdapterIronSourceUtils
         onLog:[NSString
@@ -117,7 +117,7 @@
     return;
   }
   if ([self canLoadInterstitialInstance:instanceID]) {
-    [self setInterstitialDelegate:adapterDelegate toInstanceState:kInstanceStateLocked];
+    [self setInterstitialDelegate:adapterDelegate toInstanceState:GADMAdapterIronSourceInstanceStateLocked];
     [self addInterstitialDelegate:adapterDelegate forInstanceID:instanceID];
     [GADMAdapterIronSourceUtils
         onLog:[NSString
@@ -163,7 +163,7 @@
   id<GADMAdapterIronSourceRewardedDelegate> delegate =
       [self getRewardedDelegateForInstanceID:instanceID];
   if (delegate) {
-    [self setRewardedDelegate:delegate toInstanceState:kInstanceStateCanLoad];
+    [self setRewardedDelegate:delegate toInstanceState:GADMAdapterIronSourceInstanceStateCanLoad];
     [delegate rewardedVideoDidFailToShowWithError:error instanceId:instanceID];
   } else {
     [GADMAdapterIronSourceUtils
@@ -197,7 +197,7 @@
   id<GADMAdapterIronSourceRewardedDelegate> delegate =
       [self getRewardedDelegateForInstanceID:instanceID];
   if (delegate) {
-    [self setRewardedDelegate:delegate toInstanceState:kInstanceStateCanLoad];
+    [self setRewardedDelegate:delegate toInstanceState:GADMAdapterIronSourceInstanceStateCanLoad];
     [delegate rewardedVideoDidClose:instanceID];
   } else {
     [GADMAdapterIronSourceUtils
@@ -246,7 +246,7 @@
   id<GADMAdapterIronSourceRewardedDelegate> delegate =
       [self getRewardedDelegateForInstanceID:instanceID];
   if (delegate) {
-    [self setRewardedDelegate:delegate toInstanceState:kInstanceStateCanLoad];
+    [self setRewardedDelegate:delegate toInstanceState:GADMAdapterIronSourceInstanceStateCanLoad];
     [delegate rewardedVideoDidFailToLoadWithError:error instanceId:instanceID];
   } else {
     [GADMAdapterIronSourceUtils
@@ -287,7 +287,7 @@
   id<GADMAdapterIronSourceInterstitialDelegate> delegate =
       [self getInterstitialDelegateForInstanceID:instanceID];
   if (delegate) {
-    [self setInterstitialDelegate:delegate toInstanceState:kInstanceStateCanLoad];
+    [self setInterstitialDelegate:delegate toInstanceState:GADMAdapterIronSourceInstanceStateCanLoad];
     [delegate interstitialDidFailToLoadWithError:error instanceId:instanceID];
   } else {
     [GADMAdapterIronSourceUtils
@@ -312,7 +312,7 @@
   id<GADMAdapterIronSourceInterstitialDelegate> delegate =
       [self getInterstitialDelegateForInstanceID:instanceID];
   if (delegate) {
-    [self setInterstitialDelegate:delegate toInstanceState:kInstanceStateCanLoad];
+    [self setInterstitialDelegate:delegate toInstanceState:GADMAdapterIronSourceInstanceStateCanLoad];
     [delegate interstitialDidClose:instanceID];
   } else {
     [GADMAdapterIronSourceUtils
@@ -325,7 +325,7 @@
   id<GADMAdapterIronSourceInterstitialDelegate> delegate =
       [self getInterstitialDelegateForInstanceID:instanceID];
   if (delegate) {
-    [self setInterstitialDelegate:delegate toInstanceState:kInstanceStateCanLoad];
+    [self setInterstitialDelegate:delegate toInstanceState:GADMAdapterIronSourceInstanceStateCanLoad];
     [delegate interstitialDidFailToShowWithError:error instanceId:instanceID];
   } else {
     [GADMAdapterIronSourceUtils
@@ -398,7 +398,7 @@
   id<GADMAdapterIronSourceRewardedDelegate> adapterDelegate =
       [self getRewardedDelegateForInstanceID:instanceID];
   return adapterDelegate == nil ||
-         [[adapterDelegate getState] isEqualToString:kInstanceStateCanLoad];
+         [[adapterDelegate getState] isEqualToString:GADMAdapterIronSourceInstanceStateCanLoad];
 }
 
 - (BOOL)isISRewardedVideoAdapterRegistered:(NSString *)instanceID {
@@ -434,7 +434,7 @@
   id<GADMAdapterIronSourceInterstitialDelegate> adapterDelegate =
       [self getInterstitialDelegateForInstanceID:instanceID];
   return adapterDelegate == nil ||
-         [[adapterDelegate getState] isEqualToString:kInstanceStateCanLoad];
+         [[adapterDelegate getState] isEqualToString:GADMAdapterIronSourceInstanceStateCanLoad];
 }
 
 - (BOOL)isISInterstitialAdapterRegistered:(NSString *)instanceID {

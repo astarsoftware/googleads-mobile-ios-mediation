@@ -74,7 +74,7 @@
   // -[FBAdView initWithPlacementID:adSize:rootViewController:] throws an NSInvalidArgumentException
   // if the placement ID is nil.
   NSString *placementID =
-      adConfiguration.credentials.settings[kGADMAdapterFacebookBiddingPubID];
+      adConfiguration.credentials.settings[GADMAdapterFacebookBiddingPubID];
   if (!placementID) {
     NSError *error =
         GADFBErrorWithCodeAndDescription(GADFBErrorInvalidRequest, @"Placement ID cannot be nil.");

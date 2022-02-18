@@ -48,15 +48,15 @@
   if (self) {
     _interstitialConnector = connector;
     // Default instance ID
-    _instanceID = kGADMIronSourceDefaultInstanceId;
+    _instanceID = GADMIronSourceDefaultInstanceId;
     // Default instance state
-    _instanceState = kInstanceStateStart;
+    _instanceState = GADMAdapterIronSourceInstanceStateStart;
   }
   return self;
 }
 
 + (nonnull NSString *)adapterVersion {
-  return kGADMAdapterIronSourceAdapterVersion;
+  return GADMAdapterIronSourceAdapterVersion;
 }
 
 + (nullable Class<GADAdNetworkExtras>)networkExtrasClass {
@@ -73,13 +73,13 @@
   self.isLogEnabled = strongConnector.testMode;
   /* Parse application key */
   NSString *applicationKey = @"";
-  if (credentials[kGADMAdapterIronSourceAppKey]) {
-    applicationKey = credentials[kGADMAdapterIronSourceAppKey];
+  if (credentials[GADMAdapterIronSourceAppKey]) {
+    applicationKey = credentials[GADMAdapterIronSourceAppKey];
   }
 
   /* Parse instance id key */
-  if (credentials[kGADMAdapterIronSourceInstanceId]) {
-    self.instanceID = credentials[kGADMAdapterIronSourceInstanceId];
+  if (credentials[GADMAdapterIronSourceInstanceId]) {
+    self.instanceID = credentials[GADMAdapterIronSourceInstanceId];
   }
 
   if ([GADMAdapterIronSourceUtils isEmpty:applicationKey]) {
