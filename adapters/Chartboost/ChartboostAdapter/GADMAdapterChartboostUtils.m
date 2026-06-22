@@ -72,14 +72,19 @@ NSString *_Nonnull GADMAdapterChartboostLocationFromString(NSString *_Nullable s
       [string stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceCharacterSet];
   if (!adLocation.length) {
     NSLog(@"Missing or Invalid Chartboost location. Using Chartboost's default location.");
-    return [CBLocationDefault copy];
+    return @"Default";
   }
   return adLocation;
 }
 
 CHBMediation *_Nonnull GADMAdapterChartboostMediation(void) {
-  return [[CHBMediation alloc] initWithType:CBMediationAdMob
-                             libraryVersion:GADMobileAds.sharedInstance.sdkVersion
+  NSString *versionString =
+      [NSString stringWithFormat:@"afma-sdk-i-v%ld.%ld.%ld",
+                                 GADMobileAds.sharedInstance.versionNumber.majorVersion,
+                                 GADMobileAds.sharedInstance.versionNumber.minorVersion,
+                                 GADMobileAds.sharedInstance.versionNumber.patchVersion];
+  return [[CHBMediation alloc] initWithName:@"AdMob"
+                             libraryVersion:versionString
                              adapterVersion:GADMAdapterChartboostVersion];
 }
 
@@ -121,4 +126,22 @@ CHBBannerSize GADMAdapterChartboostBannerSizeFromAdSize(
 
   CHBBannerSize chartboostSize = {0};
   return chartboostSize;
+}
+
+#pragma mark - Privacy Methods
+
+void GADMAdapterChartboostSetCOPPAUsingRequestConfiguration(void) {
+  NSNumber *tagForChildDirectedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment;
+  NSNumber *tagForUnderAgeOfConsent =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent;
+  GADAgeRestrictedTreatment *ageRestrictedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.ageRestrictedTreatment;
+
+  if ([tagForChildDirectedTreatment isEqual:@YES] || [tagForUnderAgeOfConsent isEqual:@YES] ||
+      ageRestrictedTreatment == GADAgeRestrictedTreatmentChild) {
+    [Chartboost addDataUseConsent:[CHBCOPPADataUseConsent isChildDirected:true]];
+  } else if ([tagForChildDirectedTreatment isEqual:@NO] || [tagForUnderAgeOfConsent isEqual:@NO]) {
+    [Chartboost addDataUseConsent:[CHBCOPPADataUseConsent isChildDirected:false]];
+  }
 }

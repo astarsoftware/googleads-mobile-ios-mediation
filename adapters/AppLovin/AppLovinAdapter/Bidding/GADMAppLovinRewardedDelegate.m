@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC.
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,12 +20,6 @@
 @implementation GADMAppLovinRewardedDelegate {
   /// AppLovin rewarded ad renderer to which the events are delegated.
   __weak GADMAdapterAppLovinRewardedRenderer *_parentRenderer;
-
-  /// Indicates whether the user has watched the rewarded ad completely.
-  BOOL _fullyWatched;
-
-  /// Reward information for AppLovin ads.
-  GADAdReward *_reward;
 }
 
 #pragma mark - Initialization
@@ -46,6 +40,13 @@
 
   GADMAdapterAppLovinRewardedRenderer *parentRenderer = _parentRenderer;
   parentRenderer.ad = ad;
+
+  BOOL isMultipleAdsEnabled = GADMAdapterAppLovinIsMultipleAdsLoadingEnabled();
+  if (isMultipleAdsEnabled) {
+    [GADMAdapterAppLovinMediationManager.sharedInstance
+        removeRewardedZoneIdentifier:parentRenderer.zoneIdentifier];
+  }
+
   dispatch_async(dispatch_get_main_queue(), ^{
     if (parentRenderer.adLoadCompletionHandler) {
       parentRenderer.delegate = parentRenderer.adLoadCompletionHandler(parentRenderer, nil);
@@ -82,9 +83,6 @@
   [GADMAdapterAppLovinUtils log:@"Rewarded ad dismissed"];
   GADMAdapterAppLovinRewardedRenderer *parentRenderer = _parentRenderer;
   id<GADMediationRewardedAdEventDelegate> delegate = parentRenderer.delegate;
-  if (_fullyWatched && _reward) {
-    [delegate didRewardUserWithReward:_reward];
-  }
   [GADMAdapterAppLovinMediationManager.sharedInstance
       removeRewardedZoneIdentifier:parentRenderer.zoneIdentifier];
 
@@ -105,10 +103,10 @@
   [GADMAdapterAppLovinUtils log:@"Rewarded ad playback ended at playback percent: %lu%%",
                                 (unsigned long)percentPlayed.unsignedIntegerValue];
 
-  GADMAdapterAppLovinRewardedRenderer *parentRenderer = _parentRenderer;
-  _fullyWatched = wasFullyWatched;
-  if (_fullyWatched) {
-    [parentRenderer.delegate didEndVideo];
+  id<GADMediationRewardedAdEventDelegate> delegate = _parentRenderer.delegate;
+  if (wasFullyWatched) {
+    [delegate didRewardUser];
+    [delegate didEndVideo];
   }
 }
 
@@ -137,8 +135,6 @@
   NSString *currency = response[@"currency"];
 
   [GADMAdapterAppLovinUtils log:@"Rewarded %@ %@", amount, currency];
-
-  _reward = [[GADAdReward alloc] initWithRewardType:currency rewardAmount:amount];
 }
 
 @end

@@ -31,16 +31,14 @@ createFramework() {
   # Build the static library for the specified sdk and architecture.
   xcodebuild -target Adapter \
   -configuration "${CONFIGURATION}" \
-  -sdk "$1" \
-  -UseModernBuildSystem=NO \
-  ARCHS="$2" \
+  -sdk "${1}" \
+  ARCHS="${2}" \
   BUILD_DIR="${BUILD_DIR}" \
   BUILD_ROOT="${BUILD_ROOT}" \
-  OBJROOT="${OBJROOT}" \
+  OBJROOT="${OBJROOT}/${1}" \
   ONLY_ACTIVE_ARCH=NO \
   SYMROOT="${SYMROOT}" \
-  "${ACTION}" \
-  clean build
+  "${ACTION}"
 
   # Create framework using lipo.
   lipo -create "${BUILD_DIR}/${CONFIGURATION}-$1/${LIB_NAME}.a" -output "${TEMP_FRAMEWORK_LOCATION}/${FRAMEWORK_NAME}"
@@ -48,9 +46,55 @@ createFramework() {
   # Create Modules directory and copy the module map inside.
   mkdir -p "${TEMP_FRAMEWORK_LOCATION}/Modules"
   /bin/cp -a "${MODULE_MAP_PATH}/module.modulemap" "${TEMP_FRAMEWORK_LOCATION}/Modules/module.modulemap"
+
+  # Static library does not automatically generate an Info.plist file. Create
+  # a fake framework to generate the Info.plist and then copy it into the
+  # static library. Info.plist is required to allow embedding static frameworks
+  # in Xcode 15.
+  TEMP_FRAMEWORK_BUILD_DIR="${BUILD_DIR}/temp_framework_build_dir"
+  TEMP_FRAMEWORK_ROOT_DIR="${BUILD_DIR}/temp_framework_root_dir"
+  TEMP_FRAMEWORK_OBJROOT_DIR="${BUILD_DIR}/objroot_dir"
+  TEMP_FRAMEWORK_SYMROOT_DIR="${BUILD_DIR}/symroot_dir"
+
+  mkdir -p "${TEMP_FRAMEWORK_BUILD_DIR}"
+  mkdir -p "${TEMP_FRAMEWORK_ROOT_DIR}"
+  mkdir -p "${TEMP_FRAMEWORK_OBJROOT_DIR}"
+  mkdir -p "${TEMP_FRAMEWORK_SYMROOT_DIR}"
+
+  xcodebuild -target IMobileAdapter \
+  -configuration "${CONFIGURATION}" \
+  -sdk "${1}" \
+  ARCHS="${2}" \
+  BUILD_DIR="${TEMP_FRAMEWORK_BUILD_DIR}" \
+  BUILD_ROOT="${TEMP_FRAMEWORK_ROOT_DIR}" \
+  OBJROOT="${TEMP_FRAMEWORK_OBJROOT_DIR}/${1}" \
+  ONLY_ACTIVE_ARCH=NO \
+  SYMROOT="${TEMP_FRAMEWORK_SYMROOT_DIR}" \
+  "build"
+
+ install -m 0444 "${TEMP_FRAMEWORK_BUILD_DIR}/${CONFIGURATION}-$1/${FRAMEWORK_NAME}.framework/Info.plist" "${TEMP_FRAMEWORK_LOCATION}/Info.plist"
 }
 
-createFramework "iphoneos" "armv7 arm64"
+# Separate the framework based on platforms.
+# Copy all the iphoneos frameworks to iphoneos sub directory.
+# Copy all the iphonesimulator frameworks to iphonesimulator sub directory.
+rm -r "./Drop_Framework_And_Headers/iphoneos"
+rm -r "./Drop_Framework_And_Headers/iphonesimulator"
+mkdir -p "./Drop_Framework_And_Headers/iphoneos"
+mkdir -p "./Drop_Framework_And_Headers/iphonesimulator"
+find "./Drop_Framework_And_Headers" \
+  -path "./Drop_Framework_And_Headers/iphoneos" -prune -o \
+  -path "./Drop_Framework_And_Headers/iphonesimulator" -prune -o \
+  -name "*ios-arm64_x86_64-simulator*" \
+  -exec cp -R {} "./Drop_Framework_And_Headers/iphonesimulator/" \;
+find "./Drop_Framework_And_Headers" \
+  -path "./Drop_Framework_And_Headers/iphoneos" -prune -o \
+  -path "./Drop_Framework_And_Headers/iphonesimulator" -prune -o \
+  -name "*ios-arm64*" \
+  -not -name "*ios-arm64_x86_64-simulator*" \
+  -exec cp -R {} "./Drop_Framework_And_Headers/iphoneos/" \;
+
+createFramework "iphoneos" "arm64"
 createFramework "iphonesimulator" "arm64 x86_64"
 
 # Create dynamic framework using the frameworks generated above.

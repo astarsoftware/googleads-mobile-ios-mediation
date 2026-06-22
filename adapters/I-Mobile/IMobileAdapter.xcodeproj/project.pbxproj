@@ -38,6 +38,7 @@
 		00CDCD0E254B745D00C51623 /* GADMAdapterIMobileBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CDCD0C254B745D00C51623 /* GADMAdapterIMobileBannerAd.m */; };
 		00CDCD17254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CDCD15254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.h */; };
 		00CDCD18254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CDCD16254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.m */; };
+		151C68684963EFA5896D5787 /* Pods_Default_AdapterWithoutValidationScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2449FF802C208BFF6E68B09E /* Pods_Default_AdapterWithoutValidationScript.framework */; };
 		45E63509222F1852006EB5A1 /* GADMediationAdapterIMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E63508222F1851006EB5A1 /* GADMediationAdapterIMobile.m */; };
 		45E63516222F1A62006EB5A1 /* GADMediationAdapterIMobile.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E63507222F1851006EB5A1 /* GADMediationAdapterIMobile.h */; };
 		45E63517222F1A69006EB5A1 /* IMobileAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E634F1222F1503006EB5A1 /* IMobileAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -46,6 +47,38 @@
 		5D9C30E922672BC30011AFB8 /* GADMAdapterIMobile.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9C30E722672BC30011AFB8 /* GADMAdapterIMobile.h */; };
 		5DF812AC225C8794008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DF812AB225C8794008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.h */; };
 		5DF812AE225C87AE008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF812AD225C87AE008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.m */; };
+		AD6E39A32EA1676800818296 /* IMobileAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E634F1222F1503006EB5A1 /* IMobileAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD6E39A42EA1676800818296 /* GADMediationAdapterIMobile.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E63507222F1851006EB5A1 /* GADMediationAdapterIMobile.h */; };
+		AD6E39A52EA1676800818296 /* GADMAdapterIMobileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = E5708A2022DDC3A20027BAF8 /* GADMAdapterIMobileUtils.h */; };
+		AD6E39A62EA1676800818296 /* GADMAdapterIMobile.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9C30E722672BC30011AFB8 /* GADMAdapterIMobile.h */; };
+		AD6E39A72EA1676800818296 /* GADMAdapterIMobileInterstitialAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CDCD15254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.h */; };
+		AD6E39A82EA1676800818296 /* GADMAdapterIMobileUnifiedNativeAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DF812AB225C8794008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.h */; };
+		AD6E39A92EA1676800818296 /* GADMAdapterIMobileConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9C30E422670A740011AFB8 /* GADMAdapterIMobileConstants.h */; };
+		AD6E39AA2EA1676800818296 /* GADMAdapterIMobileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CD9A1925533AF000DFE1EF /* GADMAdapterIMobileManager.h */; };
+		AD6E39AB2EA1676800818296 /* GADMAdapterIMobileBannerAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CDCD0B254B745D00C51623 /* GADMAdapterIMobileBannerAd.h */; };
+		AD6E39AD2EA1676800818296 /* GADMAdapterIMobileBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CDCD0C254B745D00C51623 /* GADMAdapterIMobileBannerAd.m */; };
+		AD6E39AE2EA1676800818296 /* GADMAdapterIMobileInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CDCD16254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.m */; };
+		AD6E39AF2EA1676800818296 /* GADMAdapterIMobileUnifiedNativeAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF812AD225C87AE008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.m */; };
+		AD6E39B02EA1676800818296 /* GADMediationAdapterIMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E63508222F1851006EB5A1 /* GADMediationAdapterIMobile.m */; };
+		AD6E39B12EA1676800818296 /* GADMAdapterIMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C30E622672BC30011AFB8 /* GADMAdapterIMobile.m */; };
+		AD6E39B22EA1676800818296 /* GADMAdapterIMobileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5708A2222DDC3EC0027BAF8 /* GADMAdapterIMobileUtils.m */; };
+		AD6E39B32EA1676800818296 /* GADMAdapterIMobileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD9A1A25533AF000DFE1EF /* GADMAdapterIMobileManager.m */; };
+		ADA6B94B2CF14634009C8FDA /* IMobileAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E634F1222F1503006EB5A1 /* IMobileAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADA6B94C2CF14634009C8FDA /* GADMediationAdapterIMobile.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E63507222F1851006EB5A1 /* GADMediationAdapterIMobile.h */; };
+		ADA6B94D2CF14634009C8FDA /* GADMAdapterIMobileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = E5708A2022DDC3A20027BAF8 /* GADMAdapterIMobileUtils.h */; };
+		ADA6B94E2CF14634009C8FDA /* GADMAdapterIMobile.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9C30E722672BC30011AFB8 /* GADMAdapterIMobile.h */; };
+		ADA6B94F2CF14634009C8FDA /* GADMAdapterIMobileInterstitialAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CDCD15254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.h */; };
+		ADA6B9502CF14634009C8FDA /* GADMAdapterIMobileUnifiedNativeAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 5DF812AB225C8794008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.h */; };
+		ADA6B9512CF14634009C8FDA /* GADMAdapterIMobileConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D9C30E422670A740011AFB8 /* GADMAdapterIMobileConstants.h */; };
+		ADA6B9522CF14634009C8FDA /* GADMAdapterIMobileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CD9A1925533AF000DFE1EF /* GADMAdapterIMobileManager.h */; };
+		ADA6B9532CF14634009C8FDA /* GADMAdapterIMobileBannerAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 00CDCD0B254B745D00C51623 /* GADMAdapterIMobileBannerAd.h */; };
+		ADA6B9552CF14634009C8FDA /* GADMAdapterIMobileBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CDCD0C254B745D00C51623 /* GADMAdapterIMobileBannerAd.m */; };
+		ADA6B9562CF14634009C8FDA /* GADMAdapterIMobileInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CDCD16254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.m */; };
+		ADA6B9572CF14634009C8FDA /* GADMAdapterIMobileUnifiedNativeAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF812AD225C87AE008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.m */; };
+		ADA6B9582CF14634009C8FDA /* GADMediationAdapterIMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E63508222F1851006EB5A1 /* GADMediationAdapterIMobile.m */; };
+		ADA6B9592CF14634009C8FDA /* GADMAdapterIMobile.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9C30E622672BC30011AFB8 /* GADMAdapterIMobile.m */; };
+		ADA6B95A2CF14634009C8FDA /* GADMAdapterIMobileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5708A2222DDC3EC0027BAF8 /* GADMAdapterIMobileUtils.m */; };
+		ADA6B95B2CF14634009C8FDA /* GADMAdapterIMobileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 00CD9A1A25533AF000DFE1EF /* GADMAdapterIMobileManager.m */; };
 		E5708A2122DDC3A20027BAF8 /* GADMAdapterIMobileUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = E5708A2022DDC3A20027BAF8 /* GADMAdapterIMobileUtils.h */; };
 		E5708A2322DDC3EC0027BAF8 /* GADMAdapterIMobileUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E5708A2222DDC3EC0027BAF8 /* GADMAdapterIMobileUtils.m */; };
 /* End PBXBuildFile section */
@@ -70,6 +103,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD6E39B52EA1676800818296 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B95D2CF14634009C8FDA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +131,8 @@
 		00CDCD15254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterIMobileInterstitialAd.h; sourceTree = "<group>"; };
 		00CDCD16254B7D4A00C51623 /* GADMAdapterIMobileInterstitialAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterIMobileInterstitialAd.m; sourceTree = "<group>"; };
 		00DD265322F109F00039C1D4 /* Script_Validate.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Script_Validate.sh; sourceTree = "<group>"; };
+		2449FF802C208BFF6E68B09E /* Pods_Default_AdapterWithoutValidationScript.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Default_AdapterWithoutValidationScript.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40CB1E4FAC2DCB4C3B568979 /* Pods-Default-AdapterWithoutValidationScript.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Default-AdapterWithoutValidationScript.release.xcconfig"; path = "Target Support Files/Pods-Default-AdapterWithoutValidationScript/Pods-Default-AdapterWithoutValidationScript.release.xcconfig"; sourceTree = "<group>"; };
 		45E634EE222F1503006EB5A1 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E634F1222F1503006EB5A1 /* IMobileAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IMobileAdapter.h; sourceTree = "<group>"; };
 		45E634FA222F1527006EB5A1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -97,12 +150,38 @@
 		5D9C30E722672BC30011AFB8 /* GADMAdapterIMobile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdapterIMobile.h; sourceTree = "<group>"; };
 		5DF812AB225C8794008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterIMobileUnifiedNativeAd.h; sourceTree = "<group>"; };
 		5DF812AD225C87AE008B68F3 /* GADMAdapterIMobileUnifiedNativeAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterIMobileUnifiedNativeAd.m; sourceTree = "<group>"; };
+		94727462EF02B9381574EA8B /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Default-AdapterWithoutValidationScript.debug.xcconfig"; path = "Target Support Files/Pods-Default-AdapterWithoutValidationScript/Pods-Default-AdapterWithoutValidationScript.debug.xcconfig"; sourceTree = "<group>"; };
+		AD00C4292B87BF43007C85F3 /* IMobileAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = IMobileAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD6E39B92EA1676800818296 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA6B9612CF14634009C8FDA /* libStaticIMobileAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStaticIMobileAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E5708A2022DDC3A20027BAF8 /* GADMAdapterIMobileUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterIMobileUtils.h; sourceTree = "<group>"; };
 		E5708A2222DDC3EC0027BAF8 /* GADMAdapterIMobileUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterIMobileUtils.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		45E634EB222F1503006EB5A1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C4262B87BF43007C85F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E39B42EA1676800818296 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				151C68684963EFA5896D5787 /* Pods_Default_AdapterWithoutValidationScript.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B95C2CF14634009C8FDA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,6 +201,8 @@
 				45E63503222F17B7006EB5A1 /* Configuration */,
 				45E634FF222F15C7006EB5A1 /* BuildScript */,
 				45E634EF222F1503006EB5A1 /* Products */,
+				6AE849C6CD1340980F16CC71 /* Pods */,
+				AA29F8BCA2C6A4DF89CE71C5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -129,6 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				45E634EE222F1503006EB5A1 /* libAdapter.a */,
+				AD00C4292B87BF43007C85F3 /* IMobileAdapter.framework */,
+				ADA6B9612CF14634009C8FDA /* libStaticIMobileAdapter.a */,
+				AD6E39B92EA1676800818296 /* libAdapter.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -192,6 +276,24 @@
 			path = Configuration;
 			sourceTree = "<group>";
 		};
+		6AE849C6CD1340980F16CC71 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				94727462EF02B9381574EA8B /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */,
+				40CB1E4FAC2DCB4C3B568979 /* Pods-Default-AdapterWithoutValidationScript.release.xcconfig */,
+			);
+			name = Pods;
+			path = ../../AdapterUnitTests/Pods;
+			sourceTree = "<group>";
+		};
+		AA29F8BCA2C6A4DF89CE71C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2449FF802C208BFF6E68B09E /* Pods_Default_AdapterWithoutValidationScript.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -208,6 +310,45 @@
 				5D9C30E522670A740011AFB8 /* GADMAdapterIMobileConstants.h in Headers */,
 				00CD9A1B25533AF000DFE1EF /* GADMAdapterIMobileManager.h in Headers */,
 				00CDCD0D254B745D00C51623 /* GADMAdapterIMobileBannerAd.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C4242B87BF43007C85F3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E39A22EA1676800818296 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD6E39A32EA1676800818296 /* IMobileAdapter.h in Headers */,
+				AD6E39A42EA1676800818296 /* GADMediationAdapterIMobile.h in Headers */,
+				AD6E39A52EA1676800818296 /* GADMAdapterIMobileUtils.h in Headers */,
+				AD6E39A62EA1676800818296 /* GADMAdapterIMobile.h in Headers */,
+				AD6E39A72EA1676800818296 /* GADMAdapterIMobileInterstitialAd.h in Headers */,
+				AD6E39A82EA1676800818296 /* GADMAdapterIMobileUnifiedNativeAd.h in Headers */,
+				AD6E39A92EA1676800818296 /* GADMAdapterIMobileConstants.h in Headers */,
+				AD6E39AA2EA1676800818296 /* GADMAdapterIMobileManager.h in Headers */,
+				AD6E39AB2EA1676800818296 /* GADMAdapterIMobileBannerAd.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B94A2CF14634009C8FDA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADA6B94B2CF14634009C8FDA /* IMobileAdapter.h in Headers */,
+				ADA6B94C2CF14634009C8FDA /* GADMediationAdapterIMobile.h in Headers */,
+				ADA6B94D2CF14634009C8FDA /* GADMAdapterIMobileUtils.h in Headers */,
+				ADA6B94E2CF14634009C8FDA /* GADMAdapterIMobile.h in Headers */,
+				ADA6B94F2CF14634009C8FDA /* GADMAdapterIMobileInterstitialAd.h in Headers */,
+				ADA6B9502CF14634009C8FDA /* GADMAdapterIMobileUnifiedNativeAd.h in Headers */,
+				ADA6B9512CF14634009C8FDA /* GADMAdapterIMobileConstants.h in Headers */,
+				ADA6B9522CF14634009C8FDA /* GADMAdapterIMobileManager.h in Headers */,
+				ADA6B9532CF14634009C8FDA /* GADMAdapterIMobileBannerAd.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -233,6 +374,61 @@
 			productReference = 45E634EE222F1503006EB5A1 /* libAdapter.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		AD00C4282B87BF43007C85F3 /* IMobileAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD00C42F2B87BF43007C85F3 /* Build configuration list for PBXNativeTarget "IMobileAdapter" */;
+			buildPhases = (
+				AD00C4242B87BF43007C85F3 /* Headers */,
+				AD00C4252B87BF43007C85F3 /* Sources */,
+				AD00C4262B87BF43007C85F3 /* Frameworks */,
+				AD00C4272B87BF43007C85F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = IMobileAdapter;
+			productName = IMobileAdapter;
+			productReference = AD00C4292B87BF43007C85F3 /* IMobileAdapter.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		AD6E399F2EA1676800818296 /* AdapterWithoutValidationScript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD6E39B62EA1676800818296 /* Build configuration list for PBXNativeTarget "AdapterWithoutValidationScript" */;
+			buildPhases = (
+				2CF73993D7EECC51FE7BE27A /* [CP] Check Pods Manifest.lock */,
+				AD6E39A22EA1676800818296 /* Headers */,
+				AD6E39AC2EA1676800818296 /* Sources */,
+				AD6E39B42EA1676800818296 /* Frameworks */,
+				AD6E39B52EA1676800818296 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdapterWithoutValidationScript;
+			productName = IMobileAdapter;
+			productReference = AD6E39B92EA1676800818296 /* libAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		ADA6B9472CF14634009C8FDA /* StaticIMobileAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA6B95E2CF14634009C8FDA /* Build configuration list for PBXNativeTarget "StaticIMobileAdapter" */;
+			buildPhases = (
+				ADA6B94A2CF14634009C8FDA /* Headers */,
+				ADA6B9542CF14634009C8FDA /* Sources */,
+				ADA6B95C2CF14634009C8FDA /* Frameworks */,
+				ADA6B95D2CF14634009C8FDA /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StaticIMobileAdapter;
+			productName = IMobileAdapter;
+			productReference = ADA6B9612CF14634009C8FDA /* libStaticIMobileAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -256,6 +452,18 @@
 						DevelopmentTeam = CSTR6SUWN9;
 						ProvisioningStyle = Automatic;
 					};
+					AD00C4282B87BF43007C85F3 = {
+						CreatedOnToolsVersion = 15.1;
+						ProvisioningStyle = Automatic;
+					};
+					AD6E399F2EA1676800818296 = {
+						DevelopmentTeam = CSTR6SUWN9;
+						ProvisioningStyle = Automatic;
+					};
+					ADA6B9472CF14634009C8FDA = {
+						DevelopmentTeam = CSTR6SUWN9;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 45E634E9222F1503006EB5A1 /* Build configuration list for PBXProject "IMobileAdapter" */;
@@ -274,9 +482,22 @@
 				45E634ED222F1503006EB5A1 /* Adapter */,
 				45E6350E222F1972006EB5A1 /* Framework */,
 				00DD265422F109F80039C1D4 /* ValidateSourceCode */,
+				AD00C4282B87BF43007C85F3 /* IMobileAdapter */,
+				ADA6B9472CF14634009C8FDA /* StaticIMobileAdapter */,
+				AD6E399F2EA1676800818296 /* AdapterWithoutValidationScript */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AD00C4272B87BF43007C85F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		00DD265522F109F80039C1D4 /* Validate Source Code */ = {
@@ -296,6 +517,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -o errexit\nset -o nounset\nset -o xtrace\n\nbash \"${SRCROOT}/BuildScript/Script_Validate.sh\"\n";
+		};
+		2CF73993D7EECC51FE7BE27A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Default-AdapterWithoutValidationScript-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		45E63513222F19CD006EB5A1 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -328,6 +571,41 @@
 				5D9C30E822672BC30011AFB8 /* GADMAdapterIMobile.m in Sources */,
 				E5708A2322DDC3EC0027BAF8 /* GADMAdapterIMobileUtils.m in Sources */,
 				00CD9A1C25533AF000DFE1EF /* GADMAdapterIMobileManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C4252B87BF43007C85F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E39AC2EA1676800818296 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD6E39AD2EA1676800818296 /* GADMAdapterIMobileBannerAd.m in Sources */,
+				AD6E39AE2EA1676800818296 /* GADMAdapterIMobileInterstitialAd.m in Sources */,
+				AD6E39AF2EA1676800818296 /* GADMAdapterIMobileUnifiedNativeAd.m in Sources */,
+				AD6E39B02EA1676800818296 /* GADMediationAdapterIMobile.m in Sources */,
+				AD6E39B12EA1676800818296 /* GADMAdapterIMobile.m in Sources */,
+				AD6E39B22EA1676800818296 /* GADMAdapterIMobileUtils.m in Sources */,
+				AD6E39B32EA1676800818296 /* GADMAdapterIMobileManager.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9542CF14634009C8FDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADA6B9552CF14634009C8FDA /* GADMAdapterIMobileBannerAd.m in Sources */,
+				ADA6B9562CF14634009C8FDA /* GADMAdapterIMobileInterstitialAd.m in Sources */,
+				ADA6B9572CF14634009C8FDA /* GADMAdapterIMobileUnifiedNativeAd.m in Sources */,
+				ADA6B9582CF14634009C8FDA /* GADMediationAdapterIMobile.m in Sources */,
+				ADA6B9592CF14634009C8FDA /* GADMAdapterIMobile.m in Sources */,
+				ADA6B95A2CF14634009C8FDA /* GADMAdapterIMobileUtils.m in Sources */,
+				ADA6B95B2CF14634009C8FDA /* GADMAdapterIMobileManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,7 +690,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -467,7 +744,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -518,6 +794,136 @@
 			};
 			name = Release;
 		};
+		AD00C42D2B87BF43007C85F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45E63504222F17CD006EB5A1 /* Adapter.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Google. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.IMobileAdapter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AD00C42E2B87BF43007C85F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45E63504222F17CD006EB5A1 /* Adapter.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Google. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.IMobileAdapter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AD6E39B72EA1676800818296 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 94727462EF02B9381574EA8B /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CSTR6SUWN9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "${PRODUCT_NAME}";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AD6E39B82EA1676800818296 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 40CB1E4FAC2DCB4C3B568979 /* Pods-Default-AdapterWithoutValidationScript.release.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CSTR6SUWN9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "${PRODUCT_NAME}";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ADA6B95F2CF14634009C8FDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CSTR6SUWN9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ADA6B9602CF14634009C8FDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = CSTR6SUWN9;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -553,6 +959,33 @@
 			buildConfigurations = (
 				45E63510222F1972006EB5A1 /* Debug */,
 				45E63511222F1972006EB5A1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD00C42F2B87BF43007C85F3 /* Build configuration list for PBXNativeTarget "IMobileAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD00C42D2B87BF43007C85F3 /* Debug */,
+				AD00C42E2B87BF43007C85F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD6E39B62EA1676800818296 /* Build configuration list for PBXNativeTarget "AdapterWithoutValidationScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD6E39B72EA1676800818296 /* Debug */,
+				AD6E39B82EA1676800818296 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADA6B95E2CF14634009C8FDA /* Build configuration list for PBXNativeTarget "StaticIMobileAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA6B95F2CF14634009C8FDA /* Debug */,
+				ADA6B9602CF14634009C8FDA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import "GADMUnityInterstitialMediationAdapterProxy.h"
-#import "NSErrorUnity.h"
+#import "GADMAdapterUnityUtils.h"
 #import "ASAdTracker.h"
 
 @interface GADMUnityInterstitialMediationAdapterProxy ()
@@ -24,8 +24,8 @@
 @implementation GADMUnityInterstitialMediationAdapterProxy
 
 - (nonnull instancetype)initWithAd:(id<GADMediationInterstitialAd>)ad
-         completionHandler:(GADMediationInterstitialLoadCompletionHandler)completionHandler;
-{
+                 completionHandler:
+                     (GADMediationInterstitialLoadCompletionHandler)completionHandler {
   self = [super init];
   if (self) {
     _ad = ad;
@@ -39,22 +39,23 @@
 - (void)unityAdsAdFailedToLoad:(nonnull NSString *)placementId
                      withError:(UnityAdsLoadError)loadError
                    withMessage:(nonnull NSString *)message {
-  self.loadCompletionHandler(self.ad, [NSError adNotAvailablePerPlacement:placementId]);
+  self.loadCompletionHandler(
+      self.ad, GADMAdapterUnitySDKErrorWithUnityAdsLoadErrorAndMessage(loadError, message));
 }
 
 - (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
   self.eventDelegate = self.loadCompletionHandler(self.ad, nil);
-	
-	
-	// astar
-	NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
-	if (placementId != nil) {
-		networkInfo[@"placementId"] = placementId;
-	}
-	
-	ASAdTracker *adTracker = [ASAdTracker sharedInstance];
-	[adTracker adDidLoadForMediator:@"admob" fromNetwork:@"unity" ofType:@"fullscreen" data:networkInfo];
-	
+
+  NSMutableDictionary *networkInfo = [NSMutableDictionary dictionary];
+  if (placementId != nil) {
+    networkInfo[@"placementId"] = placementId;
+  }
+
+  ASAdTracker *adTracker = [ASAdTracker sharedInstance];
+  [adTracker adDidLoadForMediator:@"admob"
+                       fromNetwork:@"unity"
+                            ofType:@"fullscreen"
+                              data:networkInfo];
 }
 
 @end

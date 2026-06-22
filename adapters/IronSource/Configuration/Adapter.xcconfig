@@ -16,9 +16,9 @@ LIB_NAME = $(EXECUTABLE_PREFIX)$(PRODUCT_NAME)
 
 OUTPUT_FOLDER = ${PROJECT_DIR}/Library
 
-MIN_OS_MAJOR_VERSION = 10
+MIN_OS_MAJOR_VERSION = 13
 MIN_OS_MINOR_VERSION = 0
-MIN_OS_MAJOR_VERSION_64_BIT = 10
+MIN_OS_MAJOR_VERSION_64_BIT = 13
 MIN_OS_MINOR_VERSION_64_BIT = 0
 
 /// Xcode variables
@@ -26,17 +26,22 @@ MIN_OS_MINOR_VERSION_64_BIT = 0
 IPHONEOS_DEPLOYMENT_TARGET = $(MIN_OS_MAJOR_VERSION).$(MIN_OS_MINOR_VERSION)
 IPHONEOS_DEPLOYMENT_TARGET[arch=arm64] = $(MIN_OS_MAJOR_VERSION_64_BIT).$(MIN_OS_MINOR_VERSION_64_BIT)
 IPHONEOS_DEPLOYMENT_TARGET[arch=x86_64] = $(MIN_OS_MAJOR_VERSION_64_BIT).$(MIN_OS_MINOR_VERSION_64_BIT)
+CURRENT_PROJECT_VERSION = 94101
+MARKETING_VERSION = 9.4.1
 MODULE_MAP_PATH = $(SRCROOT)/Public
-FRAMEWORK_SEARCH_PATHS = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/**"
-LIBRARY_SEARCH_PATHS = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/**"
-HEADER_SEARCH_PATHS = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/**"
+FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*] = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/iphoneos/**"
+FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*] = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/iphonesimulator/**"
+LIBRARY_SEARCH_PATHS[sdk=iphoneos*] = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/iphoneos/**"
+LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*] = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/iphonesimulator/**"
+HEADER_SEARCH_PATHS[sdk=iphoneos*] = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/iphoneos/**"
+HEADER_SEARCH_PATHS[sdk=iphonesimulator*] = $(inherited) "$(SRCROOT)/Drop_Framework_And_Headers/iphonesimulator/**"
 SDKROOT = iphoneos
 SUPPORTED_PLATFORMS = iphoneos iphonesimulator
 ONLY_ACTIVE_ARCH = NO
-VALID_ARCHS = arm64 armv7 x86_64
+VALID_ARCHS = arm64 x86_64
 TARGETED_DEVICE_FAMILY = 1,2
 BITCODE_GENERATION_MODE = bitcode
-ENABLE_BITCODE = YES
+ENABLE_BITCODE = NO
 CLANG_ENABLE_OBJC_ARC = YES
 GCC_WARN_UNDECLARED_SELECTOR = YES
 CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES
@@ -54,3 +59,4 @@ DEAD_CODE_STRIPPING = YES
 /// Use modules, but link frameworks explicitly.
 CLANG_ENABLE_MODULES = YES
 CLANG_MODULES_AUTOLINK = NO
+OTHER_CFLAGS = -fobjc-arc -fstack-protector-all

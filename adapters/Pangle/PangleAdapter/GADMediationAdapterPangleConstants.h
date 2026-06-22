@@ -1,10 +1,10 @@
-// Copyright 2021 Google LLC
+// Copyright 2022 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
 //
-//     http://www.apache.org/licenses/LICENSE-2.0
+//     https://www.apache.org/licenses/LICENSE-2.0
 //
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
@@ -14,11 +14,17 @@
 
 #import <Foundation/Foundation.h>
 
-/// Pangle mediation network adapter version.
-static NSString *const GADMAdapterPangleVersion = @"x.y.z.p";
+/// Pangle adapter version.
+static NSString *const GADMAdapterPangleVersion = @"8.1.0.6.0";
 
-/// Pangle mediation network adapter Pangle App ID parameter key.
+/// Pangle adapter Pangle App ID parameter key.
 static NSString *const GADMAdapterPangleAppID = @"appid";
 
-/// Pangle mediation network adapter Ad Placement ID parameter key.
+/// Pangle adapter Ad Placement ID parameter key.
 static NSString *const GADMAdapterPanglePlacementID = @"placementid";
+
+/// Pangle adapter error domain.
+static NSString *const GADMAdapterPangleErrorDomain = @"com.google.mediation.pangle";
+
+/// the mediation ID.
+static NSString *const GADMAdapterPangleAdxID = @"207";

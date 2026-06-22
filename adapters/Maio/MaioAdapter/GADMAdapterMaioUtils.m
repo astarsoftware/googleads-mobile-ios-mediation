@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC.
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,39 +14,6 @@
 
 #import "GADMAdapterMaioUtils.h"
 #import "GADMMaioConstants.h"
-
-//@implementation GADMAdapterMaioUtils : NSObject
-/**
- *  MaioFailReason の文字列表記を取得します。
- */
-static NSString *_Nonnull GADMAdapterMaioStringFromFailReason(MaioFailReason failReason) {
-  switch (failReason) {
-    case MaioFailReasonUnknown:
-      return @"MaioFailReasonUnknown";
-    case MaioFailReasonNetworkConnection:
-      return @"MaioFailReasonNetworkConnection";
-    case MaioFailReasonNetworkServer:
-      return @"MaioFailReasonNetworkServer";
-    case MaioFailReasonNetworkClient:
-      return @"MaioFailReasonNetworkClient";
-    case MaioFailReasonSdk:
-      return @"MaioFailReasonSdk";
-    case MaioFailReasonDownloadCancelled:
-      return @"MaioFailReasonDownloadCancelled";
-    case MaioFailReasonAdStockOut:
-      return @"MaioFailReasonAdStockOut";
-    case MaioFailReasonVideoPlayback:
-      return @"MaioFailReasonVideoPlayback";
-    case MaioFailReasonIncorrectMediaId:
-      return @"MaioFailReasonInCorrectMediaId";
-    case MaioFailReasonIncorrectZoneId:
-      return @"MaioFailReasonInCorrectZoneId";
-    case MaioFailReasonNotFoundViewContext:
-      return @"MaioFailReasonNotFoundViewContext";
-  }
-  // Error to indicate that the error is new and has not been supported by the adapter yet.
-  return [NSString stringWithFormat:@"maio SDK failed with reason code: %ld", (long)failReason];
-}
 
 void GADMAdapterMaioMutableSetAddObject(NSMutableSet *_Nullable set, NSObject *_Nonnull object) {
   if (object) {
@@ -84,12 +51,38 @@ NSError *_Nonnull GADMAdapterMaioErrorWithCodeAndDescription(GADMAdapterMaioErro
   return error;
 }
 
-NSError *_Nonnull GADMAdapterMaioSDKErrorForFailReason(MaioFailReason reason) {
-  NSString *description =
-      [NSString stringWithFormat:@"maio SDK returned a load failure callback with reason: %@",
-                                 GADMAdapterMaioStringFromFailReason(reason)];
-  NSDictionary *userInfo =
-      @{NSLocalizedDescriptionKey : description, NSLocalizedFailureReasonErrorKey : description};
-  NSError *error = [NSError errorWithDomain:GADMMaioSDKErrorDomain code:reason userInfo:userInfo];
-  return error;
+BOOL GADMAdapterMaioIsChildUser(void) {
+  GADRequestConfiguration *requestConfiguration = GADMobileAds.sharedInstance.requestConfiguration;
+  return requestConfiguration.ageRestrictedTreatment == GADAgeRestrictedTreatmentChild ||
+         [requestConfiguration.tagForChildDirectedTreatment boolValue] ||
+         [requestConfiguration.tagForUnderAgeOfConsent boolValue];
 }
+
+@implementation GADMAdapterMaioUtils
+
++ (nullable MaioBannerSize *)maioAdSizeFromRequestedSize:(GADAdSize)size {
+  GADAdSize banner = GADAdSizeBanner;
+  GADAdSize large = GADAdSizeLargeBanner;
+  GADAdSize rectangle = GADAdSizeMediumRectangle;
+
+  NSArray<NSValue *> *potentials = @[
+    NSValueFromGADAdSize(banner), NSValueFromGADAdSize(large), NSValueFromGADAdSize(rectangle)
+  ];
+
+  GADAdSize closestSize = GADClosestValidSizeForAdSizes(size, potentials);
+  CGSize closestCGSize = CGSizeFromGADAdSize(closestSize);
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(banner), closestCGSize)) {
+    return [MaioBannerSize banner];
+  }
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(large), closestCGSize)) {
+    return [MaioBannerSize bigBanner];
+  }
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(rectangle), closestCGSize)) {
+    return [MaioBannerSize mediumRectangle];
+  }
+
+  NSLog(@"Unable to retrieve maio size from GADAdSize: %@", NSStringFromGADAdSize(size));
+  return nil;
+}
+
+@end

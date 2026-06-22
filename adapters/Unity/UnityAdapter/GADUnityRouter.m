@@ -57,16 +57,15 @@ typedef void (^InitCompletionHandler)(NSError *);
 
 - (void)sdkInitializeWithGameId:(NSString *)gameId
           withCompletionHandler:(InitCompletionHandler)complete {
-  if ([UnityAds isInitialized]) {
-    if (complete != nil) {
-      complete(nil);
+  @synchronized(self.completionBlocks) {
+    if ([UnityAds isInitialized]) {
+      if (complete != nil) {
+        complete(nil);
+      }
+      return;
     }
-    return;
-  }
-  // If this method was called multiple times from different threads, we want to call all completion
-  // handlers once initialization is done.
-  if (complete != nil) {
-    @synchronized(self.completionBlocks) {
+
+    if (complete != nil) {
       GADMAdapterUnityMutableArrayAddObject(self.completionBlocks, complete);
     }
   }
@@ -87,7 +86,9 @@ typedef void (^InitCompletionHandler)(NSError *);
               GADMAdapterUnityErrorAdInitializationFailure, message);
           [[GADUnityRouter sharedRouter] callCompletionBlocks:adapterError];
         };
-    [UnityAds initialize:gameId testMode:NO initializationDelegate:initDelegate];
+    [UnityAds initialize:gameId
+                      testMode:GADMediationAdapterUnity.testMode
+        initializationDelegate:initDelegate];
   });
 }
 

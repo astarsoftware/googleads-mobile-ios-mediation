@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import <GoogleMobileAds/GoogleMobileAds.h>
-#import <ImobileSdkAds/ImobileSdkAds.h>
+#import <ImobileSdkAds.h>
 
 #import "GADMediationAdapterIMobile.h"
 
@@ -39,3 +39,6 @@ void GADMAdapterIMobileMapTableRemoveObjectForKey(NSMapTable *_Nullable mapTable
 
 /// Converts ad size from Google Mobile Ads SDK to ad size supported by i-mobile ad network.
 GADAdSize GADMAdapterIMobileAdSizeFromGADAdSize(GADAdSize gadAdSize);
+
+/// Returns whether the user is a child user.
+BOOL GADMAdapterIMobileIsChildUser(void);

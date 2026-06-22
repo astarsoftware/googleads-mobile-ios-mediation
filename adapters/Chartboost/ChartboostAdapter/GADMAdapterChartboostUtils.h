@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#if __has_include(<Chartboost/Chartboost+Mediation.h>)
-#import <Chartboost/Chartboost+Mediation.h>
+#if __has_include(<ChartboostSDK/ChartboostSDK.h>)
+#import <ChartboostSDK/ChartboostSDK.h>
 #else
-#import "Chartboost+Mediation.h"
+#import "ChartboostSDK.h"
 #endif
 #import <Foundation/Foundation.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
@@ -61,3 +61,7 @@ NSError *_Nonnull GADMAdapterChartboostErrorWithCodeAndDescription(
 /// Returns the closest CHBBannerSize size from the requested GADAdSize.
 CHBBannerSize GADMAdapterChartboostBannerSizeFromAdSize(
     GADAdSize gadAdSize, NSError *_Nullable __autoreleasing *_Nullable error);
+
+/// Set Chartboost COPPA configuration using
+/// GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment.
+void GADMAdapterChartboostSetCOPPAUsingRequestConfiguration(void);

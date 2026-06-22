@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXAggregateTarget section */
@@ -32,29 +32,56 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		008109F6267D49C3001912A0 /* MaioOB.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 008109F5267D49C3001912A0 /* MaioOB.xcframework */; };
 		00AC999222E923F300262599 /* GADMAdapterMaioUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 00AC999022E923F300262599 /* GADMAdapterMaioUtils.h */; };
 		00AC999322E923F300262599 /* GADMAdapterMaioUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AC999122E923F300262599 /* GADMAdapterMaioUtils.m */; };
-		23D2A84B26A88B5B00188D33 /* GADRTBMaioInterstitialAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 23D2A84726A88B5B00188D33 /* GADRTBMaioInterstitialAd.h */; };
-		23D2A84C26A88B5B00188D33 /* GADRTBMaioInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D2A84826A88B5B00188D33 /* GADRTBMaioInterstitialAd.m */; };
-		23D2A84D26A88B5B00188D33 /* GADRTBMaioRewardedAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 23D2A84926A88B5B00188D33 /* GADRTBMaioRewardedAd.h */; };
-		23D2A84E26A88B5B00188D33 /* GADRTBMaioRewardedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 23D2A84A26A88B5B00188D33 /* GADRTBMaioRewardedAd.m */; };
 		3582A58D1FB2355D00490786 /* MaioAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3582A58B1FB2355D00490786 /* MaioAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		45021519225E907500FD53A1 /* GADMAdapterMaioAdsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 45021517225E907500FD53A1 /* GADMAdapterMaioAdsManager.h */; };
-		4502151A225E907500FD53A1 /* GADMAdapterMaioAdsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 45021518225E907500FD53A1 /* GADMAdapterMaioAdsManager.m */; };
 		45E6353822309EAE006EB5A1 /* GADMediationAdapterMaio.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E6353622309EAE006EB5A1 /* GADMediationAdapterMaio.h */; };
 		45E6353922309EAE006EB5A1 /* GADMediationAdapterMaio.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6353722309EAE006EB5A1 /* GADMediationAdapterMaio.m */; };
 		45E6353C22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E6353A22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.h */; };
 		45E6353D22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6353B22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.m */; };
+		A4BF061E6D23707818EC35EE /* Pods_Default_AdapterWithoutValidationScript.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 362E3009D2E87A592907729B /* Pods_Default_AdapterWithoutValidationScript.framework */; };
+		AD6E391E2EA1670F00818296 /* GADMAdapterMaioRewardedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6353B22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.m */; };
+		AD6E39202EA1670F00818296 /* GADMediationAdapterMaio.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6353722309EAE006EB5A1 /* GADMediationAdapterMaio.m */; };
+		AD6E39212EA1670F00818296 /* GADMAdapterMaioInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1B0932B2BC52E00CA4FC8 /* GADMAdapterMaioInterstitialAd.m */; };
+		AD6E39222EA1670F00818296 /* GADMAdapterMaioUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AC999122E923F300262599 /* GADMAdapterMaioUtils.m */; };
+		AD6E39232EA1670F00818296 /* GADMMaioInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F392F1FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.m */; };
+		AD6E39252EA1670F00818296 /* GADMMaioRewardedAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F39201FB98B2F00A32028 /* GADMMaioRewardedAdapter.m */; };
+		AD6E39292EA1670F00818296 /* MaioAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3582A58B1FB2355D00490786 /* MaioAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD6E392B2EA1670F00818296 /* GADMMaioConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F39181FB98B2E00A32028 /* GADMMaioConstants.h */; };
+		AD6E392C2EA1670F00818296 /* GADMediationAdapterMaio.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E6353622309EAE006EB5A1 /* GADMediationAdapterMaio.h */; };
+		AD6E392D2EA1670F00818296 /* GADMMaioRewardedAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F39221FB98B2F00A32028 /* GADMMaioRewardedAdapter.h */; };
+		AD6E392F2EA1670F00818296 /* GADMAdapterMaioRewardedAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E6353A22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.h */; };
+		AD6E39302EA1670F00818296 /* GADMAdapterMaioUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 00AC999022E923F300262599 /* GADMAdapterMaioUtils.h */; };
+		AD6E39312EA1670F00818296 /* GADMMaioInterstitialAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F392E1FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.h */; };
+		ADA1B0942B2BC52E00CA4FC8 /* GADMAdapterMaioInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1B0932B2BC52E00CA4FC8 /* GADMAdapterMaioInterstitialAd.m */; };
+		ADA6B9EB2CF146D9009C8FDA /* GADMAdapterMaioRewardedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6353B22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.m */; };
+		ADA6B9ED2CF146D9009C8FDA /* GADMediationAdapterMaio.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E6353722309EAE006EB5A1 /* GADMediationAdapterMaio.m */; };
+		ADA6B9EE2CF146D9009C8FDA /* GADMAdapterMaioInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1B0932B2BC52E00CA4FC8 /* GADMAdapterMaioInterstitialAd.m */; };
+		ADA6B9EF2CF146D9009C8FDA /* GADMAdapterMaioUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 00AC999122E923F300262599 /* GADMAdapterMaioUtils.m */; };
+		ADA6B9F02CF146D9009C8FDA /* GADMMaioInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F392F1FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.m */; };
+		ADA6B9F22CF146D9009C8FDA /* GADMMaioRewardedAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F39201FB98B2F00A32028 /* GADMMaioRewardedAdapter.m */; };
+		ADA6B9F62CF146D9009C8FDA /* MaioAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 3582A58B1FB2355D00490786 /* MaioAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADA6B9F82CF146D9009C8FDA /* GADMMaioConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F39181FB98B2E00A32028 /* GADMMaioConstants.h */; };
+		ADA6B9F92CF146D9009C8FDA /* GADMediationAdapterMaio.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E6353622309EAE006EB5A1 /* GADMediationAdapterMaio.h */; };
+		ADA6B9FA2CF146D9009C8FDA /* GADMMaioRewardedAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F39221FB98B2F00A32028 /* GADMMaioRewardedAdapter.h */; };
+		ADA6B9FC2CF146D9009C8FDA /* GADMAdapterMaioRewardedAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 45E6353A22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.h */; };
+		ADA6B9FD2CF146D9009C8FDA /* GADMAdapterMaioUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 00AC999022E923F300262599 /* GADMAdapterMaioUtils.h */; };
+		ADA6B9FE2CF146D9009C8FDA /* GADMMaioInterstitialAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F392E1FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.h */; };
 		C29F39271FB996B400A32028 /* GADMMaioRewardedAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F39201FB98B2F00A32028 /* GADMMaioRewardedAdapter.m */; };
 		C29F39281FB996CD00A32028 /* GADMMaioConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F39181FB98B2E00A32028 /* GADMMaioConstants.h */; };
 		C29F392D1FB996CD00A32028 /* GADMMaioRewardedAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F39221FB98B2F00A32028 /* GADMMaioRewardedAdapter.h */; };
 		C29F39301FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = C29F392E1FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.h */; };
 		C29F39311FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = C29F392F1FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.m */; };
+		E2751CA02EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E2751C9F2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m */; };
+		E2751CA12EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h in Headers */ = {isa = PBXBuildFile; fileRef = E2751C9E2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h */; };
+		E2751CA22EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h in Headers */ = {isa = PBXBuildFile; fileRef = E2751C9E2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h */; };
+		E2751CA32EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E2751C9F2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m */; };
+		E2751CA42EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = E2751C9F2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m */; };
+		E2751CA52EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h in Headers */ = {isa = PBXBuildFile; fileRef = E2751C9E2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		00DD267122F10B230039C1D4 /* PBXContainerItemProxy */ = {
+		ADA6B9E92CF146D9009C8FDA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7DFABB151DA8682C00322E02 /* Project object */;
 			proxyType = 1;
@@ -73,6 +100,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD6E39272EA1670F00818296 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9F42CF146D9009C8FDA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -80,16 +125,11 @@
 		00AC999022E923F300262599 /* GADMAdapterMaioUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterMaioUtils.h; sourceTree = "<group>"; };
 		00AC999122E923F300262599 /* GADMAdapterMaioUtils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterMaioUtils.m; sourceTree = "<group>"; };
 		00DD266B22F10AFF0039C1D4 /* Script_Validate.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = Script_Validate.sh; sourceTree = "<group>"; };
-		23D2A84726A88B5B00188D33 /* GADRTBMaioInterstitialAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRTBMaioInterstitialAd.h; sourceTree = "<group>"; };
-		23D2A84826A88B5B00188D33 /* GADRTBMaioInterstitialAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADRTBMaioInterstitialAd.m; sourceTree = "<group>"; };
-		23D2A84926A88B5B00188D33 /* GADRTBMaioRewardedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADRTBMaioRewardedAd.h; sourceTree = "<group>"; };
-		23D2A84A26A88B5B00188D33 /* GADRTBMaioRewardedAd.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADRTBMaioRewardedAd.m; sourceTree = "<group>"; };
 		3582A58B1FB2355D00490786 /* MaioAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MaioAdapter.h; sourceTree = "<group>"; };
 		3582A58C1FB2355D00490786 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		3582A58E1FB2361000490786 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3582A5901FB239E400490786 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
-		45021517225E907500FD53A1 /* GADMAdapterMaioAdsManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterMaioAdsManager.h; sourceTree = "<group>"; };
-		45021518225E907500FD53A1 /* GADMAdapterMaioAdsManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterMaioAdsManager.m; sourceTree = "<group>"; };
+		362E3009D2E87A592907729B /* Pods_Default_AdapterWithoutValidationScript.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Default_AdapterWithoutValidationScript.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		45E6353622309EAE006EB5A1 /* GADMediationAdapterMaio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMediationAdapterMaio.h; sourceTree = "<group>"; };
 		45E6353722309EAE006EB5A1 /* GADMediationAdapterMaio.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterMaio.m; sourceTree = "<group>"; };
 		45E6353A22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterMaioRewardedAd.h; sourceTree = "<group>"; };
@@ -100,11 +140,20 @@
 		7D9552B11DC006E5005DCE8D /* Script_Framework.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Script_Framework.sh; sourceTree = "<group>"; };
 		7DE821BF1DB04B5000AA08CF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7DFABB1D1DA8682C00322E02 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9B0FA64435847405CDE1DF63 /* Pods-Default-AdapterWithoutValidationScript.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Default-AdapterWithoutValidationScript.release.xcconfig"; path = "Target Support Files/Pods-Default-AdapterWithoutValidationScript/Pods-Default-AdapterWithoutValidationScript.release.xcconfig"; sourceTree = "<group>"; };
+		AD00C4592B87D3FC007C85F3 /* MaioAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MaioAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD6E39352EA1670F00818296 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA1B0922B2BC4ED00CA4FC8 /* GADMAdapterMaioInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterMaioInterstitialAd.h; sourceTree = "<group>"; };
+		ADA1B0932B2BC52E00CA4FC8 /* GADMAdapterMaioInterstitialAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterMaioInterstitialAd.m; sourceTree = "<group>"; };
+		ADA6BA022CF146D9009C8FDA /* libStaticMaioAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStaticMaioAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C29F39181FB98B2E00A32028 /* GADMMaioConstants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMMaioConstants.h; sourceTree = "<group>"; };
 		C29F39201FB98B2F00A32028 /* GADMMaioRewardedAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMMaioRewardedAdapter.m; sourceTree = "<group>"; };
 		C29F39221FB98B2F00A32028 /* GADMMaioRewardedAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMMaioRewardedAdapter.h; sourceTree = "<group>"; };
 		C29F392E1FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMMaioInterstitialAdapter.h; sourceTree = "<group>"; };
 		C29F392F1FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMMaioInterstitialAdapter.m; sourceTree = "<group>"; };
+		D5E668C05BBBD25DA34EE2C4 /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Default-AdapterWithoutValidationScript.debug.xcconfig"; path = "Target Support Files/Pods-Default-AdapterWithoutValidationScript/Pods-Default-AdapterWithoutValidationScript.debug.xcconfig"; sourceTree = "<group>"; };
+		E2751C9E2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterMaioBannerAd.h; sourceTree = "<group>"; };
+		E2751C9F2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterMaioBannerAd.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,7 +161,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				008109F6267D49C3001912A0 /* MaioOB.xcframework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C4562B87D3FC007C85F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E39262EA1670F00818296 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A4BF061E6D23707818EC35EE /* Pods_Default_AdapterWithoutValidationScript.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9F32CF146D9009C8FDA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,19 +193,19 @@
 			isa = PBXGroup;
 			children = (
 				008109F5267D49C3001912A0 /* MaioOB.xcframework */,
+				362E3009D2E87A592907729B /* Pods_Default_AdapterWithoutValidationScript.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		23D2A84626A88B5B00188D33 /* Bidding */ = {
+		0D4D9DB955B768BB7923B11E /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				23D2A84726A88B5B00188D33 /* GADRTBMaioInterstitialAd.h */,
-				23D2A84826A88B5B00188D33 /* GADRTBMaioInterstitialAd.m */,
-				23D2A84926A88B5B00188D33 /* GADRTBMaioRewardedAd.h */,
-				23D2A84A26A88B5B00188D33 /* GADRTBMaioRewardedAd.m */,
+				D5E668C05BBBD25DA34EE2C4 /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */,
+				9B0FA64435847405CDE1DF63 /* Pods-Default-AdapterWithoutValidationScript.release.xcconfig */,
 			);
-			path = Bidding;
+			name = Pods;
+			path = ../../AdapterUnitTests/Pods;
 			sourceTree = "<group>";
 		};
 		3582A5891FB2353B00490786 /* Public */ = {
@@ -168,9 +238,10 @@
 		7D72B8C11DB97C10006EAE11 /* MaioAdapter */ = {
 			isa = PBXGroup;
 			children = (
-				23D2A84626A88B5B00188D33 /* Bidding */,
-				45021517225E907500FD53A1 /* GADMAdapterMaioAdsManager.h */,
-				45021518225E907500FD53A1 /* GADMAdapterMaioAdsManager.m */,
+				E2751C9E2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h */,
+				E2751C9F2EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m */,
+				ADA1B0922B2BC4ED00CA4FC8 /* GADMAdapterMaioInterstitialAd.h */,
+				ADA1B0932B2BC52E00CA4FC8 /* GADMAdapterMaioInterstitialAd.m */,
 				45E6353A22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.h */,
 				45E6353B22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.m */,
 				00AC999022E923F300262599 /* GADMAdapterMaioUtils.h */,
@@ -207,6 +278,7 @@
 				7D46CFDE1DB6B76E0050F612 /* Configuration */,
 				7DFABB1E1DA8682C00322E02 /* Products */,
 				008109F4267D49C3001912A0 /* Frameworks */,
+				0D4D9DB955B768BB7923B11E /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -214,6 +286,9 @@
 			isa = PBXGroup;
 			children = (
 				7DFABB1D1DA8682C00322E02 /* libAdapter.a */,
+				AD00C4592B87D3FC007C85F3 /* MaioAdapter.framework */,
+				ADA6BA022CF146D9009C8FDA /* libStaticMaioAdapter.a */,
+				AD6E39352EA1670F00818296 /* libAdapter.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -226,15 +301,50 @@
 			buildActionMask = 2147483647;
 			files = (
 				3582A58D1FB2355D00490786 /* MaioAdapter.h in Headers */,
-				23D2A84D26A88B5B00188D33 /* GADRTBMaioRewardedAd.h in Headers */,
 				C29F39281FB996CD00A32028 /* GADMMaioConstants.h in Headers */,
+				E2751CA12EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h in Headers */,
 				45E6353822309EAE006EB5A1 /* GADMediationAdapterMaio.h in Headers */,
 				C29F392D1FB996CD00A32028 /* GADMMaioRewardedAdapter.h in Headers */,
-				23D2A84B26A88B5B00188D33 /* GADRTBMaioInterstitialAd.h in Headers */,
-				45021519225E907500FD53A1 /* GADMAdapterMaioAdsManager.h in Headers */,
 				45E6353C22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.h in Headers */,
 				00AC999222E923F300262599 /* GADMAdapterMaioUtils.h in Headers */,
 				C29F39301FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C4542B87D3FC007C85F3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E39282EA1670F00818296 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD6E39292EA1670F00818296 /* MaioAdapter.h in Headers */,
+				AD6E392B2EA1670F00818296 /* GADMMaioConstants.h in Headers */,
+				E2751CA52EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h in Headers */,
+				AD6E392C2EA1670F00818296 /* GADMediationAdapterMaio.h in Headers */,
+				AD6E392D2EA1670F00818296 /* GADMMaioRewardedAdapter.h in Headers */,
+				AD6E392F2EA1670F00818296 /* GADMAdapterMaioRewardedAd.h in Headers */,
+				AD6E39302EA1670F00818296 /* GADMAdapterMaioUtils.h in Headers */,
+				AD6E39312EA1670F00818296 /* GADMMaioInterstitialAdapter.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9F52CF146D9009C8FDA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADA6B9F62CF146D9009C8FDA /* MaioAdapter.h in Headers */,
+				ADA6B9F82CF146D9009C8FDA /* GADMMaioConstants.h in Headers */,
+				E2751CA22EE9649D0097EE41 /* GADMAdapterMaioBannerAd.h in Headers */,
+				ADA6B9F92CF146D9009C8FDA /* GADMediationAdapterMaio.h in Headers */,
+				ADA6B9FA2CF146D9009C8FDA /* GADMMaioRewardedAdapter.h in Headers */,
+				ADA6B9FC2CF146D9009C8FDA /* GADMAdapterMaioRewardedAd.h in Headers */,
+				ADA6B9FD2CF146D9009C8FDA /* GADMAdapterMaioUtils.h in Headers */,
+				ADA6B9FE2CF146D9009C8FDA /* GADMMaioInterstitialAdapter.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -253,11 +363,66 @@
 			buildRules = (
 			);
 			dependencies = (
-				00DD267222F10B230039C1D4 /* PBXTargetDependency */,
 			);
 			name = Adapter;
 			productName = Adapter;
 			productReference = 7DFABB1D1DA8682C00322E02 /* libAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		AD00C4582B87D3FC007C85F3 /* MaioAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD00C45F2B87D3FC007C85F3 /* Build configuration list for PBXNativeTarget "MaioAdapter" */;
+			buildPhases = (
+				AD00C4542B87D3FC007C85F3 /* Headers */,
+				AD00C4552B87D3FC007C85F3 /* Sources */,
+				AD00C4562B87D3FC007C85F3 /* Frameworks */,
+				AD00C4572B87D3FC007C85F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MaioAdapter;
+			productName = MaioAdapter;
+			productReference = AD00C4592B87D3FC007C85F3 /* MaioAdapter.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		AD6E391A2EA1670F00818296 /* AdapterWithoutValidationScript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD6E39322EA1670F00818296 /* Build configuration list for PBXNativeTarget "AdapterWithoutValidationScript" */;
+			buildPhases = (
+				0A66ED6C37EB1818D5458980 /* [CP] Check Pods Manifest.lock */,
+				AD6E391D2EA1670F00818296 /* Sources */,
+				AD6E39262EA1670F00818296 /* Frameworks */,
+				AD6E39272EA1670F00818296 /* CopyFiles */,
+				AD6E39282EA1670F00818296 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdapterWithoutValidationScript;
+			productName = Adapter;
+			productReference = AD6E39352EA1670F00818296 /* libAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		ADA6B9E72CF146D9009C8FDA /* StaticMaioAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA6B9FF2CF146D9009C8FDA /* Build configuration list for PBXNativeTarget "StaticMaioAdapter" */;
+			buildPhases = (
+				ADA6B9EA2CF146D9009C8FDA /* Sources */,
+				ADA6B9F32CF146D9009C8FDA /* Frameworks */,
+				ADA6B9F42CF146D9009C8FDA /* CopyFiles */,
+				ADA6B9F52CF146D9009C8FDA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADA6B9E82CF146D9009C8FDA /* PBXTargetDependency */,
+			);
+			name = StaticMaioAdapter;
+			productName = Adapter;
+			productReference = ADA6BA022CF146D9009C8FDA /* libStaticMaioAdapter.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -274,6 +439,10 @@
 					};
 					7DFABB1C1DA8682C00322E02 = {
 						CreatedOnToolsVersion = 7.3.1;
+					};
+					AD00C4582B87D3FC007C85F3 = {
+						CreatedOnToolsVersion = 15.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -293,9 +462,22 @@
 				7DFABB1C1DA8682C00322E02 /* Adapter */,
 				7D1B6CA21DC2ACF900D8CABF /* Framework */,
 				00DD266C22F10B0D0039C1D4 /* ValidateSourceCode */,
+				AD00C4582B87D3FC007C85F3 /* MaioAdapter */,
+				ADA6B9E72CF146D9009C8FDA /* StaticMaioAdapter */,
+				AD6E391A2EA1670F00818296 /* AdapterWithoutValidationScript */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AD00C4572B87D3FC007C85F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		00DD266D22F10B0D0039C1D4 /* Validate Source Code */ = {
@@ -311,6 +493,28 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "set -o errexit\nset -o nounset\nset -o xtrace\n\nbash \"${SRCROOT}/BuildScript/Script_Validate.sh\"\n";
+		};
+		0A66ED6C37EB1818D5458980 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Default-AdapterWithoutValidationScript-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
 		};
 		7D1B6CA61DC2AD7700D8CABF /* Framework Script */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -333,24 +537,58 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4502151A225E907500FD53A1 /* GADMAdapterMaioAdsManager.m in Sources */,
 				45E6353D22309EFE006EB5A1 /* GADMAdapterMaioRewardedAd.m in Sources */,
-				23D2A84C26A88B5B00188D33 /* GADRTBMaioInterstitialAd.m in Sources */,
 				45E6353922309EAE006EB5A1 /* GADMediationAdapterMaio.m in Sources */,
+				ADA1B0942B2BC52E00CA4FC8 /* GADMAdapterMaioInterstitialAd.m in Sources */,
 				00AC999322E923F300262599 /* GADMAdapterMaioUtils.m in Sources */,
+				E2751CA02EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m in Sources */,
 				C29F39311FB9BEDC00A32028 /* GADMMaioInterstitialAdapter.m in Sources */,
-				23D2A84E26A88B5B00188D33 /* GADRTBMaioRewardedAd.m in Sources */,
 				C29F39271FB996B400A32028 /* GADMMaioRewardedAdapter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C4552B87D3FC007C85F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E391D2EA1670F00818296 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD6E391E2EA1670F00818296 /* GADMAdapterMaioRewardedAd.m in Sources */,
+				AD6E39202EA1670F00818296 /* GADMediationAdapterMaio.m in Sources */,
+				AD6E39212EA1670F00818296 /* GADMAdapterMaioInterstitialAd.m in Sources */,
+				AD6E39222EA1670F00818296 /* GADMAdapterMaioUtils.m in Sources */,
+				E2751CA42EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m in Sources */,
+				AD6E39232EA1670F00818296 /* GADMMaioInterstitialAdapter.m in Sources */,
+				AD6E39252EA1670F00818296 /* GADMMaioRewardedAdapter.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9EA2CF146D9009C8FDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADA6B9EB2CF146D9009C8FDA /* GADMAdapterMaioRewardedAd.m in Sources */,
+				ADA6B9ED2CF146D9009C8FDA /* GADMediationAdapterMaio.m in Sources */,
+				ADA6B9EE2CF146D9009C8FDA /* GADMAdapterMaioInterstitialAd.m in Sources */,
+				ADA6B9EF2CF146D9009C8FDA /* GADMAdapterMaioUtils.m in Sources */,
+				E2751CA32EE9649D0097EE41 /* GADMAdapterMaioBannerAd.m in Sources */,
+				ADA6B9F02CF146D9009C8FDA /* GADMMaioInterstitialAdapter.m in Sources */,
+				ADA6B9F22CF146D9009C8FDA /* GADMMaioRewardedAdapter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		00DD267222F10B230039C1D4 /* PBXTargetDependency */ = {
+		ADA6B9E82CF146D9009C8FDA /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 00DD266C22F10B0D0039C1D4 /* ValidateSourceCode */;
-			targetProxy = 00DD267122F10B230039C1D4 /* PBXContainerItemProxy */;
+			targetProxy = ADA6B9E92CF146D9009C8FDA /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -464,7 +702,6 @@
 		};
 		7DFABB271DA8682C00322E02 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7D6A68A31DB7ED230001E48B /* Debug.xcconfig */;
 			buildSettings = {
 				SKIP_INSTALL = YES;
 			};
@@ -474,6 +711,154 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7D6A68A41DB7ED310001E48B /* Release.xcconfig */;
 			buildSettings = {
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AD00C45D2B87D3FC007C85F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D46CFDF1DB6B7CC0050F612 /* Adapter.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Google. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.MaioAdapter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AD00C45E2B87D3FC007C85F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D46CFDF1DB6B7CC0050F612 /* Adapter.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Google. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.MaioAdapter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AD6E39332EA1670F00818296 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5E668C05BBBD25DA34EE2C4 /* Pods-Default-AdapterWithoutValidationScript.debug.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "${PRODUCT_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AD6E39342EA1670F00818296 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D6A68A41DB7ED310001E48B /* Release.xcconfig */;
+			buildSettings = {
+				PRODUCT_NAME = "${PRODUCT_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		ADA6BA002CF146D9009C8FDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		ADA6BA012CF146D9009C8FDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -513,6 +898,33 @@
 			buildConfigurations = (
 				7DFABB271DA8682C00322E02 /* Debug */,
 				7DFABB281DA8682C00322E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD00C45F2B87D3FC007C85F3 /* Build configuration list for PBXNativeTarget "MaioAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD00C45D2B87D3FC007C85F3 /* Debug */,
+				AD00C45E2B87D3FC007C85F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD6E39322EA1670F00818296 /* Build configuration list for PBXNativeTarget "AdapterWithoutValidationScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD6E39332EA1670F00818296 /* Debug */,
+				AD6E39342EA1670F00818296 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADA6B9FF2CF146D9009C8FDA /* Build configuration list for PBXNativeTarget "StaticMaioAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA6BA002CF146D9009C8FDA /* Debug */,
+				ADA6BA012CF146D9009C8FDA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

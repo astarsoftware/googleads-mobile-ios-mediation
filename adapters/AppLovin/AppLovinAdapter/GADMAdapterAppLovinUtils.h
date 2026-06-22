@@ -1,10 +1,16 @@
+// Copyright 2018 Google LLC
 //
-//  GADMAdapterAppLovinUtils.h
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-//  Created by Thomas So on 1/10/18.
-//
-//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #import <AppLovinSDK/AppLovinSDK.h>
 #import <Foundation/Foundation.h>
@@ -55,22 +61,19 @@ NSError *_Nonnull GADMAdapterAppLovinErrorWithCodeAndDescription(GADMAdapterAppL
 /// Returns an NSError with the provided error code.
 NSError *_Nonnull GADMAdapterAppLovinSDKErrorWithCode(NSInteger code);
 
-/// Returns an error where the instance of the AppLovin SDK for a given SDKKey cannot be found.
-NSError *_Nonnull GADMAdapterAppLovinNilSDKError(NSString *_Nonnull SDKKey);
+/// Returns an error indicating the AppLovin SDK does not support child users.
+NSError *_Nonnull GADMAdapterAppLovinChildUserError(void);
+
+/// Returns whether loading multiple ads is enabled.
+BOOL GADMAdapterAppLovinIsMultipleAdsLoadingEnabled(void);
 
 @interface GADMAdapterAppLovinUtils : NSObject
 
 /// Retrieves the AppLovin SDK key from the specified |credentials| or from Info.plist.
 + (nullable NSString *)retrieveSDKKeyFromCredentials:(nonnull NSDictionary *)credentials;
 
-/// Retrieve an instance of the AppLovin SDK with the provided SDK key.
-+ (nullable ALSdk *)retrieveSDKFromSDKKey:(nonnull NSString *)SDKKey;
-
 /// Returns whether the given string is a valid SDK key or not.
 + (BOOL)isValidAppLovinSDKKey:(nonnull NSString *)SDKKey;
-
-/// Retrieve the SDK key from the Info.plist, if any.
-+ (nullable NSString *)infoDictionarySDKKey;
 
 /// Retrieves the zone identifier from an appropriate connector object. Returns the default
 /// zone if no zone identifier exists. Returns nil for invalid custom zones.
@@ -86,5 +89,8 @@ NSError *_Nonnull GADMAdapterAppLovinNilSDKError(NSString *_Nonnull SDKKey);
 
 /// Formats and logs the string.
 + (void)log:(nonnull NSString *)format, ...;
+
+/// Returns whether the user has been tagged as a child or not.
++ (BOOL)isChildUser;
 
 @end

@@ -1,0 +1,88 @@
+// Copyright 2024 Google LLC.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import Foundation
+import GoogleMobileAds
+import MolocoSDK
+
+/// A fake implementation of MolocoRewarded.
+final class FakeMolocoRewarded: NSObject {
+
+  /// The load error that occured.
+  let loadError: Error?
+
+  /// The show error that occured.
+  let showError: Error?
+
+  /// Var to capture the bid response that was used to load the ad on Moloco SDK. Used for
+  /// assertion. It is initlialized to a value that is never asserted for.
+  var bidResponseUsedToLoadMolocoAd: String = "nil"
+
+  // MolocoSDK.MolocoRewardedInterstitial properties.
+  var rewardedDelegate: (any MolocoSDK.MolocoRewardedDelegate)?
+  var fullscreenViewController: UIViewController?
+  var isReady: Bool
+
+  /// If loadError is nil, this fake mimics load success. If loadError is not nil, this fake mimics
+  /// load failure.
+  init(
+    rewardedDelegate: any MolocoSDK.MolocoRewardedDelegate, loadError: Error?,
+    isReadyToBeShown: Bool = true, showError: Error?
+  ) {
+    self.rewardedDelegate = rewardedDelegate
+    self.isReady = isReadyToBeShown
+    self.loadError = loadError
+    self.showError = showError
+  }
+
+}
+
+// MARK: - MolocoSDK.MolocoRewardedInterstitial
+
+extension FakeMolocoRewarded: MolocoSDK.MolocoRewardedInterstitial {
+
+  func show(from viewController: UIViewController) {
+    guard let rewardedDelegate else { return }
+    if !isReady || showError != nil {
+      rewardedDelegate.failToShow(ad: self, with: showError)
+      return
+    }
+
+    // Simulate show and the subsequent ad lifecycle events.
+    rewardedDelegate.didShow(ad: self)
+    rewardedDelegate.didClick(on: self)
+    rewardedDelegate.didHide(ad: self)
+    rewardedDelegate.rewardedVideoStarted(ad: self)
+    rewardedDelegate.userRewarded(ad: self)
+    rewardedDelegate.rewardedVideoCompleted(ad: self)
+  }
+
+  func show(from viewController: UIViewController, muted: Bool) {
+    // No-op.
+  }
+
+  func load(bidResponse: String) {
+    bidResponseUsedToLoadMolocoAd = bidResponse
+    guard let loadError else {
+      rewardedDelegate?.didLoad(ad: self)
+      return
+    }
+    rewardedDelegate?.failToLoad(ad: self, with: loadError)
+  }
+
+  func destroy() {
+    // No-op.
+  }
+
+}

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC.
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -23,9 +23,11 @@ typedef NS_ENUM(NSInteger, GADMAdapterMaioErrorCode) {
   /// The maio adapter does not support the ad format being requested.
   GADMAdapterMaioErrorAdFormatNotSupported = 103,
   /// An ad is already loaded for this network configuration.
-  GADMAdapterMaioErrorAdAlreadyLoaded = 104
+  GADMAdapterMaioErrorAdAlreadyLoaded = 104,
+  /// Filter age-restricted requests for maio SDK because it cannot receive age-restricted signals
+  GADMAdapterMaioErrorChildUser = 105
 };
 
-@interface GADMediationAdapterMaio : NSObject <GADRTBAdapter>
+@interface GADMediationAdapterMaio : NSObject <GADMediationAdapter>
 
 @end

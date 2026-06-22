@@ -18,8 +18,8 @@
 NSError *GADMChartboostErrorForCHBCacheError(CHBCacheError *error) {
   NSString *suffix = [NSString stringWithFormat:@"code %lu", (unsigned long)error.code];
   switch (error.code) {
-    case CHBCacheErrorCodeInternal:
-      suffix = @"CHBCacheErrorCodeInternal";
+    case CHBCacheErrorCodeInternalError:
+      suffix = @"CHBCacheErrorCodeInternalError";
       break;
     case CHBCacheErrorCodeInternetUnavailable:
       suffix = @"CHBCacheErrorCodeInternetUnavailable";
@@ -39,6 +39,9 @@ NSError *GADMChartboostErrorForCHBCacheError(CHBCacheError *error) {
     case CHBCacheErrorCodePublisherDisabled:
       suffix = @"CHBCacheErrorCodePublisherDisabled";
       break;
+    case CHBCacheErrorCodeServerError:
+      suffix = @"CHBCacheErrorCodeServerError";
+      break;
   }
 
   NSString *description =
@@ -49,14 +52,11 @@ NSError *GADMChartboostErrorForCHBCacheError(CHBCacheError *error) {
 NSError *GADMChartboostErrorForCHBShowError(CHBShowError *error) {
   NSString *suffix = [NSString stringWithFormat:@"code %lu", (unsigned long)error.code];
   switch (error.code) {
-    case CHBShowErrorCodeInternal:
-      suffix = @"CHBShowErrorCodeInternal";
+    case CHBShowErrorCodeInternalError:
+      suffix = @"CHBShowErrorCodeInternalError";
       break;
     case CHBShowErrorCodeSessionNotStarted:
       suffix = @"CHBShowErrorCodeSessionNotStarted";
-      break;
-    case CHBShowErrorCodeAdAlreadyVisible:
-      suffix = @"CHBShowErrorCodeAdAlreadyVisible";
       break;
     case CHBShowErrorCodeInternetUnavailable:
       suffix = @"CHBShowErrorCodeInternetUnavailable";
@@ -66,6 +66,9 @@ NSError *GADMChartboostErrorForCHBShowError(CHBShowError *error) {
       break;
     case CHBShowErrorCodeNoCachedAd:
       suffix = @"CHBShowErrorCodeNoCachedAd";
+      break;
+    case CHBShowErrorCodeNoViewController:
+      suffix = @"CHBShowErrorCodeNoViewController";
       break;
   }
   NSString *description =
@@ -83,11 +86,8 @@ NSError *GADMChartboostErrorForCHBClickError(CHBClickError *error) {
     case CHBClickErrorCodeUriUnrecognized:
       suffix = @"CHBClickErrorCodeUriUnrecognized";
       break;
-    case CHBClickErrorCodeConfirmationGateFailure:
-      suffix = @"CHBClickErrorCodeConfirmationGateFailure";
-      break;
-    case CHBClickErrorCodeInternal:
-      suffix = @"CHBClickErrorCodeInternal";
+    case CHBClickErrorCodeInternalError:
+      suffix = @"CHBClickErrorCodeInternalError";
       break;
   }
   NSString *description =

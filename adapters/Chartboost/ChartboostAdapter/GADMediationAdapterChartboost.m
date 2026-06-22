@@ -13,25 +13,38 @@
 // limitations under the License.
 
 #import "GADMediationAdapterChartboost.h"
-#if __has_include(<Chartboost/Chartboost.h>)
-#import <Chartboost/Chartboost.h>
+#if __has_include(<ChartboostSDK/ChartboostSDK.h>)
+#import <ChartboostSDK/ChartboostSDK.h>
 #else
-#import "Chartboost.h"
+#import "ChartboostSDK.h"
 #endif
 #import "GADMAdapterChartboostConstants.h"
 #import "GADMAdapterChartboostRewardedAd.h"
 #import "GADMAdapterChartboostUtils.h"
 #import "GADMChartboostError.h"
-#import "GADMChartboostExtras.h"
 #import "GADMediationAdapterChartboost.h"
+#import "GADMediationAdapterChartboostBannerAd.h"
+#import "GADMediationAdapterChartboostInterstitialAd.h"
 
 @implementation GADMediationAdapterChartboost {
+  /// Chartboost banner ad wrapper.
+  GADMediationAdapterChartboostBannerAd *_bannerAd;
+
   /// Chartboost rewarded ad wrapper.
   GADMAdapterChartboostRewardedAd *_rewardedAd;
+
+  /// Chartboost interstitial ad wrapper.
+  GADMediationAdapterChartboostInterstitialAd *_interstitialAd;
 }
 
 + (void)setUpWithConfiguration:(GADMediationServerConfiguration *)configuration
              completionHandler:(GADMediationAdapterSetUpCompletionBlock)completionHandler {
+  [GADMediationAdapterChartboost startChartBoostWithCredentialsArray:configuration.credentials completionHandler:^(NSError * _Nullable error) {
+    completionHandler(error);
+  }];
+}
+
++ (void)startChartBoostWithCredentialsArray:(nonnull NSArray<GADMediationCredentials *> *)credentialsArray completionHandler:(void (^)(NSError *_Nullable error))completionHandler {
   if (SYSTEM_VERSION_LESS_THAN(GADMAdapterChartboostMinimumOSVersion)) {
     NSString *logMessage = [NSString
         stringWithFormat:
@@ -45,7 +58,7 @@
 
   NSMutableDictionary *credentials = [[NSMutableDictionary alloc] init];
 
-  for (GADMediationCredentials *cred in configuration.credentials) {
+  for (GADMediationCredentials *cred in credentialsArray) {
     NSString *appID = cred.settings[GADMAdapterChartboostAppID];
     NSString *appSignature = cred.settings[GADMAdapterChartboostAppSignature];
 
@@ -71,14 +84,18 @@
     NSLog(@"Initializing Chartboost SDK with the app ID: %@ and app signature: %@", appID,
           appSignature);
   }
-  [Chartboost startWithAppId:appID
+
+  GADMAdapterChartboostSetCOPPAUsingRequestConfiguration();
+
+  [Chartboost startWithAppID:appID
                 appSignature:appSignature
-                  completion:^(BOOL success) {
+                  completion:^(CHBStartError *cbError) {
                     NSError *error = nil;
-                    if (!success) {
+                    if (cbError) {
                       error = GADMAdapterChartboostErrorWithCodeAndDescription(
                           GADMAdapterChartboostErrorInitializationFailure,
-                          @"Chartboost SDK initialization failed.");
+                          @"Chartboost SDK failed to initialize.");
+                      NSLog(@"Failed to initialize Chartboost SDK: %@", cbError);
                     }
                     completionHandler(error);
                   }];
@@ -98,7 +115,7 @@
 }
 
 + (nullable Class<GADAdNetworkExtras>)networkExtrasClass {
-  return [GADMChartboostExtras class];
+  return nil;
 }
 
 + (GADVersionNumber)adapterVersion {
@@ -118,9 +135,53 @@
 - (void)loadRewardedAdForAdConfiguration:(GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
                            (GADMediationRewardedLoadCompletionHandler)completionHandler {
-  _rewardedAd = [[GADMAdapterChartboostRewardedAd alloc] initWithAdConfiguration:adConfiguration
-                                                               completionHandler:completionHandler];
-  [_rewardedAd loadRewardedAd];
+  __weak GADMediationAdapterChartboost *weakSelf = self;
+  [GADMediationAdapterChartboost startChartBoostWithCredentialsArray:@[adConfiguration.credentials] completionHandler:^(NSError * _Nullable error) {
+    GADMediationAdapterChartboost *strongSelf = weakSelf;
+    if(!strongSelf) {
+      return;
+    }
+
+    strongSelf->_rewardedAd = [[GADMAdapterChartboostRewardedAd alloc] initWithAdConfiguration:adConfiguration
+                                                                 completionHandler:completionHandler];
+    [strongSelf->_rewardedAd loadRewardedAd];
+  }];
+}
+
+- (void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
+                   completionHandler:(GADMediationBannerLoadCompletionHandler)completionHandler {
+  __weak GADMediationAdapterChartboost *weakSelf = self;
+  [GADMediationAdapterChartboost startChartBoostWithCredentialsArray:@[adConfiguration.credentials] completionHandler:^(NSError * _Nullable error) {
+    GADMediationAdapterChartboost *strongSelf = weakSelf;
+    if(!strongSelf) {
+      return;
+    }
+
+    strongSelf->_bannerAd =
+        [[GADMediationAdapterChartboostBannerAd alloc] initWithAdConfiguration:adConfiguration
+                                                             completionHandler:completionHandler];
+
+    [strongSelf->_bannerAd loadBannerAd];
+  }];
+}
+
+- (void)loadInterstitialForAdConfiguration:
+            (GADMediationInterstitialAdConfiguration *)adConfiguration
+                         completionHandler:
+                             (GADMediationInterstitialLoadCompletionHandler)completionHandler {
+  __weak GADMediationAdapterChartboost *weakSelf = self;
+  [GADMediationAdapterChartboost startChartBoostWithCredentialsArray:@[adConfiguration.credentials] completionHandler:^(NSError * _Nullable error) {
+    GADMediationAdapterChartboost *strongSelf = weakSelf;
+    if(!strongSelf) {
+      return;
+    }
+
+    strongSelf->_interstitialAd = [[GADMediationAdapterChartboostInterstitialAd alloc]
+        initWithAdConfiguration:adConfiguration
+              completionHandler:completionHandler];
+
+    [strongSelf->_interstitialAd loadInterstitialAd];
+  }];
 }
 
 @end

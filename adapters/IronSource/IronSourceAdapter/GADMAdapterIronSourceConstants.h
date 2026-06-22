@@ -14,9 +14,13 @@
 
 // IronSource internal reporting const.
 static NSString *const GADMAdapterIronSourceMediationName = @"AdMob";
-static NSString *const GADMAdapterIronSourceAdapterVersion = @"7.2.0.0";
-static NSString *const GADMIronSourceDefaultInstanceId = @"0";
-static NSString *const GADMAdapterIronSourceInternalVersion = @"310";
+
+static NSString *const GADMAdapterIronSourceAdapterVersion = @"9.4.1.0.1";
+
+static NSString *const GADMIronSourceDefaultNonRtbInstanceId = @"0";
+static NSString *const GADMIronSourceDefaultRtbInstanceId = @"";
+
+static NSString *const GADMAdapterIronSourceInternalVersion = @"510";
 
 // IronSource parameters keys.
 static NSString *const GADMAdapterIronSourceAppKey = @"appKey";
@@ -28,6 +32,9 @@ typedef NSString *InstanceState NS_STRING_ENUM;
 static InstanceState const GADMAdapterIronSourceInstanceStateLocked = @"LOCKED";
 static InstanceState const GADMAdapterIronSourceInstanceStateStart = @"START";
 static InstanceState const GADMAdapterIronSourceInstanceStateCanLoad = @"CANLOAD";
+static InstanceState const GADMAdapterIronSourceInstanceStateShowing = @"SHOWING";
 
 // IronSource mediation adapter error domain.
 static NSString *const GADMAdapterIronSourceErrorDomain = @"com.google.mediation.IronSource";
+
+static NSString *const GADMAdapterIronSourceWatermark = @"watermark";

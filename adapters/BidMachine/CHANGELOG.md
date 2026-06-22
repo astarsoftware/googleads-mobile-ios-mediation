@@ -1,0 +1,97 @@
+## BidMachine iOS Mediation Adapter Changelog
+
+#### Next Version
+- Update the minimum iOS version to relax Google Mobile Ads SDK dependency to allow minor versions.
+
+#### [Version 3.7.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.7.1.0.zip)
+- Verified compatibility with BidMachine SDK version 3.7.1.
+- Fixed bidding banner ad requests not properly passing the ad size.
+
+Built and tested with:
+- Google Mobile Ads SDK version 13.4.0.
+- BidMachine SDK version 3.7.1.
+
+#### [Version 3.7.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.7.0.0.zip)
+- Verified compatibility with BidMachine SDK version 3.7.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 13.4.0.
+- BidMachine SDK version 3.7.0.
+
+#### [Version 3.6.1.1](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.6.1.1.zip)
+- Adapter now forwards the `ageRestrictedTreatment` Google Mobile Ads SDK flag to BidMachine SDK's COPPA API.
+- Upgrade BidMachine adapter and unit tests to Swift 6.
+
+Built and tested with:
+- Google Mobile Ads SDK version 13.3.0.
+- BidMachine SDK version 3.6.1.
+
+#### [Version 3.6.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.6.1.0.zip)
+- Verified compatibility with BidMachine SDK version 3.6.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 13.2.0.
+- BidMachine SDK version 3.6.1.
+
+#### [Version 3.6.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.6.0.0.zip)
+- Verified compatibility with BidMachine SDK version 3.6.0.
+- Refactored BidMachine banner ad loading and native ad image handling.
+
+Built and tested with:
+- Google Mobile Ads SDK version 13.1.0.
+- BidMachine SDK version 3.6.0.
+
+#### [Version 3.5.1.2](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.5.1.2.zip)
+- Updated the Google Mobile Ads SDK dependency to version 13.0.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 13.0.0.
+- BidMachine SDK version 3.5.1.
+
+#### [Version 3.5.1.1](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.5.1.1.zip)
+- Updated the CocoaPods minimum iOS version to `13.0`.
+- Added support for forwarding the `tagForUnderAgeOfConsent` Google Mobile Ads SDK parameter to the BidMachine SDK.
+- Modified `BidMachineAdDelegate` conformance sections to align with BidMachine SDK callback behavior.
+
+Built and tested with:
+- Google Mobile Ads SDK version 13.0.0.
+- BidMachine SDK version 3.5.1.
+
+#### [Version 3.5.1.0](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.5.1.0.zip)
+- Verified compatibility with BidMachine SDK version 3.5.1.
+
+Built and tested with:
+- Google Mobile Ads SDK version 12.14.0.
+- BidMachine SDK version 3.5.1.
+
+#### [Version 3.5.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.5.0.0.zip)
+- Verified compatibility with BidMachine SDK version 3.5.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 12.12.0.
+- BidMachine SDK version 3.5.0.
+
+#### [Version 3.4.0.2](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.4.0.2.zip)
+- Added waterfall support for banner, interstitial, rewarded and native ad formats.
+- Removed the `isTestMode` static property from `BidMachineAdapterExtras`.
+- Added banner ad size validation for waterfall banner ads.
+
+Built and tested with:
+- Google Mobile Ads SDK version 12.12.0.
+- BidMachine SDK version 3.4.0.
+
+#### [Version 3.4.0.1](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.4.0.1.zip)
+- Test mode is now available in Objective-C through the `GADMediationAdapterBidMachineExtras.isTestMode` property.
+
+Built and tested with:
+- Google Mobile Ads SDK version 12.0.0.
+- BidMachine SDK version 3.4.0.
+
+#### [Version 3.4.0.0](https://dl.google.com/googleadmobadssdk/mediation/ios/bidmachine/BidMachineAdapter-3.4.0.0.zip)
+- Initial release.
+- Added bidding support for banner, interstitial, rewarded and native ad formats.
+- Verified compatibility with BidMachine SDK version 3.4.0.
+
+Built and tested with:
+- Google Mobile Ads SDK version 12.8.0.
+- BidMachine SDK version 3.4.0.

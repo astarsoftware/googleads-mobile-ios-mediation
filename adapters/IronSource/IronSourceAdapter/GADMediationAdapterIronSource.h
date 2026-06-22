@@ -1,3 +1,4 @@
+
 // Copyright 2018 Google Inc.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,6 +15,9 @@
 
 #import <Foundation/Foundation.h>
 #import <GoogleMobileAds/GoogleMobileAds.h>
+#import "GADMAdapterIronSourceRtbBannerAd.h"
+#import "GADMAdapterIronSourceRtbInterstitialAd.h"
+#import "GADMAdapterIronSourceRtbRewardedAd.h"
 
 typedef NS_ENUM(NSInteger, GADMAdapterIronSourceErrorCode) {
   /// Invalid server parameters.
@@ -22,7 +26,21 @@ typedef NS_ENUM(NSInteger, GADMAdapterIronSourceErrorCode) {
   GADMAdapterIronSourceErrorAdFormatNotSupported = 102,
   /// An ad is already loaded for this network configuration.
   GADMAdapterIronSourceErrorAdAlreadyLoaded = 103,
+  /// Unsupported ad size requested for IronSource.
+  GADMAdapterIronSourceErrorBannerSizeMismatch = 104,
+
+  GADMAdapterIronSourceErrorFailedToShow = 105
+
 };
 
-@interface GADMediationAdapterIronSource : NSObject <GADMediationAdapter>
+@interface GADMediationAdapterIronSource : NSObject <GADRTBAdapter>
+@property(nonatomic, strong) GADMAdapterIronSourceRtbBannerAd *_Nullable rtbBannerAd;
+@property(nonatomic, strong) GADMAdapterIronSourceRtbInterstitialAd *_Nullable rtbInterstitialAd;
+@property(nonatomic, strong) GADMAdapterIronSourceRtbRewardedAd *_Nullable rtbRewardedAd;
+
+- (void)initIronSourceSDKWithAppKey:(nonnull NSString *)appKey
+                         forAdUnits:(nonnull NSSet *)adUnits
+                  completionHandler:
+                      (nonnull GADMediationAdapterSetUpCompletionBlock)completionHandler;
+
 @end

@@ -1,28 +1,31 @@
+// Copyright 2018 Google LLC
 //
-//  GADMRTBAdapterAppLovinInterstitialRenderer.m
-//  Adapter
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-//  Created by Christopher Cong on 7/17/18.
-//  Copyright © 2018 Google. All rights reserved.
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 
 #import "GADMRTBAdapterAppLovinInterstitialRenderer.h"
 #import "GADMAdapterAppLovinConstant.h"
 #import "GADMAdapterAppLovinExtras.h"
 #import "GADMAdapterAppLovinUtils.h"
+#import "GADMAppLovinRTBInterstitialDelegate.h"
 #import "GADMediationAdapterAppLovin.h"
 
 #import <AppLovinSDK/AppLovinSDK.h>
+#include <GoogleMobileAds/GoogleMobileAds.h>
 #include <stdatomic.h>
-
-#import "GADMAppLovinRTBInterstitialDelegate.h"
 
 @implementation GADMRTBAdapterAppLovinInterstitialRenderer {
   /// Data used to render an interstitial ad.
   GADMediationInterstitialAdConfiguration *_adConfiguration;
-
-  /// Instance of the AppLovin SDK.
-  ALSdk *_SDK;
 
   /// AppLovin interstitial object used to load an ad.
   ALInterstitialAd *_interstitialAd;
@@ -55,24 +58,18 @@
 }
 
 - (void)loadAd {
-  NSString *SDKKey = [GADMAdapterAppLovinUtils
-      retrieveSDKKeyFromCredentials:_adConfiguration.credentials.settings];
-  if (!SDKKey) {
+  if (!ALSdk.shared) {
     NSError *error = GADMAdapterAppLovinErrorWithCodeAndDescription(
-        GADMAdapterAppLovinErrorInvalidServerParameters, @"Invalid server parameters.");
+        GADMAdapterAppLovinErrorAppLovinSDKNotInitialized,
+        @"Failed to retrieve ALSdk shared instance. ");
     _adLoadCompletionHandler(nil, error);
     return;
   }
-
-  _SDK = [GADMAdapterAppLovinUtils retrieveSDKFromSDKKey:SDKKey];
-  if (!_SDK) {
-    NSError *error = GADMAdapterAppLovinNilSDKError(SDKKey);
-    _adLoadCompletionHandler(nil, error);
-    return;
-  }
+  ALSdk.shared.settings.muted = GADMobileAds.sharedInstance.applicationMuted;
 
   // Create interstitial object.
-  _interstitialAd = [[ALInterstitialAd alloc] initWithSdk:_SDK];
+  _interstitialAd = [[ALInterstitialAd alloc] initWithSdk:ALSdk.shared];
+  [_interstitialAd setExtraInfoForKey:@"google_watermark" value:_adConfiguration.watermark];
 
   GADMAppLovinRTBInterstitialDelegate *delegate =
       [[GADMAppLovinRTBInterstitialDelegate alloc] initWithParentRenderer:self];
@@ -80,16 +77,12 @@
   _interstitialAd.adVideoPlaybackDelegate = delegate;
 
   // Load ad.
-  [_SDK.adService loadNextAdForAdToken:_adConfiguration.bidResponse andNotify:delegate];
+  [ALSdk.shared.adService loadNextAdForAdToken:_adConfiguration.bidResponse andNotify:delegate];
 }
 
 #pragma mark - GADMediationInterstitialAd
 
 - (void)presentFromViewController:(UIViewController *)viewController {
-  // Update mute state
-  GADMAdapterAppLovinExtras *extras = _adConfiguration.extras;
-  _SDK.settings.muted = extras.muteAudio;
-
   [_interstitialAd showAd:_ad];
 }
 

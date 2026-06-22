@@ -14,6 +14,7 @@
 
 #import "GADMediationAdapterUnity.h"
 #import <UnityAds/UnityAds.h>
+#import "GADMAdapterUnityConstants.h"
 #import "GADMAdapterUnityUtils.h"
 #import "GADMUnityBannerMediationAdapterProxy.h"
 #import "GADMUnityInterstitialMediationAdapterProxy.h"
@@ -28,9 +29,13 @@
 @property(nonatomic, strong) NSString *placementId;
 @property(nonatomic, strong) GADUnityBaseMediationAdapterProxy *adapterProxy;
 @property(nonatomic, strong) UADSBannerView *bannerView;
+@property(nonatomic, strong) NSString *objectId;  // Object ID used to track loaded/shown ads.
+@property(nonatomic, strong, nullable) NSData *watermarkForFullScreenAd;
 @end
 
 @implementation GADMediationAdapterUnity
+
+static BOOL _isTestMode = NO;
 
 // Called on Admob->init
 + (void)setUpWithConfiguration:(GADMediationServerConfiguration *)configuration
@@ -65,61 +70,190 @@
   return extractVersionFromString(GADMAdapterUnityVersion);
 }
 
+- (void)collectSignalsForRequestParameters:(GADRTBRequestParameters *)params
+                         completionHandler:(GADRTBSignalCompletionHandler)completionHandler {
+  GADAdFormat adFormat = params.configuration.credentials.firstObject.format;
+  if (adFormat == GADAdFormatBanner || adFormat == GADAdFormatInterstitial ||
+      adFormat == GADAdFormatRewarded || adFormat == GADAdFormatRewardedInterstitial) {
+    UnityAdsAdFormat format = UnityAdsAdFormatInterstitial;
+    if (adFormat == GADAdFormatBanner) {
+      format = UnityAdsAdFormatBanner;
+    } else if (adFormat == GADAdFormatRewarded || adFormat == GADAdFormatRewardedInterstitial) {
+      format = UnityAdsAdFormatRewarded;
+    }
+    UnityAdsTokenConfiguration *config = [UnityAdsTokenConfiguration newWithAdFormat:format];
+    [UnityAds getTokenWith:config
+                completion:^(NSString *_Nullable token) {
+                  NSString *unityToken = token ?: @"";
+                  completionHandler(unityToken, nil);
+                }];
+  } else {
+    completionHandler(
+        nil, GADMAdapterUnityErrorWithCodeAndDescription(GADMAdapterUnityErrorAdUnsupportedAdFormat,
+                                                         @"Unsupported ad format."));
+  }
+}
+
 - (void)loadRewardedAdForAdConfiguration:(GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
                            (GADMediationRewardedLoadCompletionHandler)completionHandler {
+  [GADMediationAdapterUnity updatePrivacyPreferences];
   self.adapterProxy = [[GADMUnityRewardedMediationAdapterProxy alloc] initWithAd:self
                                                                completionHandler:completionHandler];
 
-  [self loadAdWithConfiguration:adConfiguration];
+  GADMediationAdapterUnity *__weak weakself = self;
+  [self initializeWithConfiguration:adConfiguration
+                  completionHandler:^(NSError *_Nullable error) {
+                    GADMediationAdapterUnity *strongSelf = weakself;
+                    if (!strongSelf) {
+                      return;
+                    }
+                    if (error) {
+                      completionHandler(nil, error);
+                      return;
+                    }
+
+                    [strongSelf loadAdWithConfiguration:adConfiguration];
+                  }];
 }
 
 - (void)loadInterstitialForAdConfiguration:
             (GADMediationInterstitialAdConfiguration *)adConfiguration
                          completionHandler:
                              (GADMediationInterstitialLoadCompletionHandler)completionHandler {
+  [GADMediationAdapterUnity updatePrivacyPreferences];
   self.adapterProxy =
       [[GADMUnityInterstitialMediationAdapterProxy alloc] initWithAd:self
                                                    completionHandler:completionHandler];
 
-  [self loadAdWithConfiguration:adConfiguration];
+  GADMediationAdapterUnity *__weak weakself = self;
+  [self initializeWithConfiguration:adConfiguration
+                  completionHandler:^(NSError *_Nullable error) {
+                    GADMediationAdapterUnity *strongSelf = weakself;
+                    if (!strongSelf) {
+                      return;
+                    }
+                    if (error) {
+                      completionHandler(nil, error);
+                      return;
+                    }
+
+                    [strongSelf loadAdWithConfiguration:adConfiguration];
+                  }];
 }
 
 - (void)loadAdWithConfiguration:(GADMediationAdConfiguration *)adConfiguration {
-  [self initializeWithConfiguration:adConfiguration];
-
   self.placementId = adConfiguration.placementId;
+  self.objectId = [NSUUID UUID].UUIDString;
+  self.watermarkForFullScreenAd = adConfiguration.watermark;
+  UADSLoadOptions *loadOptions = [UADSLoadOptions new];
+  loadOptions.objectId = self.objectId;
+  if (adConfiguration.bidResponse) {
+    loadOptions.adMarkup = adConfiguration.bidResponse;
+  }
 
-  [UnityAds load:self.placementId loadDelegate:self.adapterProxy];
+  [UnityAds load:self.placementId options:loadOptions loadDelegate:self.adapterProxy];
 }
 
 - (void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
                    completionHandler:(GADMediationBannerLoadCompletionHandler)completionHandler {
-  [self initializeWithConfiguration:adConfiguration];
+  [GADMediationAdapterUnity updatePrivacyPreferences];
+  GADMediationAdapterUnity *__weak weakself = self;
+  [self initializeWithConfiguration:adConfiguration
+                  completionHandler:^(NSError *_Nullable error) {
+                    GADMediationAdapterUnity *strongSelf = weakself;
+                    if (!strongSelf) {
+                      return;
+                    }
+                    if (error) {
+                      completionHandler(nil, error);
+                      return;
+                    }
 
-  self.placementId = adConfiguration.placementId;
+                    strongSelf.placementId = adConfiguration.placementId;
+                    strongSelf.adapterProxy = [[GADMUnityBannerMediationAdapterProxy alloc]
+                               initWithAd:strongSelf
+                          requestedAdSize:adConfiguration.adSize
+                               forBidding:adConfiguration.bidResponse != nil
+                        completionHandler:completionHandler];
+                    strongSelf.bannerView =
+                        [[UADSBannerView alloc] initWithPlacementId:strongSelf.placementId
+                                                               size:adConfiguration.adSize.size];
+                    strongSelf.bannerView.delegate = strongSelf.adapterProxy;
+                    UADSLoadOptions *loadOptions = [UADSLoadOptions new];
+                    NSData *watermark = adConfiguration.watermark;
+                    if (watermark != nil) {
+                      NSString *watermarkString = [watermark base64EncodedStringWithOptions:0];
+                      [loadOptions.dictionary setValue:watermarkString
+                                                forKey:GADMAdapterUnityWatermarkKey];
+                    }
+                    if (adConfiguration.bidResponse) {
+                      loadOptions.adMarkup = adConfiguration.bidResponse;
+                    }
 
-  GADAdSize supportedSize = supportedAdSizeFromRequestedSize(adConfiguration.adSize);
-  if (!IsGADAdSizeValid(supportedSize)) {
-    completionHandler(self, [NSError unsupportedBannerGADAdSize:adConfiguration.adSize]);
-    return;
-  }
-  self.adapterProxy = [[GADMUnityBannerMediationAdapterProxy alloc] initWithAd:self
-                                                             completionHandler:completionHandler];
-
-  self.bannerView = [[UADSBannerView alloc] initWithPlacementId:self.placementId
-                                                           size:supportedSize.size];
-  self.bannerView.delegate = self.adapterProxy;
-  [self.bannerView load];
+                    [strongSelf.bannerView loadWithOptions:loadOptions];
+                  }];
 }
 
 - (void)presentFromViewController:(nonnull UIViewController *)viewController {
-  [UnityAds show:viewController placementId:self.placementId showDelegate:self.adapterProxy];
+  UADSShowOptions *showOptions = [UADSShowOptions new];
+  showOptions.objectId = self.objectId;
+  if (self.watermarkForFullScreenAd != nil) {
+    NSString *watermarkString = [self.watermarkForFullScreenAd base64EncodedStringWithOptions:0];
+    [showOptions.dictionary setValue:watermarkString forKey:GADMAdapterUnityWatermarkKey];
+  }
+
+  [self.adapterProxy.eventDelegate willPresentFullScreenView];
+  [UnityAds show:viewController
+       placementId:self.placementId
+           options:showOptions
+      showDelegate:self.adapterProxy];
 }
 
-- (void)initializeWithConfiguration:(GADMediationAdConfiguration *)adConfiguration {
+- (void)initializeWithConfiguration:(GADMediationAdConfiguration *)adConfiguration
+                  completionHandler:(void (^)(NSError *_Nullable error))completion {
   [[GADUnityRouter sharedRouter] sdkInitializeWithGameId:adConfiguration.gameId
-                                   withCompletionHandler:nil];
+                                   withCompletionHandler:completion];
+}
+
+#pragma mark Utility Methods
+
+/// Updates the UADSMetaData's |user.nonbehavioral| based on Google Mobile Ads'
+/// tagForChildDirectedTreatment and tagForUnderAgeOfConsent.
++ (void)updatePrivacyPreferences {
+  NSNumber *tagForChildDirectedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment;
+  NSNumber *tagForUnderAgeOfConsent =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent;
+
+  UADSMetaData *userMetaData = [[UADSMetaData alloc] init];
+
+  BOOL isChildDirected = [tagForChildDirectedTreatment isEqual:@YES];
+  BOOL isUnderAge = [tagForUnderAgeOfConsent isEqual:@YES];
+  BOOL isNotChildDirected = [tagForChildDirectedTreatment isEqual:@NO];
+  BOOL isNotUnderAge = [tagForUnderAgeOfConsent isEqual:@NO];
+
+  // If at least one signal indicates adult, and other api does not signal child, we are adult for
+  // this session
+  if (!isChildDirected && !isUnderAge && (isNotChildDirected || isNotUnderAge)) {
+    [userMetaData set:@"user.nonbehavioral" value:@NO];
+  }
+  // If there is any child signal, conflicts between api's, or both unspecified, we treat them as
+  // a child.
+  else {
+    [userMetaData set:@"user.nonbehavioral" value:@YES];
+  }
+
+  [userMetaData commit];
+}
+
++ (BOOL)testMode {
+  return _isTestMode;
+}
+
++ (void)setTestMode:(BOOL)testMode {
+  GADMUnityLog(@"Updating test mode flag to `%@`", (testMode ? @"YES" : @"NO"));
+  _isTestMode = testMode;
 }
 
 #pragma mark GADMediationBannerAd

@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC.
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -13,8 +13,8 @@
 // limitations under the License.
 
 #import <Foundation/Foundation.h>
-#import <Maio/Maio.h>
-#import <MaioOB/MaioOB-Swift.h>
+#import <GoogleMobileAds/GoogleMobileAds.h>
+#import <Maio/Maio-Swift.h>
 #import "GADMediationAdapterMaio.h"
 
 /// Adds |object| to |set| if |object| is not nil.
@@ -36,5 +36,12 @@ void GADMAdapterMaioMapTableSetObjectForKey(NSMapTable *_Nonnull mapTable,
 NSError *_Nonnull GADMAdapterMaioErrorWithCodeAndDescription(GADMAdapterMaioErrorCode code,
                                                              NSString *_Nonnull description);
 
-/// Returns an NSError representing a MaioFailReason.
-NSError *_Nonnull GADMAdapterMaioSDKErrorForFailReason(MaioFailReason reason);
+/// Returns whether the user is a child user.
+BOOL GADMAdapterMaioIsChildUser(void);
+
+@interface GADMAdapterMaioUtils : NSObject
+
+// maio Util methods.
++ (nullable MaioBannerSize *)maioAdSizeFromRequestedSize:(GADAdSize)size;
+
+@end

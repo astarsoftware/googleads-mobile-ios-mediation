@@ -44,20 +44,27 @@
 }
 
 - (void)viewDidLoad {
+  self.view.backgroundColor = [UIColor whiteColor];
+
   _clockLabel = [[UILabel alloc] initWithFrame:CGRectMake(50.0f, 50.0f, 50.0f, 50.0f)];
   _clockLabel.backgroundColor = [UIColor whiteColor];
   _clockLabel.textColor = [UIColor blackColor];
-  [self.view addSubview:_clockLabel];
   _clockLabel.translatesAutoresizingMaskIntoConstraints = NO;
-  NSDictionary *viewDictionary = NSDictionaryOfVariableBindings(_clockLabel);
-  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_clockLabel]|"
-                                                                    options:0
-                                                                    metrics:nil
-                                                                      views:viewDictionary]];
-  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_clockLabel]|"
-                                                                    options:0
-                                                                    metrics:nil
-                                                                      views:viewDictionary]];
+  [self.view addSubview:_clockLabel];
+  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_clockLabel
+                                                        attribute:NSLayoutAttributeCenterX
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self.view
+                                                        attribute:NSLayoutAttributeCenterX
+                                                       multiplier:1.0
+                                                         constant:0.0f]];
+  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_clockLabel
+                                                        attribute:NSLayoutAttributeCenterY
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self.view
+                                                        attribute:NSLayoutAttributeCenterY
+                                                       multiplier:1.0
+                                                         constant:0.0f]];
 
   _closeButton = [[UIButton alloc] initWithFrame:CGRectMake(250, 250, 250, 250)];
   [_closeButton setTitle:@"X" forState:UIControlStateNormal];
@@ -66,17 +73,22 @@
   [_closeButton addTarget:self
                    action:@selector(closeAd:)
          forControlEvents:UIControlEventTouchUpInside];
-  [self.view addSubview:_closeButton];
-  NSDictionary *views = NSDictionaryOfVariableBindings(_closeButton);
   _closeButton.translatesAutoresizingMaskIntoConstraints = NO;
-  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[_closeButton(60)]|"
-                                                                    options:0
-                                                                    metrics:nil
-                                                                      views:views]];
-  [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_closeButton(60)]"
-                                                                    options:0
-                                                                    metrics:nil
-                                                                      views:views]];
+  [self.view addSubview:_closeButton];
+  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_closeButton
+                                                        attribute:NSLayoutAttributeRight
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self.view
+                                                        attribute:NSLayoutAttributeRight
+                                                       multiplier:1.0
+                                                         constant:0.0f]];
+  [self.view addConstraint:[NSLayoutConstraint constraintWithItem:_closeButton
+                                                        attribute:NSLayoutAttributeTop
+                                                        relatedBy:NSLayoutRelationEqual
+                                                           toItem:self.view
+                                                        attribute:NSLayoutAttributeTopMargin
+                                                       multiplier:1.0
+                                                         constant:0.0f]];
   _closeButton.hidden = YES;
 
   [self startCountdown];
@@ -136,7 +148,9 @@
 
 /// Handles the tap on ad, and tells the delegate that ad gets clicked.
 - (void)handleTap:(UITapGestureRecognizer *)recognizer {
-  [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://www.google.com"]];
+  [UIApplication.sharedApplication openURL:[NSURL URLWithString:@"https://www.google.com"]
+                                   options:@{}
+                         completionHandler:nil];
 }
 
 @end

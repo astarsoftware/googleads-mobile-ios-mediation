@@ -1,0 +1,262 @@
+// Copyright 2025 Google LLC.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import GoogleMobileAds
+import UIKit
+
+@_implementationOnly import HyBid
+
+/// Factory that creates Client.
+final class HybidClientFactory {
+
+  private init() {}
+
+  #if DEBUG
+    /// This property will be returned by |createClient| function if set in Debug mode.
+    nonisolated(unsafe) static var debugClient: HybidClient?
+  #endif
+
+  static func createClient() -> HybidClient {
+    #if DEBUG
+      return debugClient ?? HybidClientImpl()
+    #else
+      return HybidClientImpl()
+    #endif
+  }
+
+}
+
+protocol HybidClient: NSObject {
+
+  /// Returns a version string of HyBid SDK.
+  func version() -> String
+
+  /// Initializes the HyBid SDK. The completion handle is called without an error object if HyBid
+  /// SDK was initialized successfully.
+  func initialize(
+    with appToken: String,
+    completionHandler: @escaping (VerveAdapterError?) -> Void)
+
+  /// Collects the bidding signals.
+  func collectSignals() -> String
+
+  /// Verifies the given banner size.
+  func isValidBannerSize(_ size: CGSize) -> Bool
+
+  /// Loads a RTB banner ad.
+  func loadRTBBannerAd(with bidResponse: String, size: CGSize, delegate: Any)
+    throws(VerveAdapterError)
+
+  /// Loads a RTB interstitial ad.
+  func loadRTBInterstitialAd(with bidResponse: String, delegate: Any)
+
+  /// Presents the interstitial ad.
+  func presentInterstitialAd(from viewController: UIViewController) throws(VerveAdapterError)
+
+  /// Loads a RTB rewarded ad.
+  func loadRTBRewardedAd(with bidResponse: String, delegate: Any)
+
+  /// Presents the rewarded ad.
+  func presentRewardedAd(from viewController: UIViewController) throws(VerveAdapterError)
+
+  /// Loads a RTB native ad.
+  func loadRTBNativeAd(with bidResponse: String, delegate: Any)
+
+  /// Fetches assets for the provided native ad.
+  func fetchAssets(for nativeAd: Any, delegate: Any)
+}
+
+private class HybidClientImpl: NSObject, HybidClient {
+
+  private var adView: NSObject?
+  private var interstitialAd: NSObject?
+  private var rewardedAd: NSObject?
+  private var nativeAdLoader: NSObject?
+
+  func version() -> String {
+    return HyBid.sdkVersion()
+  }
+
+  func initialize(
+    with appToken: String,
+    completionHandler: @escaping (VerveAdapterError?) -> Void
+  ) {
+    HyBid.initWithAppToken(appToken) { success in
+      guard success else {
+        completionHandler(
+          VerveAdapterError(
+            errorCode: .failedToInitializeHyBidSDK, description: "Verve SDK failed to initialize."))
+        return
+      }
+      completionHandler(nil)
+    }
+  }
+
+  func collectSignals() -> String {
+    return HyBid.getEncodedCustomRequestSignalData("Admob") ?? ""
+  }
+
+  func isValidBannerSize(_ size: CGSize) -> Bool {
+    return (try? getBannerSize(size)) != nil
+  }
+
+  private func getBannerSize(_ size: CGSize) throws(VerveAdapterError) -> HyBidAdSize {
+    let width = size.width
+    let height = size.height
+
+    switch (width, height) {
+    case (320, 50): return .size_320x50
+    case (300, 250): return .size_300x250
+    case (300, 50): return .size_300x50
+    case (320, 480): return .size_320x480
+    case (1024, 768): return .size_1024x768
+    case (768, 1024): return .size_768x1024
+    case (728, 90): return .size_728x90
+    case (160, 600): return .size_160x600
+    case (250, 250): return .size_250x250
+    case (300, 600): return .size_300x600
+    case (320, 100): return .size_320x100
+    case (480, 320): return .size_480x320
+    // Fall back to regular banner if the requested size doesn't map to any of Verve's predefined banner sizes.
+    default: return .size_320x50
+    }
+  }
+
+  func loadRTBBannerAd(
+    with bidResponse: String,
+    size: CGSize,
+    delegate: Any
+  ) throws(VerveAdapterError) {
+    guard let delegate = delegate as? HyBidAdViewDelegate else { return }
+
+    let adView: NSObject = HyBidAdView(size: try getBannerSize(size))
+    self.adView = adView
+
+    let stopAutoRefreshSelector = Selector("stopAutoRefresh")
+    let setAutoShowOnLoadSelector = Selector("setAutoShowOnLoad:")
+    let renderAdWithContentSelector = Selector("renderAdWithContent:withDelegate:")
+    if adView.responds(to: stopAutoRefreshSelector)
+      && adView.responds(to: setAutoShowOnLoadSelector)
+      && adView.responds(to: renderAdWithContentSelector)
+    {
+      adView.perform(stopAutoRefreshSelector)
+      adView.setValue(true, forKey: "autoShowOnLoad")
+      adView.perform(renderAdWithContentSelector, with: bidResponse, with: delegate)
+    }
+  }
+
+  func loadRTBInterstitialAd(
+    with bidResponse: String,
+    delegate: Any
+  ) {
+    guard let delegate = delegate as? HyBidInterstitialAdDelegate else { return }
+
+    let interstitialAd: NSObject = HyBidInterstitialAd(delegate: delegate)
+    self.interstitialAd = interstitialAd
+
+    let prepareAdWithContentSelector = Selector("prepareAdWithContent:")
+    if interstitialAd.responds(to: prepareAdWithContentSelector) {
+      interstitialAd.perform(prepareAdWithContentSelector, with: bidResponse)
+    }
+  }
+
+  func presentInterstitialAd(from viewController: UIViewController) throws(VerveAdapterError) {
+    guard let interstitialAd,
+      interstitialAd.responds(to: Selector("isReady")),
+      let isReady = interstitialAd.value(forKey: "isReady") as? Bool,
+      isReady
+    else {
+      throw VerveAdapterError(
+        errorCode: .notReadyForPresentation,
+        description:
+          "The interstitial ad is not ready for presentation."
+      )
+    }
+
+    let showFromViewControllerSelector = Selector("showFromViewController:")
+    if interstitialAd.responds(to: showFromViewControllerSelector) {
+      interstitialAd.perform(showFromViewControllerSelector, with: viewController)
+    }
+  }
+
+  func loadRTBRewardedAd(
+    with bidResponse: String,
+    delegate: Any
+  ) {
+    guard let delegate = delegate as? HyBidRewardedAdDelegate else { return }
+
+    let rewardedAd: NSObject = HyBidRewardedAd(delegate: delegate)
+    self.rewardedAd = rewardedAd
+
+    let prepareAdWithContentSelector = Selector("prepareAdWithContent:")
+    if rewardedAd.responds(to: prepareAdWithContentSelector) {
+      rewardedAd.perform(prepareAdWithContentSelector, with: bidResponse)
+    }
+  }
+
+  func presentRewardedAd(from viewController: UIViewController) throws(VerveAdapterError) {
+    guard let rewardedAd,
+      rewardedAd.responds(to: Selector("isReady")),
+      let isReady = rewardedAd.value(forKey: "isReady") as? Bool,
+      isReady
+    else {
+      throw VerveAdapterError(
+        errorCode: .notReadyForPresentation,
+        description:
+          "The rewarded ad is not ready for presentation."
+      )
+    }
+
+    let showFromViewControllerSelector = Selector("showFromViewController:")
+    if rewardedAd.responds(to: showFromViewControllerSelector) {
+      rewardedAd.perform(showFromViewControllerSelector, with: viewController)
+    }
+  }
+
+  func loadRTBNativeAd(
+    with bidResponse: String,
+    delegate: Any
+  ) {
+    guard let delegate = delegate as? HyBidNativeAdLoaderDelegate else { return }
+
+    let nativeAdLoader: NSObject = HyBidNativeAdLoader()
+    self.nativeAdLoader = nativeAdLoader
+
+    let stopAutoRefreshSelector = Selector("stopAutoRefresh")
+    let prepareNativeAdWithDelegateSelector = Selector("prepareNativeAdWithDelegate:withContent:")
+    if nativeAdLoader.responds(to: stopAutoRefreshSelector)
+      && nativeAdLoader.responds(to: prepareNativeAdWithDelegateSelector)
+    {
+      nativeAdLoader.perform(stopAutoRefreshSelector)
+      nativeAdLoader.perform(prepareNativeAdWithDelegateSelector, with: delegate, with: bidResponse)
+    }
+  }
+
+  func fetchAssets(
+    for nativeAd: Any,
+    delegate: Any
+  ) {
+    guard let nativeAd = nativeAd as? NSObject,
+      let delegate = delegate as? NSObject
+    else {
+      return
+    }
+
+    let fetchNativeAdAssetsWithDelegateSelector = Selector("fetchNativeAdAssetsWithDelegate:")
+    if nativeAd.responds(to: fetchNativeAdAssetsWithDelegateSelector) {
+      nativeAd.perform(fetchNativeAdAssetsWithDelegateSelector, with: delegate)
+    }
+  }
+
+}

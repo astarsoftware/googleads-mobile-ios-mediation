@@ -14,7 +14,7 @@
 
 #import "GADMAdapterIMobileInterstitialAd.h"
 
-#import <ImobileSdkAds/ImobileSdkAds.h>
+#import <ImobileSdkAds.h>
 
 #import <stdatomic.h>
 
@@ -34,9 +34,7 @@
   GADMediationInterstitialLoadCompletionHandler _loadCompletionHandler;
 
   /// The ad event delegate to forward ad rendering events to the Google Mobile Ads SDK.
-  /// Intentionally keeping a reference to the delegate because this delegate is returned from the
-  /// GMA SDK, not set on the GMA SDK.
-  id<GADMediationInterstitialAdEventDelegate> _delegate;
+  __weak id<GADMediationInterstitialAdEventDelegate> _delegate;
 
   /// i-mobile spot ID.
   NSString *_spotID;
@@ -116,16 +114,17 @@
 #pragma mark - GADMediationInterstitialAd
 
 - (void)presentFromViewController:(UIViewController *)viewController {
+  id<GADMediationInterstitialAdEventDelegate> delegate = _delegate;
   BOOL didPresent = [ImobileSdkAds showBySpotID:_spotID];
   if (!didPresent) {
     NSString *errorMessage = @"Spot ID not registered.";
     GADMAdapterIMobileLog(@"%@", errorMessage);
     NSError *error = GADMAdapterIMobileErrorWithCodeAndDescription(
         GADMAdapterIMobileErrorAdNotPresented, errorMessage);
-    [_delegate didFailToPresentWithError:error];
+    [delegate didFailToPresentWithError:error];
     return;
   }
-  [_delegate willPresentFullScreenView];
+  [delegate willPresentFullScreenView];
 }
 
 #pragma mark - IMobileSdkAdsDelegate
@@ -144,7 +143,6 @@
 
 - (void)imobileSdkAdsSpotDidClick:(NSString *)spotId {
   [_delegate reportClick];
-  [_delegate willBackgroundApplication];
 }
 
 - (void)imobileSdkAdsSpotDidClose:(NSString *)spotId {

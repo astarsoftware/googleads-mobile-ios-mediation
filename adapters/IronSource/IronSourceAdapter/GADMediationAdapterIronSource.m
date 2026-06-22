@@ -13,29 +13,37 @@
 // limitations under the License.
 
 #import "GADMediationAdapterIronSource.h"
+#import "GADMAdapterIronSourceBannerAd.h"
 #import "GADMAdapterIronSourceConstants.h"
+#import "GADMAdapterIronSourceInterstitialAd.h"
 #import "GADMAdapterIronSourceRewardedAd.h"
 #import "GADMAdapterIronSourceUtils.h"
-#import "ISMediationManager.h"
 
 @interface GADMediationAdapterIronSource () {
   GADMAdapterIronSourceRewardedAd *_rewardedAd;
+  GADMAdapterIronSourceInterstitialAd *_interstitialAd;
+  GADMAdapterIronSourceBannerAd *_bannerAd;
 }
 
 @end
 
 @implementation GADMediationAdapterIronSource
 
+#pragma mark GADMediation Adapter implementation
+
 + (void)setUpWithConfiguration:(nonnull GADMediationServerConfiguration *)configuration
              completionHandler:(nonnull GADMediationAdapterSetUpCompletionBlock)completionHandler {
   NSMutableSet *appKeys = [[NSMutableSet alloc] init];
   NSMutableSet *ironSourceAdUnits = [[NSMutableSet alloc] init];
 
+  // Check which ad units are expected to be served in the current session.
   for (GADMediationCredentials *cred in configuration.credentials) {
     if (cred.format == GADAdFormatInterstitial) {
       GADMAdapterIronSourceMutableSetAddObject(ironSourceAdUnits, IS_INTERSTITIAL);
     } else if (cred.format == GADAdFormatRewarded) {
       GADMAdapterIronSourceMutableSetAddObject(ironSourceAdUnits, IS_REWARDED_VIDEO);
+    } else if (cred.format == GADAdFormatBanner) {
+      GADMAdapterIronSourceMutableSetAddObject(ironSourceAdUnits, IS_BANNER);
     }
 
     NSString *appKeyFromSetting = cred.settings[GADMAdapterIronSourceAppKey];
@@ -52,6 +60,7 @@
 
   NSString *appKey = [appKeys anyObject];
   if (appKeys.count > 1) {
+    // Multiple app keys are ignored and only one of them is used
     [GADMAdapterIronSourceUtils
         onLog:[NSString stringWithFormat:
                             @"Found the following app keys: %@. "
@@ -63,14 +72,18 @@
                             appKey, ironSourceAdUnits]];
   }
 
-  [[ISMediationManager sharedManager] initIronSourceSDKWithAppKey:appKey
-                                                       forAdUnits:ironSourceAdUnits];
-  completionHandler(nil);
+  // Report the mediation type to IronSource
+  [IronSource setMediationType:[GADMAdapterIronSourceUtils getMediationType]];
+
+  // Initiailize the IronSource SDK
+  [[GADMediationAdapterIronSource alloc] initIronSourceSDKWithAppKey:appKey
+                                                          forAdUnits:ironSourceAdUnits
+                                                   completionHandler:completionHandler];
 }
 
 + (GADVersionNumber)adSDKVersion {
   GADVersionNumber version = {0};
-  NSString *sdkVersion = [IronSource sdkVersion];
+  NSString *sdkVersion = [IronSourceAds sdkVersion];
   NSArray<NSString *> *components = [sdkVersion componentsSeparatedByString:@"."];
   if (components.count > 2) {
     version.majorVersion = components[0].integerValue;
@@ -82,6 +95,7 @@
   } else if (components.count == 1) {
     version.majorVersion = components[0].integerValue;
   }
+
   return version;
 }
 
@@ -98,17 +112,28 @@
     version.minorVersion = components[1].integerValue;
     version.patchVersion = components[2].integerValue * 100 + components[3].integerValue;
   }
+
   return version;
+}
+
+- (void)collectSignalsForRequestParameters:(GADRTBRequestParameters *)params
+                         completionHandler:(GADRTBSignalCompletionHandler)completionHandler {
+  completionHandler([IronSource getISDemandOnlyBiddingData], nil);
 }
 
 - (void)loadRewardedAdForAdConfiguration:
             (nonnull GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
                            (nonnull GADMediationRewardedLoadCompletionHandler)completionHandler {
-  _rewardedAd = [[GADMAdapterIronSourceRewardedAd alloc]
-      initWithGADMediationRewardedAdConfiguration:adConfiguration
-                                completionHandler:completionHandler];
-  [_rewardedAd requestRewardedAd];
+  if (adConfiguration.bidResponse) {
+    _rtbRewardedAd = [GADMAdapterIronSourceRtbRewardedAd alloc];
+    [_rtbRewardedAd loadRewardedAdForConfiguration:adConfiguration
+                                 completionHandler:completionHandler];
+  } else {
+    _rewardedAd = [GADMAdapterIronSourceRewardedAd alloc];
+    [_rewardedAd loadRewardedAdForConfiguration:adConfiguration
+                              completionHandler:completionHandler];
+  }
 }
 
 - (void)loadRewardedInterstitialAdForAdConfiguration:
@@ -121,6 +146,76 @@
         @"request flow to load the ad to attempt to load a rewarded interstitial ad from "
         @"IronSource.");
   [self loadRewardedAdForAdConfiguration:adConfiguration completionHandler:completionHandler];
+}
+
+- (void)loadInterstitialForAdConfiguration:
+            (nonnull GADMediationInterstitialAdConfiguration *)adConfiguration
+                         completionHandler:(nonnull GADMediationInterstitialLoadCompletionHandler)
+                                               completionHandler {
+  if (adConfiguration.bidResponse) {
+    self.rtbInterstitialAd = [GADMAdapterIronSourceRtbInterstitialAd alloc];
+    [self.rtbInterstitialAd loadInterstitialForAdConfiguration:adConfiguration
+                                             completionHandler:completionHandler];
+
+  } else {
+    _interstitialAd = [GADMAdapterIronSourceInterstitialAd alloc];
+    [_interstitialAd loadInterstitialForAdConfiguration:adConfiguration
+                                      completionHandler:completionHandler];
+  }
+}
+
+- (void)loadBannerForAdConfiguration:(nonnull GADMediationBannerAdConfiguration *)adConfiguration
+                   completionHandler:
+                       (nonnull GADMediationBannerLoadCompletionHandler)completionHandler {
+  if (adConfiguration.bidResponse) {
+    _rtbBannerAd = [GADMAdapterIronSourceRtbBannerAd alloc];
+    [self.rtbBannerAd loadBannerAdForConfiguration:adConfiguration
+                                 completionHandler:completionHandler];
+  } else {
+    _bannerAd = [GADMAdapterIronSourceBannerAd alloc];
+    [_bannerAd loadBannerAdForAdConfiguration:adConfiguration completionHandler:completionHandler];
+  }
+}
+
+#pragma mark - Initialize IronSource SDK
+
+- (void)initIronSourceSDKWithAppKey:(nonnull NSString *)appKey
+                         forAdUnits:(nonnull NSSet *)adUnits
+                  completionHandler:
+                      (nonnull GADMediationAdapterSetUpCompletionBlock)completionHandler {
+  NSArray<ISAAdFormat *> *adunitToInit =
+      [GADMAdapterIronSourceUtils adFormatsToInitializeForAdUnits:adUnits];
+  ISAInitRequestBuilder *requestBuilder =
+      [[[ISAInitRequestBuilder alloc] initWithAppKey:appKey] withLegacyAdFormats:adunitToInit];
+  ISAInitRequest *request = [requestBuilder build];
+
+  NSNumber *tagForChildDirectedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForChildDirectedTreatment;
+  NSNumber *tagForUnderAgeOfConsent =
+      GADMobileAds.sharedInstance.requestConfiguration.tagForUnderAgeOfConsent;
+  GADAgeRestrictedTreatment *ageRestrictedTreatment =
+      GADMobileAds.sharedInstance.requestConfiguration.ageRestrictedTreatment;
+  if ([tagForChildDirectedTreatment isEqual:@YES] || [tagForUnderAgeOfConsent isEqual:@YES] ||
+      ageRestrictedTreatment == GADAgeRestrictedTreatmentChild) {
+    [LevelPlay setMetaDataWithKey:@"is_child_directed" value:@"YES"];
+  } else if (([tagForChildDirectedTreatment isEqual:@NO] ||
+              [tagForUnderAgeOfConsent isEqual:@NO])) {
+    [LevelPlay setMetaDataWithKey:@"is_child_directed" value:@"NO"];
+  }
+
+  [IronSourceAds
+      initWithRequest:request
+           completion:^(BOOL success, NSError *_Nullable error) {
+             if (!success || error) {
+               [GADMAdapterIronSourceUtils
+                   onLog:[NSString stringWithFormat:@"iAds init failed with error reason: %@",
+                                                    error.localizedDescription]];
+               completionHandler(error);
+               return;
+             }
+             [GADMAdapterIronSourceUtils onLog:[NSString stringWithFormat:@"iAds SDK initialized"]];
+             completionHandler(nil);
+           }];
 }
 
 @end

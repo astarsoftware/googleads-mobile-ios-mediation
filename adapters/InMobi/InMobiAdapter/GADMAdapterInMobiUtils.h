@@ -1,11 +1,24 @@
+// Copyright 2015 Google LLC
 //
-//  GADMAdapterInMobiUtils.h
-//  Adapter
-//  Copyright © 2019 Google. All rights reserved.
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
 //
 
 #import <Foundation/Foundation.h>
+
 #import <GoogleMobileAds/GoogleMobileAds.h>
+
+#import "GADInMobiExtras.h"
+#import "GADMAdapterInMobiConstants.h"
 #import "GADMediationAdapterInMobi.h"
 
 /// Adds |object| to |array| if |object| is not nil.
@@ -40,17 +53,22 @@ NSError *_Nonnull GADMAdapterInMobiErrorWithCodeAndDescription(GADMAdapterInMobi
 NSError *_Nullable GADMAdapterInMobiValidatePlacementIdentifier(
     NSNumber *_Nonnull placementIdentifier);
 
-/// Sets up InMobi targetting information from the specified |connector|.
-void GADMAdapterInMobiSetTargetingFromConnector(id<GADMAdNetworkConnector> _Nonnull connector);
-
 /// Sets up InMobi targetting information from the specified ad configuration.
 void GADMAdapterInMobiSetTargetingFromAdConfiguration(
     GADMediationAdConfiguration *_Nonnull adConfig);
 
-/// Creates InMobi request parameters from the specified |connector|.
-NSDictionary<NSString *, id> *_Nonnull GADMAdapterInMobiCreateRequestParametersFromConnector(
-    id<GADMAdNetworkConnector> _Nonnull connector);
+/// Creates InMobi request parameters from the specified ad configuration for the mediation
+/// type and the child directed treatment bit.
+NSDictionary<NSString *, id> *_Nonnull GADMAdapterInMobiRequestParameters(
+    GADInMobiExtras *_Nullable extras,
+    GADMAdapterInMobiRequestParametersMediationType _Nonnull mediationType);
 
-/// Creates InMobi request parameters from the specified ad configuration.
-NSDictionary<NSString *, id> *_Nonnull GADMAdapterInMobiCreateRequestParametersFromAdConfiguration(
+/// Logs with GADMediationAdapterInMobi Prefix.
+void GADMAdapterInMobiLog(NSString *_Nonnull format, ...);
+
+/// Forwards U.S. Privacy String set in NSUserDefaults to InMobi SDK.
+void GADMAdapterInMobiSetUSPrivacyCompliance(void);
+
+/// Creates a bid response data from ad configuration.
+NSData *_Nullable GADMAdapterInMobiBidResponseDataFromAdConfigration(
     GADMediationAdConfiguration *_Nonnull adConfig);

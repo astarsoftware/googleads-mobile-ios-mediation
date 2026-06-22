@@ -1,4 +1,4 @@
-// Copyright 2020 Google LLC.
+// Copyright 2020 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 
 #import "GADMAdapterInMobiInitializer.h"
 
-#import <InMobiSDK/InMobiSDK.h>
+#import <InMobiSDK/InMobiSDK-Swift.h>
 
 #import "GADMAdapterInMobiUtils.h"
 #import "GADMInMobiConsent.h"
@@ -62,6 +62,20 @@
 
   _initializationState = GADMAdapterInMobiInitStateInitializing;
   GADMAdapterInMobiInitializer *__weak weakSelf = self;
+
+  if ([NSThread isMainThread]) {
+    [self initializeInMobiSDK:accountID completionHandler:completionHandler];
+  } else {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      [weakSelf initializeInMobiSDK:accountID completionHandler:completionHandler];
+    });
+  }
+}
+
+- (void)initializeInMobiSDK:(nonnull NSString *)accountID
+          completionHandler:(nonnull GADMAdapterInMobiInitCompletionHandler)completionHandler {
+  GADMAdapterInMobiInitializer *__weak weakSelf = self;
+
   [IMSdk initWithAccountID:accountID
          consentDictionary:GADMInMobiConsent.consent
       andCompletionHandler:^(NSError *_Nullable error) {
@@ -73,7 +87,8 @@
         if (error) {
           strongSelf->_initializationState = GADMAdapterInMobiInitStateUninitialized;
         } else {
-          NSLog(@"[InMobi] Initialized successfully.");
+          GADMAdapterInMobiLog(@"InMobi SDK Initialized successfully.");
+
           strongSelf->_initializationState = GADMAdapterInMobiInitStateInitialized;
         }
 

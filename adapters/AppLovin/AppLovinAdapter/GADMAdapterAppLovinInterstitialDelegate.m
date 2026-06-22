@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC.
+// Copyright 2019 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -35,6 +35,13 @@
 
 - (void)adService:(nonnull ALAdService *)adService didLoadAd:(nonnull ALAd *)ad {
   GADMAdapterAppLovin *parentRenderer = _parentRenderer;
+
+  BOOL isMultipleAdsEnabled = GADMAdapterAppLovinIsMultipleAdsLoadingEnabled();
+  if (isMultipleAdsEnabled) {
+    [GADMAdapterAppLovinMediationManager.sharedInstance
+        removeInterstitialZoneIdentifier:parentRenderer.zoneIdentifier];
+  }
+
   [GADMAdapterAppLovinUtils log:@"Interstitial did load ad: %@", ad];
   parentRenderer.interstitialAd = ad;
   [parentRenderer.connector adapterDidReceiveInterstitial:parentRenderer];

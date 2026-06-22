@@ -32,10 +32,6 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		0092576F2453B452009303A3 /* GADMAdapterChartboostBannerAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 0092576D2453B452009303A3 /* GADMAdapterChartboostBannerAd.h */; };
-		009257702453B452009303A3 /* GADMAdapterChartboostBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 0092576E2453B452009303A3 /* GADMAdapterChartboostBannerAd.m */; };
-		009257732453B466009303A3 /* GADMAdapterChartboostInterstitialAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 009257712453B466009303A3 /* GADMAdapterChartboostInterstitialAd.h */; };
-		009257742453B466009303A3 /* GADMAdapterChartboostInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 009257722453B466009303A3 /* GADMAdapterChartboostInterstitialAd.m */; };
 		458DB68322F4B7A8008D000B /* GADMChartboostError.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67422F4B7A3008D000B /* GADMChartboostError.m */; };
 		458DB68522F4B7A8008D000B /* GADMAdapterChartboostUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67622F4B7A4008D000B /* GADMAdapterChartboostUtils.h */; };
 		458DB68622F4B7A8008D000B /* GADMAdapterChartboostRewardedAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67722F4B7A5008D000B /* GADMAdapterChartboostRewardedAd.h */; };
@@ -47,9 +43,37 @@
 		458DB68D22F4B7A8008D000B /* GADMAdapterChartboostConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67E22F4B7A7008D000B /* GADMAdapterChartboostConstants.h */; };
 		458DB68E22F4B7A8008D000B /* GADMChartboostError.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67F22F4B7A7008D000B /* GADMChartboostError.h */; };
 		458DB69022F4B7A8008D000B /* GADMediationAdapterChartboost.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB68122F4B7A8008D000B /* GADMediationAdapterChartboost.m */; };
-		458DB69122F4B7A8008D000B /* GADMChartboostExtras.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB68222F4B7A8008D000B /* GADMChartboostExtras.m */; };
 		7D386A731DDA4BD500744A5F /* ChartboostAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D386A641DDA4BD500744A5F /* ChartboostAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7D386A741DDA4BD500744A5F /* GADMChartboostExtras.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D386A651DDA4BD500744A5F /* GADMChartboostExtras.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD6E39D72EA167D100818296 /* GADMediationAdapterChartboostInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1AF512B2A35EE00CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.m */; };
+		AD6E39D82EA167D100818296 /* GADMChartboostError.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67422F4B7A3008D000B /* GADMChartboostError.m */; };
+		AD6E39D92EA167D100818296 /* GADMAdapterChartboost.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67B22F4B7A6008D000B /* GADMAdapterChartboost.m */; };
+		AD6E39DA2EA167D100818296 /* GADMAdapterChartboostUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67822F4B7A5008D000B /* GADMAdapterChartboostUtils.m */; };
+		AD6E39DB2EA167D100818296 /* GADMediationAdapterChartboost.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB68122F4B7A8008D000B /* GADMediationAdapterChartboost.m */; };
+		AD6E39DC2EA167D100818296 /* GADMAdapterChartboostRewardedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67A22F4B7A5008D000B /* GADMAdapterChartboostRewardedAd.m */; };
+		AD6E39DD2EA167D100818296 /* GADMediationAdapterChartboostBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1AF992B2A471200CA4FC8 /* GADMediationAdapterChartboostBannerAd.m */; };
+		AD6E39E12EA167D100818296 /* GADMAdapterChartboost.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67922F4B7A5008D000B /* GADMAdapterChartboost.h */; };
+		AD6E39E22EA167D100818296 /* GADMChartboostError.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67F22F4B7A7008D000B /* GADMChartboostError.h */; };
+		AD6E39E32EA167D100818296 /* ChartboostAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D386A641DDA4BD500744A5F /* ChartboostAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		AD6E39E42EA167D100818296 /* GADMAdapterChartboostUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67622F4B7A4008D000B /* GADMAdapterChartboostUtils.h */; };
+		AD6E39E52EA167D100818296 /* GADMediationAdapterChartboost.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67C22F4B7A6008D000B /* GADMediationAdapterChartboost.h */; };
+		AD6E39E62EA167D100818296 /* GADMAdapterChartboostRewardedAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67722F4B7A5008D000B /* GADMAdapterChartboostRewardedAd.h */; };
+		AD6E39E72EA167D100818296 /* GADMAdapterChartboostConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67E22F4B7A7008D000B /* GADMAdapterChartboostConstants.h */; };
+		ADA1AF522B2A35EE00CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1AF512B2A35EE00CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.m */; };
+		ADA1AF9A2B2A471200CA4FC8 /* GADMediationAdapterChartboostBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1AF992B2A471200CA4FC8 /* GADMediationAdapterChartboostBannerAd.m */; };
+		ADA6B9192CF14610009C8FDA /* GADMediationAdapterChartboostInterstitialAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1AF512B2A35EE00CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.m */; };
+		ADA6B91A2CF14610009C8FDA /* GADMChartboostError.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67422F4B7A3008D000B /* GADMChartboostError.m */; };
+		ADA6B91B2CF14610009C8FDA /* GADMAdapterChartboost.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67B22F4B7A6008D000B /* GADMAdapterChartboost.m */; };
+		ADA6B91C2CF14610009C8FDA /* GADMAdapterChartboostUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67822F4B7A5008D000B /* GADMAdapterChartboostUtils.m */; };
+		ADA6B91D2CF14610009C8FDA /* GADMediationAdapterChartboost.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB68122F4B7A8008D000B /* GADMediationAdapterChartboost.m */; };
+		ADA6B91E2CF14610009C8FDA /* GADMAdapterChartboostRewardedAd.m in Sources */ = {isa = PBXBuildFile; fileRef = 458DB67A22F4B7A5008D000B /* GADMAdapterChartboostRewardedAd.m */; };
+		ADA6B91F2CF14610009C8FDA /* GADMediationAdapterChartboostBannerAd.m in Sources */ = {isa = PBXBuildFile; fileRef = ADA1AF992B2A471200CA4FC8 /* GADMediationAdapterChartboostBannerAd.m */; };
+		ADA6B9232CF14610009C8FDA /* GADMAdapterChartboost.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67922F4B7A5008D000B /* GADMAdapterChartboost.h */; };
+		ADA6B9242CF14610009C8FDA /* GADMChartboostError.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67F22F4B7A7008D000B /* GADMChartboostError.h */; };
+		ADA6B9252CF14610009C8FDA /* ChartboostAdapter.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D386A641DDA4BD500744A5F /* ChartboostAdapter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADA6B9262CF14610009C8FDA /* GADMAdapterChartboostUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67622F4B7A4008D000B /* GADMAdapterChartboostUtils.h */; };
+		ADA6B9272CF14610009C8FDA /* GADMediationAdapterChartboost.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67C22F4B7A6008D000B /* GADMediationAdapterChartboost.h */; };
+		ADA6B9282CF14610009C8FDA /* GADMAdapterChartboostRewardedAd.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67722F4B7A5008D000B /* GADMAdapterChartboostRewardedAd.h */; };
+		ADA6B9292CF14610009C8FDA /* GADMAdapterChartboostConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 458DB67E22F4B7A7008D000B /* GADMAdapterChartboostConstants.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,13 +96,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		AD6E39DF2EA167D100818296 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9212CF14610009C8FDA /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0092576D2453B452009303A3 /* GADMAdapterChartboostBannerAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterChartboostBannerAd.h; sourceTree = "<group>"; };
-		0092576E2453B452009303A3 /* GADMAdapterChartboostBannerAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterChartboostBannerAd.m; sourceTree = "<group>"; };
-		009257712453B466009303A3 /* GADMAdapterChartboostInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMAdapterChartboostInterstitialAd.h; sourceTree = "<group>"; };
-		009257722453B466009303A3 /* GADMAdapterChartboostInterstitialAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMAdapterChartboostInterstitialAd.m; sourceTree = "<group>"; };
 		458DB67422F4B7A3008D000B /* GADMChartboostError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMChartboostError.m; sourceTree = "<group>"; };
 		458DB67622F4B7A4008D000B /* GADMAdapterChartboostUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdapterChartboostUtils.h; sourceTree = "<group>"; };
 		458DB67722F4B7A5008D000B /* GADMAdapterChartboostRewardedAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdapterChartboostRewardedAd.h; sourceTree = "<group>"; };
@@ -90,11 +128,9 @@
 		458DB67E22F4B7A7008D000B /* GADMAdapterChartboostConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMAdapterChartboostConstants.h; sourceTree = "<group>"; };
 		458DB67F22F4B7A7008D000B /* GADMChartboostError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMChartboostError.h; sourceTree = "<group>"; };
 		458DB68122F4B7A8008D000B /* GADMediationAdapterChartboost.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterChartboost.m; sourceTree = "<group>"; };
-		458DB68222F4B7A8008D000B /* GADMChartboostExtras.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GADMChartboostExtras.m; sourceTree = "<group>"; };
 		7D264FEC1DDCFF7C00027720 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		7D264FEE1DDCFF9100027720 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7D386A641DDA4BD500744A5F /* ChartboostAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChartboostAdapter.h; sourceTree = "<group>"; };
-		7D386A651DDA4BD500744A5F /* GADMChartboostExtras.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GADMChartboostExtras.h; sourceTree = "<group>"; };
 		7D386A661DDA4BD500744A5F /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		7D46CFDF1DB6B7CC0050F612 /* Adapter.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Adapter.xcconfig; sourceTree = "<group>"; };
 		7D6A68A31DB7ED230001E48B /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -102,10 +138,38 @@
 		7D9552B11DC006E5005DCE8D /* Script_Framework.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = Script_Framework.sh; sourceTree = "<group>"; };
 		7DE821BF1DB04B5000AA08CF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		7DFABB1D1DA8682C00322E02 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD00C4112B871596007C85F3 /* ChartboostAdapter.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ChartboostAdapter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD6E39EB2EA167D100818296 /* libAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADA1AF502B2A359600CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMediationAdapterChartboostInterstitialAd.h; sourceTree = "<group>"; };
+		ADA1AF512B2A35EE00CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterChartboostInterstitialAd.m; sourceTree = "<group>"; };
+		ADA1AF982B2A46DF00CA4FC8 /* GADMediationAdapterChartboostBannerAd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GADMediationAdapterChartboostBannerAd.h; sourceTree = "<group>"; };
+		ADA1AF992B2A471200CA4FC8 /* GADMediationAdapterChartboostBannerAd.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GADMediationAdapterChartboostBannerAd.m; sourceTree = "<group>"; };
+		ADA6B92D2CF14610009C8FDA /* libStaticChartboostAdapter.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libStaticChartboostAdapter.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		7DFABB1A1DA8682C00322E02 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C40E2B871596007C85F3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E39DE2EA167D100818296 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9202CF14610009C8FDA /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -120,20 +184,19 @@
 			children = (
 				458DB67922F4B7A5008D000B /* GADMAdapterChartboost.h */,
 				458DB67B22F4B7A6008D000B /* GADMAdapterChartboost.m */,
-				0092576D2453B452009303A3 /* GADMAdapterChartboostBannerAd.h */,
-				0092576E2453B452009303A3 /* GADMAdapterChartboostBannerAd.m */,
 				458DB67E22F4B7A7008D000B /* GADMAdapterChartboostConstants.h */,
-				009257712453B466009303A3 /* GADMAdapterChartboostInterstitialAd.h */,
-				009257722453B466009303A3 /* GADMAdapterChartboostInterstitialAd.m */,
 				458DB67722F4B7A5008D000B /* GADMAdapterChartboostRewardedAd.h */,
 				458DB67A22F4B7A5008D000B /* GADMAdapterChartboostRewardedAd.m */,
 				458DB67622F4B7A4008D000B /* GADMAdapterChartboostUtils.h */,
 				458DB67822F4B7A5008D000B /* GADMAdapterChartboostUtils.m */,
 				458DB67F22F4B7A7008D000B /* GADMChartboostError.h */,
 				458DB67422F4B7A3008D000B /* GADMChartboostError.m */,
-				458DB68222F4B7A8008D000B /* GADMChartboostExtras.m */,
 				458DB67C22F4B7A6008D000B /* GADMediationAdapterChartboost.h */,
 				458DB68122F4B7A8008D000B /* GADMediationAdapterChartboost.m */,
+				ADA1AF502B2A359600CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.h */,
+				ADA1AF512B2A35EE00CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.m */,
+				ADA1AF982B2A46DF00CA4FC8 /* GADMediationAdapterChartboostBannerAd.h */,
+				ADA1AF992B2A471200CA4FC8 /* GADMediationAdapterChartboostBannerAd.m */,
 			);
 			path = ChartboostAdapter;
 			sourceTree = "<group>";
@@ -151,7 +214,6 @@
 			isa = PBXGroup;
 			children = (
 				7D386A641DDA4BD500744A5F /* ChartboostAdapter.h */,
-				7D386A651DDA4BD500744A5F /* GADMChartboostExtras.h */,
 			);
 			path = Headers;
 			sourceTree = "<group>";
@@ -192,6 +254,9 @@
 			isa = PBXGroup;
 			children = (
 				7DFABB1D1DA8682C00322E02 /* libAdapter.a */,
+				AD00C4112B871596007C85F3 /* ChartboostAdapter.framework */,
+				ADA6B92D2CF14610009C8FDA /* libStaticChartboostAdapter.a */,
+				AD6E39EB2EA167D100818296 /* libAdapter.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,12 +272,44 @@
 				458DB68E22F4B7A8008D000B /* GADMChartboostError.h in Headers */,
 				7D386A731DDA4BD500744A5F /* ChartboostAdapter.h in Headers */,
 				458DB68522F4B7A8008D000B /* GADMAdapterChartboostUtils.h in Headers */,
-				0092576F2453B452009303A3 /* GADMAdapterChartboostBannerAd.h in Headers */,
-				009257732453B466009303A3 /* GADMAdapterChartboostInterstitialAd.h in Headers */,
 				458DB68B22F4B7A8008D000B /* GADMediationAdapterChartboost.h in Headers */,
-				7D386A741DDA4BD500744A5F /* GADMChartboostExtras.h in Headers */,
 				458DB68622F4B7A8008D000B /* GADMAdapterChartboostRewardedAd.h in Headers */,
 				458DB68D22F4B7A8008D000B /* GADMAdapterChartboostConstants.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C40C2B871596007C85F3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E39E02EA167D100818296 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD6E39E12EA167D100818296 /* GADMAdapterChartboost.h in Headers */,
+				AD6E39E22EA167D100818296 /* GADMChartboostError.h in Headers */,
+				AD6E39E32EA167D100818296 /* ChartboostAdapter.h in Headers */,
+				AD6E39E42EA167D100818296 /* GADMAdapterChartboostUtils.h in Headers */,
+				AD6E39E52EA167D100818296 /* GADMediationAdapterChartboost.h in Headers */,
+				AD6E39E62EA167D100818296 /* GADMAdapterChartboostRewardedAd.h in Headers */,
+				AD6E39E72EA167D100818296 /* GADMAdapterChartboostConstants.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9222CF14610009C8FDA /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADA6B9232CF14610009C8FDA /* GADMAdapterChartboost.h in Headers */,
+				ADA6B9242CF14610009C8FDA /* GADMChartboostError.h in Headers */,
+				ADA6B9252CF14610009C8FDA /* ChartboostAdapter.h in Headers */,
+				ADA6B9262CF14610009C8FDA /* GADMAdapterChartboostUtils.h in Headers */,
+				ADA6B9272CF14610009C8FDA /* GADMediationAdapterChartboost.h in Headers */,
+				ADA6B9282CF14610009C8FDA /* GADMAdapterChartboostRewardedAd.h in Headers */,
+				ADA6B9292CF14610009C8FDA /* GADMAdapterChartboostConstants.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -238,6 +335,60 @@
 			productReference = 7DFABB1D1DA8682C00322E02 /* libAdapter.a */;
 			productType = "com.apple.product-type.library.static";
 		};
+		AD00C4102B871596007C85F3 /* ChartboostAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD00C4172B871596007C85F3 /* Build configuration list for PBXNativeTarget "ChartboostAdapter" */;
+			buildPhases = (
+				AD00C40C2B871596007C85F3 /* Headers */,
+				AD00C40D2B871596007C85F3 /* Sources */,
+				AD00C40E2B871596007C85F3 /* Frameworks */,
+				AD00C40F2B871596007C85F3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChartboostAdapter;
+			productName = ChartboostAdapter;
+			productReference = AD00C4112B871596007C85F3 /* ChartboostAdapter.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		AD6E39D32EA167D100818296 /* AdapterWithoutValidationScript */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AD6E39E82EA167D100818296 /* Build configuration list for PBXNativeTarget "AdapterWithoutValidationScript" */;
+			buildPhases = (
+				AD6E39D62EA167D100818296 /* Sources */,
+				AD6E39DE2EA167D100818296 /* Frameworks */,
+				AD6E39DF2EA167D100818296 /* CopyFiles */,
+				AD6E39E02EA167D100818296 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AdapterWithoutValidationScript;
+			productName = Adapter;
+			productReference = AD6E39EB2EA167D100818296 /* libAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		ADA6B9152CF14610009C8FDA /* StaticChartboostAdapter */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADA6B92A2CF14610009C8FDA /* Build configuration list for PBXNativeTarget "StaticChartboostAdapter" */;
+			buildPhases = (
+				ADA6B9182CF14610009C8FDA /* Sources */,
+				ADA6B9202CF14610009C8FDA /* Frameworks */,
+				ADA6B9212CF14610009C8FDA /* CopyFiles */,
+				ADA6B9222CF14610009C8FDA /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = StaticChartboostAdapter;
+			productName = Adapter;
+			productReference = ADA6B92D2CF14610009C8FDA /* libStaticChartboostAdapter.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -252,6 +403,10 @@
 					};
 					7DFABB1C1DA8682C00322E02 = {
 						CreatedOnToolsVersion = 7.3.1;
+					};
+					AD00C4102B871596007C85F3 = {
+						CreatedOnToolsVersion = 15.1;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -271,9 +426,22 @@
 				7DFABB1C1DA8682C00322E02 /* Adapter */,
 				7D1B6CA21DC2ACF900D8CABF /* Framework */,
 				00DD262322F107B10039C1D4 /* ValidateSourceCode */,
+				AD00C4102B871596007C85F3 /* ChartboostAdapter */,
+				ADA6B9152CF14610009C8FDA /* StaticChartboostAdapter */,
+				AD6E39D32EA167D100818296 /* AdapterWithoutValidationScript */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AD00C40F2B871596007C85F3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		00DD262422F107B10039C1D4 /* Validate Source Code */ = {
@@ -311,14 +479,48 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				009257702453B452009303A3 /* GADMAdapterChartboostBannerAd.m in Sources */,
-				458DB69122F4B7A8008D000B /* GADMChartboostExtras.m in Sources */,
+				ADA1AF522B2A35EE00CA4FC8 /* GADMediationAdapterChartboostInterstitialAd.m in Sources */,
 				458DB68322F4B7A8008D000B /* GADMChartboostError.m in Sources */,
 				458DB68A22F4B7A8008D000B /* GADMAdapterChartboost.m in Sources */,
 				458DB68722F4B7A8008D000B /* GADMAdapterChartboostUtils.m in Sources */,
 				458DB69022F4B7A8008D000B /* GADMediationAdapterChartboost.m in Sources */,
-				009257742453B466009303A3 /* GADMAdapterChartboostInterstitialAd.m in Sources */,
 				458DB68922F4B7A8008D000B /* GADMAdapterChartboostRewardedAd.m in Sources */,
+				ADA1AF9A2B2A471200CA4FC8 /* GADMediationAdapterChartboostBannerAd.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD00C40D2B871596007C85F3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AD6E39D62EA167D100818296 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD6E39D72EA167D100818296 /* GADMediationAdapterChartboostInterstitialAd.m in Sources */,
+				AD6E39D82EA167D100818296 /* GADMChartboostError.m in Sources */,
+				AD6E39D92EA167D100818296 /* GADMAdapterChartboost.m in Sources */,
+				AD6E39DA2EA167D100818296 /* GADMAdapterChartboostUtils.m in Sources */,
+				AD6E39DB2EA167D100818296 /* GADMediationAdapterChartboost.m in Sources */,
+				AD6E39DC2EA167D100818296 /* GADMAdapterChartboostRewardedAd.m in Sources */,
+				AD6E39DD2EA167D100818296 /* GADMediationAdapterChartboostBannerAd.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADA6B9182CF14610009C8FDA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADA6B9192CF14610009C8FDA /* GADMediationAdapterChartboostInterstitialAd.m in Sources */,
+				ADA6B91A2CF14610009C8FDA /* GADMChartboostError.m in Sources */,
+				ADA6B91B2CF14610009C8FDA /* GADMAdapterChartboost.m in Sources */,
+				ADA6B91C2CF14610009C8FDA /* GADMAdapterChartboostUtils.m in Sources */,
+				ADA6B91D2CF14610009C8FDA /* GADMediationAdapterChartboost.m in Sources */,
+				ADA6B91E2CF14610009C8FDA /* GADMAdapterChartboostRewardedAd.m in Sources */,
+				ADA6B91F2CF14610009C8FDA /* GADMediationAdapterChartboostBannerAd.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -397,7 +599,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(MIN_OS_MAJOR_VERSION).$(MIN_OS_MINOR_VERSION)";
 				MTL_ENABLE_DEBUG_INFO = YES;
 			};
 			name = Debug;
@@ -434,7 +636,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = "$(MIN_OS_MAJOR_VERSION).$(MIN_OS_MINOR_VERSION)";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -450,6 +652,152 @@
 		7DFABB281DA8682C00322E02 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		AD00C4152B871596007C85F3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D46CFDF1DB6B7CC0050F612 /* Adapter.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Google. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.ChartboostAdapter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		AD00C4162B871596007C85F3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D46CFDF1DB6B7CC0050F612 /* Adapter.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = "$(inherited)";
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				EXECUTABLE_PREFIX = "";
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Google. All rights reserved.";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = "$(inherited)";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACH_O_TYPE = staticlib;
+				MARKETING_VERSION = "$(inherited)";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.google.ChartboostAdapter;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		AD6E39E92EA167D100818296 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "${PRODUCT_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		AD6E39EA2EA167D100818296 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "${PRODUCT_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		ADA6B92B2CF14610009C8FDA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		ADA6B92C2CF14610009C8FDA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;
@@ -489,6 +837,33 @@
 			buildConfigurations = (
 				7DFABB271DA8682C00322E02 /* Debug */,
 				7DFABB281DA8682C00322E02 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD00C4172B871596007C85F3 /* Build configuration list for PBXNativeTarget "ChartboostAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD00C4152B871596007C85F3 /* Debug */,
+				AD00C4162B871596007C85F3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AD6E39E82EA167D100818296 /* Build configuration list for PBXNativeTarget "AdapterWithoutValidationScript" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AD6E39E92EA167D100818296 /* Debug */,
+				AD6E39EA2EA167D100818296 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADA6B92A2CF14610009C8FDA /* Build configuration list for PBXNativeTarget "StaticChartboostAdapter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADA6B92B2CF14610009C8FDA /* Debug */,
+				ADA6B92C2CF14610009C8FDA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

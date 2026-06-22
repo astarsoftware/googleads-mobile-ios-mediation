@@ -14,14 +14,13 @@
 
 #import "GADMediationAdapterIMobile.h"
 
+#import <ImobileSdkAds.h>
+
 #import "GADMAdapterIMobileBannerAd.h"
 #import "GADMAdapterIMobileConstants.h"
 #import "GADMAdapterIMobileInterstitialAd.h"
 #import "GADMAdapterIMobileUnifiedNativeAd.h"
 #import "GADMAdapterIMobileUtils.h"
-
-@interface GADMediationAdapterIMobile () <GADMediationAdapter>
-@end
 
 @implementation GADMediationAdapterIMobile {
   /// i-mobile banner ad wrapper.
@@ -37,8 +36,16 @@
 #pragma mark - GADMediationAdapter
 
 + (GADVersionNumber)adSDKVersion {
-  // i-Mobile SDK doesn't have any API to get the version.
   GADVersionNumber version = {0};
+  NSArray<NSString *> *components =
+      [[ImobileSdkAds getSdkVersion] componentsSeparatedByString:@"."];
+
+  if (components.count >= 3) {
+    version.majorVersion = components[0].integerValue;
+    version.minorVersion = components[1].integerValue;
+    version.patchVersion = components[2].integerValue;
+  }
+
   return version;
 }
 
@@ -61,12 +68,24 @@
 
 + (void)setUpWithConfiguration:(GADMediationServerConfiguration *)configuration
              completionHandler:(GADMediationAdapterSetUpCompletionBlock)completionHandler {
-  // i-Mobile SDK doesn't have any initialization API.
+  if (GADMAdapterIMobileIsChildUser()) {
+    completionHandler(GADMAdapterIMobileErrorWithCodeAndDescription(
+        GADMAdapterIMobileErrorChildUser, @"The request had age-restricted treatment, but i-mobile "
+                                          @"SDK cannot receive age-restricted signals."));
+    return;
+  }
   completionHandler(nil);
 }
 
 - (void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
                    completionHandler:(GADMediationBannerLoadCompletionHandler)completionHandler {
+  if (GADMAdapterIMobileIsChildUser()) {
+    completionHandler(nil, GADMAdapterIMobileErrorWithCodeAndDescription(
+                               GADMAdapterIMobileErrorChildUser,
+                               @"The request had age-restricted treatment, but i-mobile SDK "
+                               @"cannot receive age-restricted signals."));
+    return;
+  }
   _bannerAd = [[GADMAdapterIMobileBannerAd alloc] initWithAdConfiguration:adConfiguration];
   [_bannerAd loadBannerAdWithCompletionHandler:completionHandler];
 }
@@ -75,6 +94,13 @@
             (GADMediationInterstitialAdConfiguration *)adConfiguration
                          completionHandler:
                              (GADMediationInterstitialLoadCompletionHandler)completionHandler {
+  if (GADMAdapterIMobileIsChildUser()) {
+    completionHandler(nil, GADMAdapterIMobileErrorWithCodeAndDescription(
+                               GADMAdapterIMobileErrorChildUser,
+                               @"The request had age-restricted treatment, but i-mobile SDK "
+                               @"cannot receive age-restricted signals."));
+    return;
+  }
   _interstitialAd =
       [[GADMAdapterIMobileInterstitialAd alloc] initWithAdConfiguration:adConfiguration];
   [_interstitialAd loadInterstitialAdWithCompletionHandler:completionHandler];
@@ -82,6 +108,13 @@
 
 - (void)loadNativeAdForAdConfiguration:(GADMediationNativeAdConfiguration *)adConfiguration
                      completionHandler:(GADMediationNativeLoadCompletionHandler)completionHandler {
+  if (GADMAdapterIMobileIsChildUser()) {
+    completionHandler(nil, GADMAdapterIMobileErrorWithCodeAndDescription(
+                               GADMAdapterIMobileErrorChildUser,
+                               @"The request had age-restricted treatment, but i-mobile SDK "
+                               @"cannot receive age-restricted signals."));
+    return;
+  }
   _unifiedNativeAd =
       [[GADMAdapterIMobileUnifiedNativeAd alloc] initWithAdConfiguration:adConfiguration];
   [_unifiedNativeAd loadNativeAdWithCompletionHandler:completionHandler];

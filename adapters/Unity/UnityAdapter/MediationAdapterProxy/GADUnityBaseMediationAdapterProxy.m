@@ -36,8 +36,9 @@
 
 - (void)unityAdsShowComplete:(nonnull NSString *)placementId
              withFinishState:(UnityAdsShowCompletionState)state {
-  [self.eventDelegate willDismissFullScreenView];
-  [self.eventDelegate didDismissFullScreenView];
+  id<GADMediationAdEventDelegate> delegate = self.eventDelegate;
+  [delegate willDismissFullScreenView];
+  [delegate didDismissFullScreenView];
 }
 
 - (void)unityAdsShowFailed:(nonnull NSString *)placementId
@@ -49,7 +50,7 @@
 }
 
 - (void)unityAdsShowStart:(nonnull NSString *)placementId {
-  [self.eventDelegate willPresentFullScreenView];
+  [self.eventDelegate reportImpression];
 }
 
 #pragma mark UADSBannerViewDelegate
@@ -65,6 +66,10 @@
 }
 
 - (void)bannerViewDidLeaveApplication:(UADSBannerView *)bannerView {
+}
+
+- (void)bannerViewDidShow:(UADSBannerView *)bannerView {
+  [self.eventDelegate reportImpression];
 }
 
 @end

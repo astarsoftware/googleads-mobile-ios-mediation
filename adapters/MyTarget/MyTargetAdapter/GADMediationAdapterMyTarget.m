@@ -1,4 +1,4 @@
-// Copyright 2019 Google LLC
+// Copyright 2023 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,22 +16,36 @@
 
 #import <MyTargetSDK/MyTargetSDK.h>
 
+#import "GADMAdapterMyTargetBannerAd.h"
 #import "GADMAdapterMyTargetConstants.h"
 #import "GADMAdapterMyTargetExtras.h"
+#import "GADMAdapterMyTargetInterstitialAd.h"
+#import "GADMAdapterMyTargetNativeAd.h"
 #import "GADMAdapterMyTargetRewardedAd.h"
+#import "GADMAdapterMyTargetUtils.h"
 
 @interface GADMediationAdapterMyTarget ()
 
 @end
 
 @implementation GADMediationAdapterMyTarget {
+  /// myTarget banner ad wrapper.
+  GADMAdapterMyTargetBannerAd *_bannerAd;
+
   /// myTarget rewarded ad wrapper.
   GADMAdapterMyTargetRewardedAd *_rewardedAd;
+
+  /// myTarget interstitial ad wrapper.
+  GADMAdapterMyTargetInterstitialAd *_interstitialAd;
+
+  /// myTarget native ad wrapper.
+  GADMAdapterMyTargetNativeAd *_nativeAd;
 }
 
 + (void)setUpWithConfiguration:(nonnull GADMediationServerConfiguration *)configuration
              completionHandler:(nonnull GADMediationAdapterSetUpCompletionBlock)completionHandler {
   // INFO: MyTarget SDK doesn't have any initialization API.
+  GADMAdapterMyTargetSetUserConsentIfNeeded();
   completionHandler(nil);
 }
 
@@ -65,13 +79,45 @@
   return version;
 }
 
+- (void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
+                   completionHandler:(GADMediationBannerLoadCompletionHandler)completionHandler {
+  GADMAdapterMyTargetSetUserConsentIfNeeded();
+
+  _bannerAd = [[GADMAdapterMyTargetBannerAd alloc] initWithAdConfiguration:adConfiguration
+                                                         completionHandler:completionHandler];
+  [_bannerAd loadBannerAd];
+}
+
 - (void)loadRewardedAdForAdConfiguration:
             (nonnull GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
                            (nonnull GADMediationRewardedLoadCompletionHandler)completionHandler {
+  GADMAdapterMyTargetSetUserConsentIfNeeded();
+
   _rewardedAd = [[GADMAdapterMyTargetRewardedAd alloc] initWithAdConfiguration:adConfiguration
                                                              completionHandler:completionHandler];
   [_rewardedAd loadRewardedAd];
+}
+
+- (void)loadInterstitialForAdConfiguration:
+            (GADMediationInterstitialAdConfiguration *)adConfiguration
+                         completionHandler:
+                             (GADMediationInterstitialLoadCompletionHandler)completionHandler {
+  GADMAdapterMyTargetSetUserConsentIfNeeded();
+
+  _interstitialAd =
+      [[GADMAdapterMyTargetInterstitialAd alloc] initWithAdConfiguration:adConfiguration
+                                                       completionHandler:completionHandler];
+  [_interstitialAd loadInterstitialAd];
+}
+
+- (void)loadNativeAdForAdConfiguration:(GADMediationNativeAdConfiguration *)adConfiguration
+                     completionHandler:(GADMediationNativeLoadCompletionHandler)completionHandler {
+  GADMAdapterMyTargetSetUserConsentIfNeeded();
+
+  _nativeAd = [[GADMAdapterMyTargetNativeAd alloc] initWithAdConfiguration:adConfiguration
+                                                         completionHandler:completionHandler];
+  [_nativeAd loadNativeAd];
 }
 
 @end

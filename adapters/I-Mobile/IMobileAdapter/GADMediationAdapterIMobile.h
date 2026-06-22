@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import <GoogleMobileAds/GoogleMobileAds.h>
-#import <ImobileSdkAds/ImobileSdkAds.h>
+#import <ImobileSdkAds.h>
 
 typedef NS_ENUM(NSInteger, GADMAdapterIMobileErrorCode) {
   /// Missing or invalid server parameters.
@@ -27,9 +27,11 @@ typedef NS_ENUM(NSInteger, GADMAdapterIMobileErrorCode) {
   /// i-mobile failed to download native ad assets.
   GADMAdapterIMobileErrorNativeAssetsDownloadFailed = 105,
   /// i-mobile does not support requesting for multiple interstitial ads using the same Spot ID.
-  GADMAdapterIMobileErrorAdAlreadyLoaded = 106
+  GADMAdapterIMobileErrorAdAlreadyLoaded = 106,
+  /// Filter age-restricted requests for i-mobile SDK because it cannot receive age-restricted signals.
+  GADMAdapterIMobileErrorChildUser = 107
 };
 
-@interface GADMediationAdapterIMobile : NSObject
+@interface GADMediationAdapterIMobile : NSObject <GADMediationAdapter>
 
 @end

@@ -13,7 +13,7 @@
 // limitations under the License.
 
 #import "GADMUnityRewardedMediationAdapterProxy.h"
-#import "NSErrorUnity.h"
+#import "GADMAdapterUnityUtils.h"
 
 @interface GADMUnityRewardedMediationAdapterProxy ()
 @property(nonatomic, weak) id<GADMediationRewardedAd> ad;
@@ -23,7 +23,7 @@
 @implementation GADMUnityRewardedMediationAdapterProxy
 
 - (nonnull instancetype)initWithAd:(id<GADMediationRewardedAd>)ad
-         completionHandler:(GADMediationRewardedLoadCompletionHandler)completionHandler {
+                 completionHandler:(GADMediationRewardedLoadCompletionHandler)completionHandler {
   self = [super init];
   if (self) {
     _ad = ad;
@@ -37,7 +37,8 @@
 - (void)unityAdsAdFailedToLoad:(nonnull NSString *)placementId
                      withError:(UnityAdsLoadError)loadError
                    withMessage:(nonnull NSString *)message {
-  self.loadCompletionHandler(self.ad, [NSError adNotAvailablePerPlacement:placementId]);
+  self.loadCompletionHandler(
+      self.ad, GADMAdapterUnitySDKErrorWithUnityAdsLoadErrorAndMessage(loadError, message));
 }
 
 - (void)unityAdsAdLoaded:(nonnull NSString *)placementId {
@@ -48,14 +49,12 @@
 
 - (void)unityAdsShowComplete:(nonnull NSString *)placementId
              withFinishState:(UnityAdsShowCompletionState)state {
-  [(id<GADMediationRewardedAdEventDelegate>)self.eventDelegate didEndVideo];
+  id<GADMediationRewardedAdEventDelegate> eventDelegate =
+      (id<GADMediationRewardedAdEventDelegate>)self.eventDelegate;
 
+  [eventDelegate didEndVideo];
   if (state == kUnityShowCompletionStateCompleted) {
-    // Unity Ads doesn't provide a way to set the reward on their front-end. Default to a reward
-    // amount of 1. Publishers using this adapter should override the reward on the AdMob front-end.
-    GADAdReward *reward = [[GADAdReward alloc] initWithRewardType:@""
-                                                     rewardAmount:[NSDecimalNumber one]];
-    [(id<GADMediationRewardedAdEventDelegate>)self.eventDelegate didRewardUserWithReward:reward];
+    [eventDelegate didRewardUser];
   }
 
   [super unityAdsShowComplete:placementId withFinishState:state];

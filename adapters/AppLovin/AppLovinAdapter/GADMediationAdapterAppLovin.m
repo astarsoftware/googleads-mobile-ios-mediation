@@ -1,4 +1,4 @@
-// Copyright 2018 Google Inc.
+// Copyright 2018 Google LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,45 +19,39 @@
 #import "GADMAdapterAppLovinInitializer.h"
 #import "GADMAdapterAppLovinRewardedRenderer.h"
 #import "GADMAdapterAppLovinUtils.h"
-#import "GADMRTBAdapterAppLovinBannerRenderer.h"
 #import "GADMRTBAdapterAppLovinInterstitialRenderer.h"
+#import "GADMWaterfallAppLovinAppOpenRenderer.h"
+#import "GADMWaterfallAppLovinBannerRenderer.h"
+#import "GADMWaterfallAppLovinInterstitialRenderer.h"
 
 @implementation GADMediationAdapterAppLovin {
-  /// AppLovin banner ad wrapper.
-  GADMRTBAdapterAppLovinBannerRenderer *_bannerRenderer;
+  /// AppLovin app open ad wrapper.
+  GADMWaterfallAppLovinAppOpenRenderer *_waterfallAppOpenRenderer;
+
+  GADMWaterfallAppLovinBannerRenderer *_waterfallBannerRenderer;
 
   /// AppLovin interstitial ad wrapper.
-  GADMRTBAdapterAppLovinInterstitialRenderer *_interstitialRenderer;
+  GADMRTBAdapterAppLovinInterstitialRenderer *_rtbInterstitialRenderer;
+
+  GADMWaterfallAppLovinInterstitialRenderer *_waterfallInterstitialRenderer;
 
   /// AppLovin rewarded ad wrapper.
   GADMAdapterAppLovinRewardedRenderer *_rewardedRenderer;
 }
 
-+ (ALSdkSettings *)SDKSettings {
-  static ALSdkSettings *GADMAdapterAppLovinSDKSettings;
-  static dispatch_once_t onceToken;
-  dispatch_once(&onceToken, ^{
-    GADMAdapterAppLovinSDKSettings = [[ALSdkSettings alloc] init];
-  });
-  return GADMAdapterAppLovinSDKSettings;
-}
-
 + (void)setUpWithConfiguration:(nonnull GADMediationServerConfiguration *)configuration
              completionHandler:(nonnull GADMediationAdapterSetUpCompletionBlock)completionHandler {
+  if ([GADMAdapterAppLovinUtils isChildUser]) {
+    completionHandler(GADMAdapterAppLovinChildUserError());
+    return;
+  }
+
   // Compile all the SDK keys that should be initialized.
   NSMutableSet<NSString *> *SDKKeys = [NSMutableSet set];
 
   // Compile SDK keys from configuration credentials.
   for (GADMediationCredentials *credentials in configuration.credentials) {
     NSString *SDKKey = credentials.settings[GADMAdapterAppLovinSDKKey];
-    if ([GADMAdapterAppLovinUtils isValidAppLovinSDKKey:SDKKey]) {
-      GADMAdapterAppLovinMutableSetAddObject(SDKKeys, SDKKey);
-    }
-  }
-
-  // Add SDK key from Info.plist if it exists.
-  if ([GADMAdapterAppLovinUtils infoDictionarySDKKey]) {
-    NSString *SDKKey = [GADMAdapterAppLovinUtils infoDictionarySDKKey];
     if ([GADMAdapterAppLovinUtils isValidAppLovinSDKKey:SDKKey]) {
       GADMAdapterAppLovinMutableSetAddObject(SDKKeys, SDKKey);
     }
@@ -71,31 +65,20 @@
     return;
   }
 
+  NSString *SDKKey = [SDKKeys anyObject];
+  if (SDKKeys.count > 1) {
+    [GADMAdapterAppLovinUtils log:@"More than one SDK key was found. The adapter will use %@ to "
+                                  @"initialize the AppLovin SDK.",
+                                  SDKKey];
+  }
+
   [GADMAdapterAppLovinUtils
       log:@"Found %lu SDK keys. Please remove any SDK keys you are not using from the AdMob UI.",
           (unsigned long)SDKKeys.count];
-
-  // Initialize SDKs based on SDK keys.
-  dispatch_group_t group = dispatch_group_create();
-  for (NSString *SDKKey in SDKKeys) {
-    dispatch_group_enter(group);
-    [GADMAdapterAppLovinInitializer.sharedInstance
-        initializeWithSDKKey:SDKKey
-           completionHandler:^(NSError *_Nullable error) {
-             if (error) {
-               NSString *errorMessage =
-                   [NSString stringWithFormat:
-                                 @"Failed to initialize AppLovin SDK with SDK Key: %@, Error: %@",
-                                 SDKKey, error.localizedDescription];
-               [GADMAdapterAppLovinUtils log:errorMessage];
-             }
-             dispatch_group_leave(group);
-           }];
-  }
-  dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-    [GADMAdapterAppLovinUtils log:@"All SDKs completed initialization."];
-    completionHandler(nil);
-  });
+  [GADMAdapterAppLovinInitializer initializeWithSDKKey:SDKKey
+                                     completionHandler:^(void) {
+                                       completionHandler(nil);
+                                     }];
 }
 
 + (GADVersionNumber)adapterVersion {
@@ -135,6 +118,11 @@
 - (void)collectSignalsForRequestParameters:(nonnull GADRTBRequestParameters *)params
                          completionHandler:
                              (nonnull GADRTBSignalCompletionHandler)completionHandler {
+  if ([GADMAdapterAppLovinUtils isChildUser]) {
+    completionHandler(nil, GADMAdapterAppLovinChildUserError());
+    return;
+  }
+
   [GADMAdapterAppLovinUtils log:@"AppLovin adapter collecting signals."];
   // Check if supported ad format.
   if (params.configuration.credentials.firstObject.format == GADAdFormatNative) {
@@ -145,62 +133,167 @@
     return;
   }
 
-  NSString *SDKKey = [GADMAdapterAppLovinUtils
-      retrieveSDKKeyFromCredentials:params.configuration.credentials.firstObject.settings];
-  if (!SDKKey) {
+  if (!ALSdk.shared) {
     NSError *error = GADMAdapterAppLovinErrorWithCodeAndDescription(
-        GADMAdapterAppLovinErrorInvalidServerParameters, @"Invalid server parameters.");
+        GADMAdapterAppLovinErrorAppLovinSDKNotInitialized,
+        @"Failed to retrieve ALSdk shared instance.");
     completionHandler(nil, error);
     return;
   }
 
-  ALSdk *SDK = [GADMAdapterAppLovinUtils retrieveSDKFromSDKKey:SDKKey];
-  if (!SDK) {
-    NSError *error = GADMAdapterAppLovinNilSDKError(SDKKey);
-    completionHandler(nil, error);
-    return;
-  }
-  NSString *signal = SDK.adService.bidToken;
-
-  if (signal.length > 0) {
-    [GADMAdapterAppLovinUtils log:@"Generated bid token %@.", signal];
-    completionHandler(signal, nil);
-  } else {
-    NSError *error = GADMAdapterAppLovinErrorWithCodeAndDescription(
-        GADMAdapterAppLovinErrorEmptyBidToken, @"Bid token is empty.");
-    completionHandler(nil, error);
-  }
+  [ALSdk.shared.adService collectBidTokenWithCompletion:^(NSString *_Nullable bidToken,
+                                                          NSString *_Nullable errorMessage) {
+    if (errorMessage) {
+      NSError *error = GADMAdapterAppLovinErrorWithCodeAndDescription(
+          GADMAdapterAppLovinErrorFailedToReturnBidToken, errorMessage);
+      completionHandler(nil, error);
+      return;
+    }
+    if (bidToken.length > 0) {
+      [GADMAdapterAppLovinUtils log:@"Generated bid token %@.", bidToken];
+      completionHandler(bidToken, nil);
+    } else {
+      NSError *error = GADMAdapterAppLovinErrorWithCodeAndDescription(
+          GADMAdapterAppLovinErrorEmptyBidToken, @"Bid token is empty.");
+      completionHandler(nil, error);
+    }
+  }];
 }
 
 #pragma mark - GADMediationAdapter load Ad
 
-- (void)loadBannerForAdConfiguration:(nonnull GADMediationBannerAdConfiguration *)adConfiguration
-                   completionHandler:
-                       (nonnull GADMediationBannerLoadCompletionHandler)completionHandler {
-  _bannerRenderer =
-      [[GADMRTBAdapterAppLovinBannerRenderer alloc] initWithAdConfiguration:adConfiguration
-                                                          completionHandler:completionHandler];
-  [_bannerRenderer loadAd];
+- (void)loadAppOpenAdForAdConfiguration:
+            (nonnull GADMediationAppOpenAdConfiguration *)adConfiguration
+                      completionHandler:
+                          (nonnull GADMediationAppOpenLoadCompletionHandler)completionHandler {
+  if ([GADMAdapterAppLovinUtils isChildUser]) {
+    completionHandler(nil, GADMAdapterAppLovinChildUserError());
+    return;
+  }
+
+  NSString *SDKKey =
+      [GADMAdapterAppLovinUtils retrieveSDKKeyFromCredentials:adConfiguration.credentials.settings];
+  if (!SDKKey) {
+    NSError *error = GADMAdapterAppLovinErrorWithCodeAndDescription(
+        GADMAdapterAppLovinErrorMissingSDKKey, @"AppLovin SDK Key is missing.");
+    completionHandler(nil, error);
+    return;
+  }
+  __weak GADMediationAdapterAppLovin *weakSelf = self;
+  [GADMAdapterAppLovinInitializer initializeWithSDKKey:SDKKey
+                                     completionHandler:^(void) {
+                                       GADMediationAdapterAppLovin *strongSelf = weakSelf;
+                                       if (!strongSelf) {
+                                         return;
+                                       }
+
+                                       strongSelf->_waterfallAppOpenRenderer =
+                                           [[GADMWaterfallAppLovinAppOpenRenderer alloc]
+                                               initWithAdConfiguration:adConfiguration
+                                                     completionHandler:completionHandler];
+                                       [strongSelf->_waterfallAppOpenRenderer loadAd];
+                                     }];
+}
+
+// Note: Banner ads are supported by AppLovin only for Waterfall and not for Bidding. So, all banner
+// ad load requests are assumed to be for Waterfall.
+- (void)loadBannerForAdConfiguration:(GADMediationBannerAdConfiguration *)adConfiguration
+                   completionHandler:(GADMediationBannerLoadCompletionHandler)completionHandler {
+  if ([GADMAdapterAppLovinUtils isChildUser]) {
+    completionHandler(nil, GADMAdapterAppLovinChildUserError());
+    return;
+  }
+
+  NSString *SDKKey =
+      [GADMAdapterAppLovinUtils retrieveSDKKeyFromCredentials:adConfiguration.credentials.settings];
+  if (!SDKKey) {
+    NSError *error = GADMAdapterAppLovinErrorWithCodeAndDescription(
+        GADMAdapterAppLovinErrorMissingSDKKey, @"AppLovin SDK Key is missing.");
+    completionHandler(nil, error);
+    return;
+  }
+  __weak GADMediationAdapterAppLovin *weakSelf = self;
+  // In the case of waterfall, initialize Applovin SDK before loading ad.
+  [GADMAdapterAppLovinInitializer
+      initializeWithSDKKey:SDKKey
+         completionHandler:^(void) {
+           GADMediationAdapterAppLovin *strongSelf = weakSelf;
+           if (!strongSelf) {
+             return;
+           }
+
+           strongSelf->_waterfallBannerRenderer = [[GADMWaterfallAppLovinBannerRenderer alloc]
+               initWithAdConfiguration:adConfiguration];
+           [strongSelf->_waterfallBannerRenderer loadAdWithCompletion:completionHandler];
+         }];
 }
 
 - (void)loadInterstitialForAdConfiguration:
             (nonnull GADMediationInterstitialAdConfiguration *)adConfiguration
                          completionHandler:(nonnull GADMediationInterstitialLoadCompletionHandler)
                                                completionHandler {
-  _interstitialRenderer = [[GADMRTBAdapterAppLovinInterstitialRenderer alloc]
-      initWithAdConfiguration:adConfiguration
-            completionHandler:completionHandler];
-  [_interstitialRenderer loadAd];
+  if ([GADMAdapterAppLovinUtils isChildUser]) {
+    completionHandler(nil, GADMAdapterAppLovinChildUserError());
+    return;
+  }
+
+  if (adConfiguration.bidResponse != nil) {
+    _rtbInterstitialRenderer = [[GADMRTBAdapterAppLovinInterstitialRenderer alloc]
+        initWithAdConfiguration:adConfiguration
+              completionHandler:completionHandler];
+    [_rtbInterstitialRenderer loadAd];
+  } else {
+    // In the case of waterfall, initialize Applovin SDK before loading ad.
+    NSString *SDKKey = [GADMAdapterAppLovinUtils
+        retrieveSDKKeyFromCredentials:adConfiguration.credentials.settings];
+    if (!SDKKey) {
+      NSError *error = GADMAdapterAppLovinErrorWithCodeAndDescription(
+          GADMAdapterAppLovinErrorMissingSDKKey, @"AppLovin SDK Key is missing.");
+      completionHandler(nil, error);
+      return;
+    }
+    __weak GADMediationAdapterAppLovin *weakSelf = self;
+    [GADMAdapterAppLovinInitializer
+        initializeWithSDKKey:SDKKey
+           completionHandler:^(void) {
+             GADMediationAdapterAppLovin *strongSelf = weakSelf;
+             if (!strongSelf) {
+               return;
+             }
+
+             strongSelf->_waterfallInterstitialRenderer =
+                 [[GADMWaterfallAppLovinInterstitialRenderer alloc]
+                     initWithAdConfiguration:adConfiguration];
+             [strongSelf->_waterfallInterstitialRenderer loadAdWithCompletion:completionHandler];
+           }];
+  }
 }
 
 - (void)loadRewardedAdForAdConfiguration:
             (nonnull GADMediationRewardedAdConfiguration *)adConfiguration
                        completionHandler:
                            (nonnull GADMediationRewardedLoadCompletionHandler)completionHandler {
-  _rewardedRenderer =
-      [[GADMAdapterAppLovinRewardedRenderer alloc] initWithAdConfiguration:adConfiguration
-                                                         completionHandler:completionHandler];
-  [_rewardedRenderer requestRewardedAd];
+  if ([GADMAdapterAppLovinUtils isChildUser]) {
+    completionHandler(nil, GADMAdapterAppLovinChildUserError());
+    return;
+  }
+
+  __weak GADMediationAdapterAppLovin *weakSelf = self;
+  NSString *SDKKey =
+      [GADMAdapterAppLovinUtils retrieveSDKKeyFromCredentials:adConfiguration.credentials.settings];
+  [GADMAdapterAppLovinInitializer initializeWithSDKKey:SDKKey
+                                     completionHandler:^(void) {
+                                       GADMediationAdapterAppLovin *strongSelf = weakSelf;
+                                       if (!strongSelf) {
+                                         return;
+                                       }
+
+                                       strongSelf->_rewardedRenderer =
+                                           [[GADMAdapterAppLovinRewardedRenderer alloc]
+                                               initWithAdConfiguration:adConfiguration
+                                                     completionHandler:completionHandler];
+                                       [strongSelf->_rewardedRenderer requestRewardedAd];
+                                     }];
 }
 
 @end

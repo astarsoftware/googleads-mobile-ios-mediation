@@ -29,6 +29,13 @@ void GADMAdapterIronSourceMapTableSetObjectForKey(NSMapTable *_Nullable mapTable
   }
 }
 
+void GADMAdapterIronSourceMapTableRemoveObjectForKey(NSMapTable *_Nullable mapTable,
+                                                     id _Nullable key) {
+  if (key) {
+    [mapTable removeObjectForKey:key];  // Allow pattern.
+  }
+}
+
 NSError *_Nonnull GADMAdapterIronSourceErrorWithCodeAndDescription(
     GADMAdapterIronSourceErrorCode code, NSString *_Nonnull description) {
   NSDictionary *userInfo =
@@ -55,18 +62,114 @@ NSError *_Nonnull GADMAdapterIronSourceErrorWithCodeAndDescription(
 }
 
 + (nonnull NSString *)getAdMobSDKVersion {
-  NSString *version = @"";
-  NSString *sdkVersion = GADMobileAds.sharedInstance.sdkVersion;
-  @try {
-    NSUInteger versionIndex = [sdkVersion rangeOfString:@"-v"].location + 1;
-    version = [sdkVersion substringFromIndex:versionIndex];
-    version = [version stringByReplacingOccurrencesOfString:@"." withString:@""];
+  return [NSString stringWithFormat:@"%ld%ld%ld",
+                                    GADMobileAds.sharedInstance.versionNumber.majorVersion,
+                                    GADMobileAds.sharedInstance.versionNumber.minorVersion,
+                                    GADMobileAds.sharedInstance.versionNumber.patchVersion];
+}
 
-  } @catch (NSException *exception) {
-    NSLog(@"Unable to parse AdMob SDK version.");
-    version = @"";
++ (nonnull NSString *)getMediationType {
+  NSString *AdapterVersionWithoutDots =
+      [GADMAdapterIronSourceAdapterVersion stringByReplacingOccurrencesOfString:@"."
+                                                                     withString:@""];
+  return [NSString stringWithFormat:@"%@%@%@%@%@%@", GADMAdapterIronSourceMediationName,
+                                    AdapterVersionWithoutDots, @"SDK", [self getAdMobSDKVersion],
+                                    @"iAds", GADMAdapterIronSourceInternalVersion];
+}
+
++ (nullable ISBannerSize *)ironSourceAdSizeFromRequestedSize:(GADAdSize)size {
+  GADAdSize banner = GADAdSizeBanner;
+  GADAdSize rectangle = GADAdSizeMediumRectangle;
+  GADAdSize large = GADAdSizeLargeBanner;
+
+  NSArray<NSValue *> *potentials = @[
+    NSValueFromGADAdSize(banner), NSValueFromGADAdSize(rectangle), NSValueFromGADAdSize(large)
+  ];
+
+  GADAdSize closestSize = GADClosestValidSizeForAdSizes(size, potentials);
+  CGSize closestCGSize = CGSizeFromGADAdSize(closestSize);
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(banner), closestCGSize)) {
+    return ISBannerSize_BANNER;
   }
-  return version;
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(large), closestCGSize)) {
+    return ISBannerSize_LARGE;
+  }
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(rectangle), closestCGSize)) {
+    return ISBannerSize_RECTANGLE;
+  }
+
+  [GADMAdapterIronSourceUtils
+      onLog:[NSString stringWithFormat:@"Unable to retrieve IronSource size from GADAdSize: %@",
+                                       NSStringFromGADAdSize(size)]];
+
+  return nil;
+}
+
++ (nonnull ISAAdSize *)iAdsSizeFromRequestedSize:(GADAdSize)size {
+  GADAdSize banner = GADAdSizeBanner;
+  GADAdSize rectangle = GADAdSizeMediumRectangle;
+  GADAdSize large = GADAdSizeLargeBanner;
+
+  NSArray<NSValue *> *potentials = @[
+    NSValueFromGADAdSize(banner), NSValueFromGADAdSize(rectangle), NSValueFromGADAdSize(large)
+  ];
+
+  GADAdSize closestSize = GADClosestValidSizeForAdSizes(size, potentials);
+  CGSize closestCGSize = CGSizeFromGADAdSize(closestSize);
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(banner), closestCGSize)) {
+    return [ISAAdSize banner];
+  }
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(large), closestCGSize)) {
+    return [ISAAdSize large];
+  }
+  if (CGSizeEqualToSize(CGSizeFromGADAdSize(rectangle), closestCGSize)) {
+    return [ISAAdSize mediumRectangle];
+  }
+
+  [GADMAdapterIronSourceUtils
+      onLog:[NSString stringWithFormat:@"Unable to retrieve IronSource size from GADAdSize: %@",
+                                       NSStringFromGADAdSize(size)]];
+
+  return [ISAAdSize banner];
+}
+
++ (NSArray<ISAAdFormat *> *_Nullable)adFormatsToInitializeForAdUnits:(nonnull NSSet *)adUnits {
+  NSMutableArray<ISAAdFormat *> *adFormatsToInitialize = [NSMutableArray array];
+
+  if ([adUnits member:IS_INTERSTITIAL] != nil) {
+    ISAAdFormat *interstitial =
+        [[ISAAdFormat alloc] initWithAdFormatType:ISAAdFormatTypeInterstitial];
+    [adFormatsToInitialize
+        addObject:interstitial];  // Allow pattern. interstitial is definitely not nil.
+  }
+
+  if ([adUnits member:IS_REWARDED_VIDEO] != nil) {
+    ISAAdFormat *rewarded = [[ISAAdFormat alloc] initWithAdFormatType:ISAAdFormatTypeRewarded];
+    [adFormatsToInitialize addObject:rewarded];  // Allow pattern. rewarded is definitely not nil.
+  }
+
+  if ([adUnits member:IS_BANNER] != nil) {
+    ISAAdFormat *banner = [[ISAAdFormat alloc] initWithAdFormatType:ISAAdFormatTypeBanner];
+    [adFormatsToInitialize addObject:banner];  // Allow pattern. banner is definitely not nil.
+  }
+
+  return [adFormatsToInitialize copy];
+}
+
++ (nonnull NSMutableDictionary<NSString *, NSString *> *)getExtraParamsWithWatermark:
+    (nullable NSData *)watermarkData {
+  NSMutableDictionary<NSString *, NSString *> *extraParams = [[NSMutableDictionary alloc] init];
+
+  if (watermarkData != nil) {
+    NSString *watermarkString = [watermarkData base64EncodedStringWithOptions:0];
+    if (watermarkString) {
+      [extraParams
+          setObject:watermarkString  // Allow pattern. watermarkString is definitely not nil.
+             forKey:GADMAdapterIronSourceWatermark];  // Allow pattern. The key is definitly not nil
+                                                      // here.
+    }
+  }
+  return extraParams;
 }
 
 @end

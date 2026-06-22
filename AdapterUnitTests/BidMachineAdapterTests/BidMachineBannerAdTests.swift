@@ -1,0 +1,236 @@
+// Copyright 2025 Google LLC.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import AdapterUnitTestKit
+import BidMachine
+import Testing
+import XCTest
+
+@testable import GoogleBidMachineAdapter
+
+@MainActor
+@Suite("BidMachine adapter RTB banner")
+final class BidMachineRTBBannerAdTests {
+
+  let client: FakeBidMachineClient
+
+  init() {
+    client = FakeBidMachineClient()
+    BidMachineClientFactory.debugClient = client
+  }
+
+  @Test("RTB banner ad load succeeds")
+  func load_succeeds() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.bidResponse = "test response"
+    adConfig.watermark = "test watermark".data(using: .utf8)
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+  }
+
+  @Test("RTB banner ad load succeeds for MREC size")
+  func load_succeeds_forMREC() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.bidResponse = "test response"
+    adConfig.watermark = "test watermark".data(using: .utf8)
+    adConfig.adSize = AdSizeMediumRectangle
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+  }
+
+  @Test("RTB banner ad load succeeds for leaderboard size")
+  func load_succeeds_forLeaderboard() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.bidResponse = "test response"
+    adConfig.watermark = "test watermark".data(using: .utf8)
+    adConfig.adSize = AdSizeLeaderboard
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+  }
+
+  @Test("RTB banner ad load fails for failing to create a request config")
+  func load_fails_whenBidMachineFailsToCreateRequestConfig() async {
+    client.shouldBidMachineSucceedCreatingRequestConfig = false
+
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.bidResponse = "test response"
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAdFailure(
+      adapter, adConfig, NSError(domain: "com.test.domain", code: 12345))
+  }
+
+  @Test("RTB banner ad load fails for failing to create an ad")
+  func load_fails_whenBidMachineFailsToCreateAd() async {
+    client.shouldBidMachineSucceedCreatingAd = false
+
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.bidResponse = "test response"
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAdFailure(
+      adapter, adConfig, NSError(domain: "com.test.domain", code: 12345))
+  }
+
+  @Test("RTB banner ad load fails for failing to return an ad")
+  func load_fails_whenBidMachineFailsToReturnAd() async {
+    client.shouldBidMachineSucceedLoadingAd = false
+
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.bidResponse = "test response"
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAdFailure(
+      adapter, adConfig, NSError(domain: "com.test.domain", code: 12345))
+  }
+
+  @Test("Impression count")
+  func impression_count() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.bidResponse = "test response"
+    adConfig.watermark = "test watermark".data(using: .utf8)
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    let eventDelegate = AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+    XCTAssertNotNil(eventDelegate.bannerAd)
+    let adDelegate = adapter.bannerAdLoader as? BidMachineAdDelegate
+    adDelegate?.didTrackImpression?(client.mockView)
+    XCTAssertEqual(eventDelegate.reportImpressionInvokeCount, 1)
+  }
+
+  @Test("Click count")
+  func click_count() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.bidResponse = "test response"
+    adConfig.watermark = "test watermark".data(using: .utf8)
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    let eventDelegate = AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+    XCTAssertNotNil(eventDelegate.bannerAd)
+    let adDelegate = adapter.bannerAdLoader as? BidMachineAdDelegate
+    adDelegate?.didUserInteraction?(client.mockView)
+    XCTAssertEqual(eventDelegate.reportClickInvokeCount, 1)
+  }
+
+}
+
+@MainActor
+@Suite("BidMachine adapter waterll banner")
+final class BidMachineWaterfallBannerAdTests {
+
+  let client: FakeBidMachineClient
+
+  init() {
+    client = FakeBidMachineClient()
+    BidMachineClientFactory.debugClient = client
+  }
+
+  @Test("Waterfall banner ad load succeeds for banner size")
+  func load_succeeds_forBanner() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+  }
+
+  @Test("Waterfall banner ad load succeeds for medium rectangle")
+  func load_succeeds_forMREC() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.adSize = AdSizeMediumRectangle
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+  }
+
+  @Test("Waterfall banner ad load succeeds for leaderboard")
+  func load_succeeds_forLeaderboard() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.adSize = AdSizeLeaderboard
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+  }
+
+  @Test("Waterfall banner ad load fails for failing to create a request config")
+  func load_fails_whenBidMachineFailsToCreateRequestConfig() async {
+    client.shouldBidMachineSucceedCreatingRequestConfig = false
+
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAdFailure(
+      adapter, adConfig, NSError(domain: "com.test.domain", code: 12345))
+  }
+
+  @Test("Waterfall banner ad load fails for failing to create an ad")
+  func load_fails_whenBidMachineFailsToCreateAd() async {
+    client.shouldBidMachineSucceedCreatingAd = false
+
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    let adapter = BidMachineAdapter()
+
+    AUTKWaitAndAssertLoadBannerAdFailure(
+      adapter, adConfig, NSError(domain: "com.test.domain", code: 12345))
+  }
+
+  @Test("Waterfall banner ad load fails for unsupported size")
+  func load_fails_whenSizeIsNotSupported() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.adSize = AdSizeSkyscraper
+    let adapter = BidMachineAdapter()
+
+    let expectedError = BidMachineAdapterError(
+      errorCode: .unsupportedBannerSize,
+      description: "Unsupported banner size."
+    ).toNSError()
+    AUTKWaitAndAssertLoadBannerAdFailure(adapter, adConfig, expectedError)
+  }
+
+  @Test("Impression count")
+  func impression_count() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    let eventDelegate = AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+    XCTAssertNotNil(eventDelegate.bannerAd)
+    let adDelegate = adapter.bannerAdLoader as? BidMachineAdDelegate
+    adDelegate?.didTrackImpression?(client.mockView)
+    XCTAssertEqual(eventDelegate.reportImpressionInvokeCount, 1)
+  }
+
+  @Test("Click count")
+  func click_count() async {
+    let adConfig = AUTKMediationBannerAdConfiguration()
+    adConfig.adSize = AdSizeBanner
+    let adapter = BidMachineAdapter()
+
+    let eventDelegate = AUTKWaitAndAssertLoadBannerAd(adapter, adConfig)
+    XCTAssertNotNil(eventDelegate.bannerAd)
+    let adDelegate = adapter.bannerAdLoader as? BidMachineAdDelegate
+    adDelegate?.didUserInteraction?(client.mockView)
+    XCTAssertEqual(eventDelegate.reportClickInvokeCount, 1)
+  }
+
+}

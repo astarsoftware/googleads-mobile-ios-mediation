@@ -14,10 +14,10 @@
 
 #import "GADMAdapterChartboostRewardedAd.h"
 
-#if __has_include(<Chartboost/Chartboost+Mediation.h>)
-#import <Chartboost/Chartboost+Mediation.h>
+#if __has_include(<ChartboostSDK/ChartboostSDK.h>)
+#import <ChartboostSDK/ChartboostSDK.h>
 #else
-#import "Chartboost+Mediation.h"
+#import "ChartboostSDK.h"
 #endif
 
 #include <stdatomic.h>
@@ -25,7 +25,6 @@
 #import "GADMAdapterChartboostConstants.h"
 #import "GADMAdapterChartboostUtils.h"
 #import "GADMChartboostError.h"
-#import "GADMChartboostExtras.h"
 
 @interface GADMAdapterChartboostRewardedAd () <CHBRewardedDelegate>
 @end
@@ -38,7 +37,7 @@
   GADMediationRewardedLoadCompletionHandler _completionHandler;
 
   /// An ad event delegate to invoke when ad rendering events occur.
-  id<GADMediationRewardedAdEventDelegate> _adEventDelegate;
+  __weak id<GADMediationRewardedAdEventDelegate> _adEventDelegate;
 
   /// Chartboost rewarded ad object
   CHBRewarded *_rewardedAd;
@@ -97,26 +96,18 @@
 
   NSString *adLocation = GADMAdapterChartboostLocationFromAdConfiguration(_adConfig);
   GADMAdapterChartboostRewardedAd *weakSelf = self;
-  [Chartboost startWithAppId:appID
+  [Chartboost startWithAppID:appID
                 appSignature:appSignature
-                  completion:^(BOOL success) {
+                  completion:^(CHBStartError *cbError) {
                     GADMAdapterChartboostRewardedAd *strongSelf = weakSelf;
                     if (!strongSelf) {
                       return;
                     }
 
-                    if (!success) {
-                      NSError *error = GADMAdapterChartboostErrorWithCodeAndDescription(
-                          GADMAdapterChartboostErrorInitializationFailure,
-                          @"Chartboost SDK initialization failed.");
-                      strongSelf->_completionHandler(nil, error);
+                    if (cbError) {
+                      NSLog(@"Failed to initialize Chartboost SDK: %@", cbError);
+                      strongSelf->_completionHandler(nil, cbError);
                       return;
-                    }
-
-                    GADMChartboostExtras *extras = strongSelf->_adConfig.extras;
-                    if (extras) {
-                      [Chartboost setFramework:extras.framework
-                                   withVersion:extras.frameworkVersion];
                     }
 
                     CHBMediation *mediation = GADMAdapterChartboostMediation();
@@ -150,29 +141,37 @@
   _adEventDelegate = _completionHandler(self, nil);
 }
 
-- (void)didShowAd:(CHBShowEvent *)event error:(nullable CHBShowError *)error {
-  if (error) {
-    NSError *showError = GADMChartboostErrorForCHBShowError(error);
-    NSLog(@"Failed to show rewarded ad from Chartboost: %@", showError.localizedDescription);
+- (void)willShowAd:(CHBShowEvent *)event {
+  [_adEventDelegate willPresentFullScreenView];
+}
 
-    // If the ad has been shown, Chartboost will proceed to dismiss it and the rest is handled in
-    // -didDismissAd:
-    [_adEventDelegate didFailToPresentWithError:showError];
+- (void)didShowAd:(CHBShowEvent *)event error:(nullable CHBShowError *)error {
+  id<GADMediationRewardedAdEventDelegate> adEventDelegate = _adEventDelegate;
+  if (!adEventDelegate) {
     return;
   }
 
-  [_adEventDelegate willPresentFullScreenView];
-  [_adEventDelegate reportImpression];
-  [_adEventDelegate didStartVideo];
+  if (error) {
+    NSError *showError = GADMChartboostErrorForCHBShowError(error);
+    NSLog(@"Failed to show rewarded ad from Chartboost: %@", showError.localizedDescription);
+    [adEventDelegate didFailToPresentWithError:showError];
+    return;
+  }
+  [adEventDelegate didStartVideo];
 }
 
 - (void)didEarnReward:(CHBRewardEvent *)event {
-  [_adEventDelegate didEndVideo];
+  id<GADMediationRewardedAdEventDelegate> adEventDelegate = _adEventDelegate;
+  if (!adEventDelegate) {
+    return;
+  }
 
-  /// Chartboost doesn't provide access to the reward type.
-  NSDecimalNumber *rewardValue = [[NSDecimalNumber alloc] initWithInteger:event.reward];
-  GADAdReward *adReward = [[GADAdReward alloc] initWithRewardType:@"" rewardAmount:rewardValue];
-  [_adEventDelegate didRewardUserWithReward:adReward];
+  [adEventDelegate didEndVideo];
+  [adEventDelegate didRewardUser];
+}
+
+- (void)didRecordImpression:(CHBImpressionEvent *)event {
+  [_adEventDelegate reportImpression];
 }
 
 - (void)didClickAd:(CHBClickEvent *)event error:(CHBClickError *)error {
@@ -185,8 +184,13 @@
 }
 
 - (void)didDismissAd:(CHBDismissEvent *)event {
-  [_adEventDelegate willDismissFullScreenView];
-  [_adEventDelegate didDismissFullScreenView];
+  id<GADMediationRewardedAdEventDelegate> adEventDelegate = _adEventDelegate;
+  if (!adEventDelegate) {
+    return;
+  }
+
+  [adEventDelegate willDismissFullScreenView];
+  [adEventDelegate didDismissFullScreenView];
 }
 
 @end
